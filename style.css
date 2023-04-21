@@ -1,7 +1,7 @@
 :root {
 	--white: #f4f6f6;
 	--black: #010111;
-	--primary: #0072c3;
+	--primary: #50a6e4;
 	--secondary: #0034c3;
 	--bg: var(--white);
 }
@@ -49,13 +49,48 @@ section {
 	margin: var(--section-margin) auto;
 }
 
+.container {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+
+}
 header,
 main {
 	margin: 0 var(--margins);
+
+	display: grid;
+	place-items: center;
 }
 
-main {
-	background: transparent url(./assets/map.svg) no-repeat center center;
-	height: 250px;
-	width: 250px;
+#map {
+	position: relative;
+}
+
+.hexagon {
+
+	position: absolute;
+	background-image: url('./assets/hexagon.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	color: black;
+	text-align: center;
+}
+
+/* Voor elke hexagon een cirkel maken */
+.hexagon::after {
+	content: '';
+	position: absolute;
+	color: var(--primary);
+	border: 2px solid var(--secondary);
+	box-shadow: 0 0 .3rem rgb(0 0 0 / 50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 60%;
+	height: auto;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	
 }
