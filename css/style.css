@@ -4,6 +4,8 @@
 	--primary: #50a6e4;
 	--secondary: #0034c3;
 	--bg: var(--white);
+
+	--margins: 2rem;
 }
 
 *,
@@ -15,6 +17,7 @@
 html {
 	background-color: var(--bg);
 	color: var(--primary);
+	font-family: "Quicksand", sans-serif;
 }
 
 body,
@@ -54,37 +57,36 @@ section {
 	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
 
+	padding-inline: var(--margins);
+	margin-inline: auto;
 }
-header,
-main {
-	margin: 0 var(--margins);
 
+.game {
 	display: grid;
+	grid-template: 1fr / 1fr 1fr;
 	place-items: center;
+	
 }
-
 #board {
 	position: relative;
+	
 }
 
 .tile {
-
 	position: absolute;
-	background-image: url('./assets/hexagon.svg');
+	background-image: url("../assets/hexagon.svg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	color: black;
-	text-align: center;
 }
 
 /* Voor elke hexagon een cirkel maken */
 .tile::after {
-	content: '';
+	content: "";
 	position: absolute;
 	color: var(--primary);
 	border: 2px solid var(--secondary);
-	box-shadow: 0 0 .3rem rgb(0 0 0 / 50%);
+	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -92,11 +94,10 @@ main {
 	height: auto;
 	aspect-ratio: 1/1;
 	border-radius: 50%;
-	
 }
 
 .tile.penguin::before {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -104,7 +105,21 @@ main {
 	width: 80%;
 	height: auto;
 	aspect-ratio: 40/46;
-	background: transparent url('./assets/penguin.svg') no-repeat center;
+	background: transparent url("../assets/penguin.svg") no-repeat center;
 	background-size: cover;
 	z-index: 2;
+}
+
+.patterns {
+	display: grid;
+	grid-template: 1fr 1fr / 1fr 1fr;
+	padding: 2rem;
+	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
+	border-radius: 2rem;
+
+}
+.pattern {
+	cursor: grabbing;
+	height: max-content;
+	object-fit: contain;
 }
