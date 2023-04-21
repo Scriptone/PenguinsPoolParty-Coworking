@@ -1,0 +1,61 @@
+:root {
+	--white: #f4f6f6;
+	--black: #010111;
+	--primary: #0072c3;
+	--secondary: #0034c3;
+	--bg: var(--white);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background-color: var(--bg);
+	color: var(--primary);
+}
+
+body,
+figure {
+	margin: 0;
+}
+
+figure {
+	width: 100%;
+	overflow: hidden;
+}
+
+.container {
+	max-width: 120rem;
+	margin: 0 auto;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+img {
+	position: relative;
+	max-width: 100%;
+	width: 100%;
+	aspect-ratio: 8/5;
+	object-fit: cover;
+}
+
+section {
+	margin: var(--section-margin) auto;
+}
+
+header,
+main {
+	margin: 0 var(--margins);
+}
+
+main {
+	background: transparent url(./assets/map.svg) no-repeat center center;
+	height: 250px;
+	width: 250px;
+}
