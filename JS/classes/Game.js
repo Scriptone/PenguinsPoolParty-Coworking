@@ -1,5 +1,6 @@
 import levels from '../data/levels.js';
 import Board from './Board.js';
+import Pattern from './Pattern.js';
 class Game {
 	constructor() {}
 
@@ -11,6 +12,14 @@ class Game {
 		let levelTag = document.querySelector(".level");
 		levelTag.innerHTML = `Level: ${level}`;
 
+		this.patterns = [];
+		let patterns = document.querySelectorAll(".pattern");
+
+		for (let pattern of patterns) {
+			this.patterns.push(new Pattern(pattern));
+			
+		}
+
 	}
 
 	drag(event) {
@@ -21,17 +30,8 @@ class Game {
 		// drag.style.top = event.clientY - 25 + "px";
 	}
 	start() {
-		//While key q is not pressed, print true in console
 		
 		document.addEventListener("mousemove", this.drag);
-		// document.addEventListener("keydown", (event) => {
-		// 	if (event.key == "q") {
-		// 		console.log("stop");
-		// 		document.removeEventListener("mousemove", this.drag);
-
-				
-		// 	}
-		// });
 
 		
 		

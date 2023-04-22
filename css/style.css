@@ -40,13 +40,7 @@ ul {
 	padding: 0;
 }
 
-img {
-	position: relative;
-	max-width: 100%;
-	width: 100%;
-	aspect-ratio: 8/5;
-	object-fit: cover;
-}
+
 
 section {
 	margin: var(--section-margin) auto;
@@ -121,5 +115,6 @@ section {
 .pattern {
 	cursor: grabbing;
 	height: max-content;
-	object-fit: contain;
+	object-fit: cover;
+	max-width: fit-content;
 }
