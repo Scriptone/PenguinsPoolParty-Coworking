@@ -35,14 +35,15 @@ class Pattern {
 		//Of toetsenbord pijltjes
 		document.addEventListener("keydown", (event) => {
 			//Links of rechts
-			event.deltaY =
-				event.keyCode == 37 ? -1 : event.keyCode == 39 ? 1 : 0;
+			let key = event.key || event.code
+			console.log(key);
+			event.deltaY = key == "ArrowLeft" ? -1 : key == "ArrowRight" ? 1 : 0;
 
 			console.log(event.deltaY);
 			if (event.deltaY != 0) this.rotate(event);
 
 			//Flip indien spatie
-			if (event.keyCode == 32) this.flip();
+			if (key == " ") this.flip();
 		});
 	}
 
@@ -53,7 +54,6 @@ class Pattern {
 	}
 
 	stopDrag(event) {
-
 		if (!this.dragging) return;
 		//Check if clone is on board
 		let board = document.querySelector("#board");
@@ -104,7 +104,6 @@ class Pattern {
 	}
 
 	flip() {
-
 		if (!this.dragging) return;
 		let currentScale = this.clone.style.scale;
 		currentScale = currentScale == "" ? 1 : parseInt(currentScale);
