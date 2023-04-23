@@ -6,6 +6,7 @@ class Tile {
 		this.y = y;
 		this.element = document.createElement("div");
 		this.icebergs = [];
+		this.penguin = null;
 	}
 
 	draw() {
@@ -20,6 +21,11 @@ class Tile {
 	addIceberg(iceberg) {
 		this.icebergs.push(iceberg);
 		this.element.appendChild(iceberg.element);
+	}
+
+	addPenguin(penguin) {
+		this.penguin = penguin;
+		penguin.setTile(this);
 	}
 }
 

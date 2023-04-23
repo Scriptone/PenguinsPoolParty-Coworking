@@ -10,6 +10,7 @@ class Game {
 		this.penguins = levels[level].Penguins;
 		this.board = new Board(this.penguins);
 		this.patterns = patterns;
+		this.board.setPatterns(this.patterns);
 	}
 
 	start() {

@@ -215,6 +215,8 @@ main {
 .patterns {
 	display: grid;
 	grid-template: 1fr 1fr / 1fr 1fr;
+	place-items: center;
+	gap: 2rem;
 	padding: 2rem;
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 	border-radius: 2rem;
@@ -223,14 +225,16 @@ main {
 
 	position: relative;
 	cursor: grabbing;
-	outline: 2px solid red;
+	border: 2px dashed black;
+	border-radius: 1rem;
 	text-align: center;
+
 }
 
 .iceberg {
 	position: absolute;
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
-	pointer-events: none;
+	
 }
 
 

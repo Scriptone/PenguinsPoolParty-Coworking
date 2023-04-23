@@ -4,7 +4,7 @@ class Pattern {
 	constructor(points) {
 		this.element = document.createElement("div");
 		this.element.classList.add("pattern");
-
+		this.padding = 2; // rem
 		this.points = points;
 		this.icebergs = [];
 
@@ -18,41 +18,69 @@ class Pattern {
 			iceberg.element.innerHTML = point;
 
 			let left = point[0] * Iceberg.tileWidth * 0.75;
-			let top = point[1] * Iceberg.tileHeight - (point[0] % 2) * Iceberg.tileHeight / 2;
-			iceberg.element.style.left = left + "px";
-			iceberg.element.style.top = top + "px";
+			let top =
+				point[1] * Iceberg.tileHeight -
+				((point[0] % 2) * Iceberg.tileHeight) / 2;
+			iceberg.element.style.left = left + this.padding * 8 + "px";
+			iceberg.element.style.top = top + this.padding * 8 + "px";
 
 			patternWidth = Math.max(patternWidth, left);
 			patternHeight = Math.max(patternHeight, top);
 
+			iceberg.element.addEventListener(
+				"mousedown",
+				this.startDrag.bind(this, iceberg)
+			);
+
 			this.element.appendChild(iceberg.element);
 		}
 
-
-		this.element.style.width = patternWidth + Iceberg.tileWidth + "px";
-		this.element.style.height = patternHeight + Iceberg.tileHeight + "px";
-		this.element.addEventListener("mousedown", this.startDrag.bind(this));
-		this.element.addEventListener("mouseup", this.stopDrag.bind(this));
-		this.element.addEventListener("mousemove", this.drag.bind(this));
+		this.element.style.width =
+			patternWidth + Iceberg.tileWidth + this.padding * 16 + "px";
+		this.element.style.height =
+			patternHeight + Iceberg.tileHeight + this.padding * 16 + "px";
 
 		this.dragging = false;
-		this.offsetX = 0;
-		this.offsetY = 0;
-
+		this.startX = 0;
+		this.startY = 0;
+		document.addEventListener("mouseup", this.stopDrag.bind(this));
+		document.addEventListener("mousemove", this.drag.bind(this));
 		patterns.appendChild(this.element);
 	}
 
-	startDrag(event) {
-		this.dragging = true;
+	startDrag(iceberg, event) {
+		this.dragging = iceberg;
+		this.startX = event.clientX;
+		this.startY = event.clientY;
 	}
 
 	stopDrag(event) {
+		//Dropped on the board
+		if (!this.dragging) return;
+		let iceberg = this.dragging;
 		this.dragging = false;
+
+		let board = this.board;
+		board.drawPattern(this, iceberg);
 	}
 
 	drag(event) {
 		if (!this.dragging) return;
-		console.log("dragging");
+		let offsetX = event.clientX - this.startX;
+		let offsetY = event.clientY - this.startY;
+
+		this.startX = event.clientX;
+		this.startY = event.clientY;
+		for (let iceberg of this.icebergs) {
+			let left = parseInt(iceberg.element.style.left);
+			let top = parseInt(iceberg.element.style.top);
+			iceberg.element.style.left = left + offsetX + "px";
+			iceberg.element.style.top = top + offsetY + "px";
+		}
+	}
+
+	setBoard(board) {
+		this.board = board;
 	}
 }
 
