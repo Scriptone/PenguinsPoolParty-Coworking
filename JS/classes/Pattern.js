@@ -15,7 +15,6 @@ class Pattern {
 			let iceberg = new Iceberg(point);
 			this.icebergs.push(iceberg);
 			iceberg.draw();
-			iceberg.element.innerHTML = point;
 
 			let left = point[0] * Iceberg.tileWidth * 0.75;
 			let top =

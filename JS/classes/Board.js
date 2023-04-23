@@ -95,29 +95,38 @@ class Board {
 		//Geen tile of als er een penguin staat
 		if (!tile || tile.penguin) return false;
 
-		console.log(tile);
+		let icebergPoint = iceberg.point;
+		let startPointX = tile.x - icebergPoint[0]; //Icebergpoint aftrekken van tilepoint om de startpositie te krijgen
+		let startPointY = tile.y - icebergPoint[1];
 
 		//Kan het patroon hier geplaatst worden?
 		for (let point of pattern.points) {
-			let x = point[0];
-			let y = point[1];
-			console.log(x, y);
-			let _tile = this.tiles[tile.y + y][tile.x + x];
+			let x = point[0] + startPointX;
+			let y = point[1] + startPointY;
+
+			/*
+			De patronen  zijn gebasseerd op de kolommen die lager staan, dus als 
+			je een patroon dropt op een kolom die hoger staat, dan moet je de y met 1 verlagen
+			*/
+			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
+
+			let _tile = this.tiles[y]?.[x];
 
 			if (!_tile || _tile.penguin) {
 				console.log("Kan niet", _tile);
 				return false;
 			}
-
 		}
 
 		//Plaats het patroon
 		console.log("Plaats patroon");
 		for (let iceberg of pattern.icebergs) {
 			let point = iceberg.point;
-			let x = point[0];
-			let y = point[1];
-			let _tile = this.tiles[tile.y + y][tile.x + x];
+			let x = point[0] + startPointX;
+			let y = point[1] + startPointY;
+			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
+
+			let _tile = this.tiles[y][x];
 			_tile.addIceberg(iceberg);
 		}
 

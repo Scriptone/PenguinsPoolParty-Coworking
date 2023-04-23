@@ -15,7 +15,7 @@ class Tile {
 		element.classList.add(`tile-${this.x}-${this.y}`);
 		element.style.width = Tile.tileWidth + "px";
 		element.style.height = Tile.tileHeight + "px";
-		element.innerHTML = this.x + ", " + this.y;
+		
 	}
 
 	addIceberg(iceberg) {
