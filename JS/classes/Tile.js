@@ -20,7 +20,7 @@ class Tile {
 
 	addIceberg(iceberg) {
 		this.icebergs.push(iceberg);
-		this.element.appendChild(iceberg.element);
+		this.element.classList.add("iceberg");
 	}
 
 	addPenguin(penguin) {

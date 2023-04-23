@@ -61,7 +61,10 @@ class Pattern {
 		this.dragging = false;
 
 		let board = this.board;
-		board.drawPattern(this, iceberg);
+		let result = board.drawPattern(this, iceberg);
+		if (result) {
+			this.element.remove();
+		}
 	}
 
 	drag(event) {

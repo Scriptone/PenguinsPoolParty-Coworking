@@ -182,7 +182,7 @@ main {
 
 
 /* Voor elke hexagon een cirkel maken */
-.tile::after {
+.tile:not(.iceberg)::after {
 	content: "";
 	position: absolute;
 	background-color: var(--secondary);

@@ -11,19 +11,19 @@ class Board {
 	}
 
 	draw() {
-		for (let i = 0; i < this.height; i++) {
-			this.tiles[i] = [];
-			for (let j = 0; j < this.width; j++) {
-				let tile = new Tile(i, j);
-				this.tiles[i][j] = tile;
+		for (let y = 0; y < this.height; y++) {
+			this.tiles[y] = [];
+			for (let x = 0; x < this.width; x++) {
+				let tile = new Tile(x, y);
+				this.tiles[y][x] = tile;
 				tile.draw();
 
 				tile.element.style.left =
-					j * Tile.tileWidth * 0.75 + this.padding * 8 + "px";
+					x * Tile.tileWidth * 0.75 + this.padding * 8 + "px";
 
 				tile.element.style.top =
-					i * Tile.tileHeight +
-					((j % 2 == 0 ? 1 : 0) * Tile.tileHeight) / 2 +
+					y * Tile.tileHeight +
+					((x % 2 == 0 ? 1 : 0) * Tile.tileHeight) / 2 +
 					this.padding * 8 +
 					"px";
 
@@ -31,7 +31,7 @@ class Board {
 
 				// Add penguins to the board
 				for (let penguin of this.penguins) {
-					if (penguin.x == i && penguin.y == j) {
+					if (penguin.x == x && penguin.y == y) {
 						tile.addPenguin(penguin);
 					}
 				}
@@ -102,7 +102,7 @@ class Board {
 			let x = point[0];
 			let y = point[1];
 			console.log(x, y);
-			let _tile = this.tiles[tile.x + x][tile.y + y];
+			let _tile = this.tiles[tile.y + y][tile.x + x];
 
 			if (!_tile || _tile.penguin) {
 				console.log("Kan niet", _tile);
@@ -113,6 +113,15 @@ class Board {
 
 		//Plaats het patroon
 		console.log("Plaats patroon");
+		for (let iceberg of pattern.icebergs) {
+			let point = iceberg.point;
+			let x = point[0];
+			let y = point[1];
+			let _tile = this.tiles[tile.y + y][tile.x + x];
+			_tile.addIceberg(iceberg);
+		}
+
+		return true; //Patroon geplaatst
 	}
 }
 
