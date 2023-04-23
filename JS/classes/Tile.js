@@ -1,5 +1,5 @@
 class Tile {
-	static tileWidth = 51;
+	static tileWidth = 50;
 	static tileHeight = 44;
 	constructor(x, y) {
 		this.x = x;
@@ -14,6 +14,7 @@ class Tile {
 		element.classList.add(`tile-${this.x}-${this.y}`);
 		element.style.width = Tile.tileWidth + "px";
 		element.style.height = Tile.tileHeight + "px";
+		element.innerHTML = this.x + ", " + this.y;
 	}
 
 	addIceberg(iceberg) {

@@ -1,40 +1,22 @@
-import levels from '../data/levels.js';
-import Board from './Board.js';
-import Pattern from './Pattern.js';
+import levels from "../data/levels.js";
+import Board from "./Board.js";
+
+import patterns from "../data/patterns.js";
 class Game {
 	constructor() {}
 
 	init(level) {
+		this.level = level;
 		this.penguins = levels[level].Penguins;
 		this.board = new Board(this.penguins);
-		this.board.draw();
-
-		let levelTag = document.querySelector(".level");
-		levelTag.innerHTML = `Level: ${level}`;
-
-		this.patterns = [];
-		let patterns = document.querySelectorAll(".pattern");
-
-		for (let pattern of patterns) {
-			this.patterns.push(new Pattern(pattern));
-			
-		}
-
+		this.patterns = patterns;
 	}
 
-	drag(event) {
-		//console.log(event);
-		// let drag = document.querySelector(".drag");
-		
-		// drag.style.left = event.clientX - 25 + "px";
-		// drag.style.top = event.clientY - 25 + "px";
-	}
 	start() {
+		this.board.draw();
 		
-		document.addEventListener("mousemove", this.drag);
-
-		
-		
+		let levelTag = document.querySelector(".level");
+		levelTag.innerHTML = `Level: ${this.level}`;
 	}
 }
 
