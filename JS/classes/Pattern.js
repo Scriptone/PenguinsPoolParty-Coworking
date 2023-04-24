@@ -90,6 +90,7 @@ class Pattern {
 		}
 	}
 	startDrag(iceberg, event) {
+		if (event.button != 0) return; //Only left click
 		this.dragging = iceberg;
 		this.startX = event.clientX;
 		this.startY = event.clientY;
@@ -97,7 +98,7 @@ class Pattern {
 
 	stopDrag(event) {
 		//Dropped on the board
-		if (!this.dragging) return;
+		if (!this.dragging || event.button != 0) return; //Only left click
 		let iceberg = this.dragging;
 		this.dragging = false;
 
@@ -110,8 +111,9 @@ class Pattern {
 
 	drag(event) {
 		if (!this.dragging) return;
-		let offsetX = event.clientX - this.startX;
-		let offsetY = event.clientY - this.startY;
+
+		let offsetX = event.movementX;
+		let offsetY = event.movementY;
 
 		this.startX = event.clientX;
 		this.startY = event.clientY;
@@ -121,9 +123,6 @@ class Pattern {
 			iceberg.element.style.left = left + offsetX + "px";
 			iceberg.element.style.top = top + offsetY + "px";
 		}
-
-		this.totalOffsetX += offsetX;
-		this.totalOffsetY += offsetY;
 	}
 
 	rotate(delta) {
@@ -136,7 +135,7 @@ class Pattern {
 
 		this.width = 0;
 		this.height = 0;
-		
+
 		for (let iceberg of this.icebergs) {
 			let point = iceberg.initialPoint;
 			let x = point[0];
@@ -185,9 +184,8 @@ class Pattern {
 
 			iceberg.point = point;
 			iceberg.cache = [];
-			
 		}
-		
+
 		this.draw();
 	}
 

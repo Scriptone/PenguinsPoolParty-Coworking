@@ -24,16 +24,8 @@ class Iceberg {
 			point[1] * Iceberg.tileHeight -
 			(Math.abs(point[0] % 2) * Iceberg.tileHeight) / 2;
 
-		element.style.left =
-			this.left +
-			this.pattern.totalOffsetX +
-			this.pattern.padding * 8 +
-			"px";
-		element.style.top =
-			this.top +
-			this.pattern.totalOffsetY +
-			this.pattern.padding * 8 +
-			"px";
+		element.style.left = this.left + this.pattern.padding * 8 + "px";
+		element.style.top = this.top + this.pattern.padding * 8 + "px";
 	}
 }
 
