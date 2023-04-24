@@ -28,6 +28,11 @@ class Iceberg {
 		element.style.top = this.top + this.pattern.padding * 8 + "px";
 
 	}
+
+	set point(point) {
+		this._point = point;
+		this.cache = [];
+	}
 }
 
 export default Iceberg;

@@ -177,9 +177,9 @@ main {
 	color: black;
 	text-align: center;
 	pointer-events: none;
-	
-}
 
+	color: transparent; /* voor de cijfers */
+}
 
 /* Voor elke hexagon een cirkel maken */
 .tile:not(.iceberg)::after {
@@ -195,7 +195,12 @@ main {
 	height: auto;
 	aspect-ratio: 1/1;
 	border-radius: 50%;
-	
+	transition: background-color 0.3s ease;
+	/* opacity: .5; voor de cijfers */
+}
+
+.tile:not(.iceberg).selected::after {
+	background-color: green;
 }
 
 .tile.penguin::before {
@@ -222,24 +227,29 @@ main {
 	border-radius: 2rem;
 }
 .pattern {
-
 	position: relative;
-	
+
 	border: 2px dashed black;
 	border-radius: 1rem;
 	text-align: center;
-
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.pattern:is(:hover, :focus) {
+	border-color: var(--primary);
+	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
+	
+}
 .pattern.pattern--error {
-	animation: pattern-error .25s linear 0s 2;
+	animation: pattern-error 0.25s linear 0s 2;
 }
 
 .iceberg {
 	position: absolute;
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
-	
+
 	cursor: grab;
+	animation: highlight 0.5s linear;
 }
 
 .dragging {
@@ -247,7 +257,8 @@ main {
 }
 @keyframes pattern-error {
 	/* Wiggle and shake and make back ground color red and opacity .5 */
-	0%, 100% {
+	0%,
+	100% {
 		transform: translateX(0);
 		border-color: red;
 	}
@@ -261,6 +272,4 @@ main {
 		border-color: red;
 		filter: blur(0.05rem);
 	}
-
 }
-

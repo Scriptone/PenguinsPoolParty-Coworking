@@ -129,6 +129,8 @@ class Pattern {
 			iceberg.element.style.left = left + offsetX + "px";
 			iceberg.element.style.top = top + offsetY + "px";
 		}
+
+		let result = this.board.selectPattern(this, this.dragging);
 	}
 
 	rotate(delta) {

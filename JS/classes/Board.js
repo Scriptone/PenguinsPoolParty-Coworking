@@ -52,7 +52,7 @@ class Board {
 		}
 	}
 
-	drawPattern(pattern, iceberg) {
+	findAvailablePattern(pattern, iceberg) {
 		//Positie
 		let { startX, startY } = pattern;
 
@@ -121,9 +121,9 @@ class Board {
 			let y = point[1] + startPointY;
 
 			/*
-			De patronen  zijn gebasseerd op de kolommen die lager staan, dus als 
-			je een patroon dropt op een kolom die hoger staat, dan moet je de y met 1 verlagen
-			*/
+	De patronen  zijn gebasseerd op de kolommen die lager staan, dus als 
+	je een patroon dropt op een kolom die hoger staat, dan moet je de y met 1 verlagen
+	*/
 			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
 
 			console.log("x", x, "y", y);
@@ -136,8 +136,47 @@ class Board {
 			}
 		}
 
+		return [tile, startPointX, startPointY];
+	}
+
+	selectPattern(pattern, iceberg) {
 		//Plaats het patroon
+		let [tile, startPointX, startPointY] = this.findAvailablePattern(pattern, iceberg);
+
+		if (!tile) {
+			return false;
+		}
+		
+		//Verwijder de vorige selectie
+		for (let tile of this.tiles.flat()) {
+			tile.element.classList.remove("selected");
+		}
+
+		//Selecteer de nieuwe tiles
+		for (let iceberg of pattern.icebergs) {
+			let point = iceberg.point;
+			let x = point[0] + startPointX;
+			let y = point[1] + startPointY;
+			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
+
+			let _tile = this.tiles[y][x];
+			_tile.element.classList.add("selected");
+		}
+
+		return true; //Patroon geplaatst
+	}
+	drawPattern(pattern, iceberg) {
+		//Plaats het patroon
+		let [tile,
+			startPointX,
+			startPointY] = this.findAvailablePattern(pattern, iceberg);
+
+		console.log(tile, startPointX, startPointY);
+		if (!tile) {
+			return false;
+		}
 		console.log("Plaats patroon");
+
 		for (let iceberg of pattern.icebergs) {
 			let point = iceberg.point;
 			let x = point[0] + startPointX;

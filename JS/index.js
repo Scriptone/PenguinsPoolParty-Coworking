@@ -3,7 +3,9 @@ import Game from "./classes/Game.js";
 
 (function () {
 	const spel = new Game();
-	let level = 2;
+	let level = 6;
 	spel.init(level);
 	spel.start();
+
+	
 })();
