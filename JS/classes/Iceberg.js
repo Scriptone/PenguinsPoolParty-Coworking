@@ -26,12 +26,6 @@ class Iceberg {
 
 		element.style.left = this.left + this.pattern.padding * 8 + "px";
 		element.style.top = this.top + this.pattern.padding * 8 + "px";
-
-	}
-
-	set point(point) {
-		this._point = point;
-		this.cache = [];
 	}
 }
 

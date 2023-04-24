@@ -176,8 +176,7 @@ main {
 	background-repeat: no-repeat;
 	color: black;
 	text-align: center;
-	pointer-events: none;
-
+	user-select: none;
 	color: transparent; /* voor de cijfers */
 }
 
@@ -215,6 +214,13 @@ main {
 	background: transparent url("../assets/penguin.svg") no-repeat center;
 	background-size: cover;
 	z-index: 2;
+	animation: penguin 0.5s infinite alternate;
+	transition: scale 0.3s ease, translate 0.3s ease;
+}
+
+.tile.penguin:hover::before {
+	translate: 15% 15%;
+	scale: 1.3;
 }
 
 .patterns {
@@ -238,7 +244,6 @@ main {
 .pattern:is(:hover, :focus) {
 	border-color: var(--primary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
-	
 }
 .pattern.pattern--error {
 	animation: pattern-error 0.25s linear 0s 2;
@@ -247,12 +252,17 @@ main {
 .iceberg {
 	position: absolute;
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
-
+	opacity: 0.75;
 	cursor: grab;
-	animation: highlight 0.5s linear;
+	
 }
 
-.dragging {
+.iceberg.placed {
+	animation: highlight 0.5s linear forwards;
+	cursor: default;
+}
+
+.iceberg.dragging {
 	cursor: grabbing;
 }
 @keyframes pattern-error {
@@ -271,5 +281,33 @@ main {
 		transform: translateX(0.5rem);
 		border-color: red;
 		filter: blur(0.05rem);
+	}
+}
+
+@keyframes highlight {
+	0% {
+		scale: 0.75;
+		opacity: 0.25;
+	}
+	100% {
+		scale: 1;
+		opacity: 1;
+	}
+}
+
+@keyframes penguin {
+	0% {
+		transform: translate(-50%, -50%) scale(1);
+	}
+
+	25% {
+		transform: translate(-50%, -50%) rotate(3deg) scale(1.025);
+	}
+
+	50% {
+		transform: translate(-50%, -50%) rotate(-3deg) scale(1.05);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1.1);
 	}
 }

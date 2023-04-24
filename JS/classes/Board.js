@@ -89,7 +89,6 @@ class Board {
 				(_distance < distance || closestTile == null) &&
 				_distance < Tile.tileWidth
 			) {
-				console.log("Distance", distance, _distance);
 				distance = _distance;
 				closestTile = _tile;
 			}
@@ -112,8 +111,6 @@ class Board {
 				? 1
 				: 0);
 
-		console.log(tile, icebergPoint, startPointX, startPointY);
-
 		//Kan het patroon hier geplaatst worden?
 		for (let iceberg of pattern.icebergs) {
 			let point = iceberg.point;
@@ -126,12 +123,10 @@ class Board {
 	*/
 			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
 
-			console.log("x", x, "y", y);
 			let _tile = this.tiles[y]?.[x];
 
 			// Indien de tile niet bestaat, of er staat al een pinguin of een ijsberg op, dan kan het patroon niet geplaatst worden
 			if (!_tile || _tile.penguin || _tile.iceberg) {
-				console.log("Kan niet", _tile);
 				return false;
 			}
 		}
@@ -141,17 +136,17 @@ class Board {
 
 	selectPattern(pattern, iceberg) {
 		//Plaats het patroon
-		let [tile, startPointX, startPointY] = this.findAvailablePattern(pattern, iceberg);
+		let [tile, startPointX, startPointY] =
+			this.findAvailablePattern(pattern, iceberg) || [];
 
-		if (!tile) {
-			return false;
-		}
-		
 		//Verwijder de vorige selectie
 		for (let tile of this.tiles.flat()) {
 			tile.element.classList.remove("selected");
 		}
 
+		if (!tile) {
+			return false;
+		}
 		//Selecteer de nieuwe tiles
 		for (let iceberg of pattern.icebergs) {
 			let point = iceberg.point;
@@ -167,15 +162,12 @@ class Board {
 	}
 	drawPattern(pattern, iceberg) {
 		//Plaats het patroon
-		let [tile,
-			startPointX,
-			startPointY] = this.findAvailablePattern(pattern, iceberg);
+		let [tile, startPointX, startPointY] =
+			this.findAvailablePattern(pattern, iceberg) || [];
 
-		console.log(tile, startPointX, startPointY);
 		if (!tile) {
 			return false;
 		}
-		console.log("Plaats patroon");
 
 		for (let iceberg of pattern.icebergs) {
 			let point = iceberg.point;
