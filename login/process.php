@@ -35,16 +35,16 @@ if (isset($_POST['login'])) {
 			$_SESSION['username'] = $username;
 
 			// Redirect to the home page
-			header("Location: index.php");
+			header("Location: ../index.html");
 			exit();
 		} else {
 			$_SESSION['error'] = "Invalid password.";
-			header("Location: login.php");
+			header("Location: index.php");
 			exit();
 		}
 	} else {
 		$_SESSION['error'] = "Invalid username.";
-		header("Location: login.php");
+		header("Location: index.php");
 		exit();
 	}
 }
@@ -60,7 +60,7 @@ if (isset($_POST['register'])) {
 	// Validate the form data
 	if ($password !== $confirm_password) {
 		$_SESSION['error'] = "Passwords do not match.";
-		header("Location: registration.php");
+		header("Location: index.php");
 		exit();
 	}
 
@@ -75,11 +75,11 @@ if (isset($_POST['register'])) {
 		$_SESSION['username'] = $username;
 
 		// Redirect to the home page
-		header("Location: index.php");
+		header("Location: ../index.html");
 		exit();
 	} else {
 		$_SESSION['error'] = "Error: " . mysqli_error($conn);
-		header("Location: registration.php");
+		header("Location: index.php");
 		exit();
 	}
 }
