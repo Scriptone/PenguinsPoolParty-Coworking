@@ -44,8 +44,8 @@ $time = isset($_GET['time']);
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
       <!-- STYLE SHEETS -->
-      <link rel="stylesheet" href="css/style.css" />
-      <link rel="stylesheet" href="css/scoreboard.css" />
+      <link rel="stylesheet" href="../css/style.css" />
+      <link rel="stylesheet" href="../css/scoreboard.css" />
       <title>Penguins Pool Party Highscore</title>
     </head>
 
@@ -55,22 +55,22 @@ $time = isset($_GET['time']);
       <div class=container>
         <header>
           <h1>Penguins Pool Party</h1>
-          <a href="./" class="logo" title="logo"></a>
+          <a href="../" class="logo" title="logo"></a>
           <nav>
             <ul>
               <li>
-                <a title="Home" class="nav-link fa fa-home" href="" aria-current="page">Home</a>
+                <a title="Home" class="nav-link fa fa-home" href="../" aria-current="page">Home</a>
               </li>
               <li>
                 <a title="help" class="nav-link fa fa-info" href="">Info</a>
               </li>
 
               <li>
-                <a title="highscores" class="nav-link fa fa-trophy" href="./highscores/">Scores</a>
+                <a title="highscores" class="nav-link fa fa-trophy" href="./">Scores</a>
               </li>
 
               <li>
-                <a title="levels" class="nav-link fa fa-list" href="./levels/">Level</a>
+                <a title="levels" class="nav-link fa fa-list" href="../levels">Level</a>
               </li>
             </ul>
           </nav>
