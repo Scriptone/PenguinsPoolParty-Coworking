@@ -85,14 +85,15 @@ class Board {
 				tileCenterY - startY
 			);
 
-			if ((_distance < distance || closestTile == null) && _distance < Tile.tileWidth) {
+			if (
+				(_distance < distance || closestTile == null) &&
+				_distance < Tile.tileWidth
+			) {
 				console.log("Distance", distance, _distance);
 				distance = _distance;
 				closestTile = _tile;
 			}
 		}
-
-		console.log("Closest tile", closestTile);
 
 		tile = tile || closestTile;
 
@@ -102,6 +103,16 @@ class Board {
 		let icebergPoint = iceberg.point;
 		let startPointX = tile.x - icebergPoint[0]; //Icebergpoint aftrekken van tilepoint om de startpositie te krijgen
 		let startPointY = tile.y - icebergPoint[1];
+
+		//StartPointY corrigeren voor de oneven kolommen
+		startPointY =
+			startPointY +
+			(Math.abs(startPointX % 2) == 1 &&
+			Math.abs(icebergPoint[0] % 2) == 1
+				? 1
+				: 0);
+
+		console.log(tile, icebergPoint, startPointX, startPointY);
 
 		//Kan het patroon hier geplaatst worden?
 		for (let iceberg of pattern.icebergs) {
