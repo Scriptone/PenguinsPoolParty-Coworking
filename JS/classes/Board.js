@@ -5,7 +5,7 @@ class Board {
 		this.penguins = penguins;
 		this.element = document.createElement("div");
 		this.element.classList.add("board");
-		parent.appendChild(this.element);
+		parent.prepend(this.element);
 		this.tiles = [];
 		this.height = 4;
 		this.width = 5;
