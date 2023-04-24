@@ -195,10 +195,10 @@ main {
 	height: auto;
 	aspect-ratio: 1/1;
 	border-radius: 50%;
-	opacity: .5;
+	
 }
 
-.tile.penguin::after {
+.tile.penguin::before {
 	content: "";
 	position: absolute;
 	top: 50%;
@@ -224,7 +224,7 @@ main {
 .pattern {
 
 	position: relative;
-	cursor: grabbing;
+	
 	border: 2px dashed black;
 	border-radius: 1rem;
 	text-align: center;
@@ -234,7 +234,8 @@ main {
 .iceberg {
 	position: absolute;
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
-	
+	cursor: grab;
 }
+
 
 
