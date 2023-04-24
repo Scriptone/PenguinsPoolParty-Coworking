@@ -75,7 +75,7 @@ if (isset($_POST['register'])) {
 		$_SESSION['username'] = $username;
 
 		// Redirect to the home page
-		header("Location: ../index.html");
+		header("Location: ../../index.html");
 		exit();
 	} else {
 		$_SESSION['error'] = "Error: " . mysqli_error($conn);
