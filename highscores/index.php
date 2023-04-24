@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 // Constanten (connectie-instellingen databank)
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root'); //arne.haers
+define('DB_USER', 'arne.haers'); //arne.haers
 define('DB_PASS', 'Kqt20$r93'); //Kqt20$r93
 define('DB_NAME', 'penguinspoolparty_highscore');
 
