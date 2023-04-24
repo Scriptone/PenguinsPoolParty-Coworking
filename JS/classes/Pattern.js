@@ -106,6 +106,8 @@ class Pattern {
 		let result = board.drawPattern(this, iceberg);
 		if (result) {
 			this.element.remove();
+		} else {
+			this.reset();
 		}
 	}
 
@@ -189,6 +191,14 @@ class Pattern {
 		this.draw();
 	}
 
+	reset() {
+		this.dragging = false;
+		this.startX = 0;
+		this.startY = 0;
+		
+
+		this.draw();
+	}
 	setBoard(board) {
 		this.board = board;
 	}
