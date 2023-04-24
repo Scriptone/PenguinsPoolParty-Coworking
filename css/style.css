@@ -231,11 +231,33 @@ main {
 
 }
 
+.pattern.pattern--error {
+	animation: pattern-error .25s linear 0s 2;
+}
+
 .iceberg {
 	position: absolute;
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
+	
 	cursor: grab;
 }
 
+@keyframes pattern-error {
+	/* Wiggle and shake and make back ground color red and opacity .5 */
+	0%, 100% {
+		transform: translateX(0);
+		border-color: red;
+	}
+	33% {
+		transform: translateX(-0.5rem);
+		border-color: red;
+		filter: blur(0.05rem);
+	}
+	66% {
+		transform: translateX(0.5rem);
+		border-color: red;
+		filter: blur(0.05rem);
+	}
 
+}
 

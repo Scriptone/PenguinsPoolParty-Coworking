@@ -4,6 +4,7 @@ class Pattern {
 	constructor(points) {
 		this.element = document.createElement("div");
 		this.element.classList.add("pattern");
+		
 		this.padding = 2; // rem
 		this.width = 0;
 		this.height = 0;
@@ -195,6 +196,12 @@ class Pattern {
 		this.dragging = false;
 		this.startX = 0;
 		this.startY = 0;
+		
+		this.element.classList.add("pattern--error");
+		setTimeout(() => {
+			this.element.classList.remove("pattern--error");
+		}, 500);
+		//this.element.classList.remove("pattern--error");
 
 		this.draw();
 	}
