@@ -56,25 +56,10 @@ class Board {
 		//Positie
 		let { startX, startY } = pattern;
 
-		//board properties
-		let { boardWidth, boardHeight } = this;
-
-		//Positie
-		let boardRect = this.element.getBoundingClientRect();
-		let boardX = boardRect.left;
-		let boardY = boardRect.top;
-
-		//In bounds
-		if (
-			startX < boardX ||
-			startY < boardY ||
-			startX > boardX + boardWidth ||
-			startY > boardY + boardHeight
-		)
-			return false;
-
 		//Zoek dichtsbijzijnde tile
 		let tile = null;
+		let distance = null;
+		let closestTile = null;
 		for (let _tile of this.tiles.flat()) {
 			let { element } = _tile;
 			let tileRect = element.getBoundingClientRect();
@@ -90,11 +75,30 @@ class Board {
 				tile = _tile;
 				break;
 			}
+
+			//Afstand berekenen
+			let tileCenterX = tileX + Tile.tileWidth / 2;
+			let tileCenterY = tileY + Tile.tileHeight / 2;
+
+			let _distance = Math.hypot(
+				tileCenterX - startX,
+				tileCenterY - startY
+			);
+
+			if ((_distance < distance || closestTile == null) && _distance < Tile.tileWidth) {
+				console.log("Distance", distance, _distance);
+				distance = _distance;
+				closestTile = _tile;
+			}
 		}
 
-		//Geen tile of als er een penguin staat
-		if (!tile || tile.penguin) return false;
+		console.log("Closest tile", closestTile);
 
+		tile = tile || closestTile;
+
+		if (!tile) {
+			return;
+		}
 		let icebergPoint = iceberg.point;
 		let startPointX = tile.x - icebergPoint[0]; //Icebergpoint aftrekken van tilepoint om de startpositie te krijgen
 		let startPointY = tile.y - icebergPoint[1];
@@ -114,7 +118,8 @@ class Board {
 			console.log("x", x, "y", y);
 			let _tile = this.tiles[y]?.[x];
 
-			if (!_tile || _tile.penguin) {
+			// Indien de tile niet bestaat, of er staat al een pinguin of een ijsberg op, dan kan het patroon niet geplaatst worden
+			if (!_tile || _tile.penguin || _tile.iceberg) {
 				console.log("Kan niet", _tile);
 				return false;
 			}

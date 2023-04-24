@@ -5,7 +5,7 @@ class Tile {
 		this.x = x;
 		this.y = y;
 		this.element = document.createElement("div");
-		this.icebergs = [];
+		this.iceberg = null;
 		this.penguin = null;
 	}
 
@@ -19,7 +19,7 @@ class Tile {
 	}
 
 	addIceberg(iceberg) {
-		this.icebergs.push(iceberg);
+		this.iceberg = iceberg;
 		this.element.classList.add("iceberg");
 	}
 

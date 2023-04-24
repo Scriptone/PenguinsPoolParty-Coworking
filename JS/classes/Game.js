@@ -7,8 +7,7 @@ class Game {
 
 	init(level) {
 		this.level = level;
-		this.penguins = levels[level].Penguins;
-		this.board = new Board(this.penguins);
+		this.board = new Board(levels[level].Penguins);
 		this.patterns = patterns;
 		this.board.setPatterns(this.patterns);
 	}
@@ -16,8 +15,6 @@ class Game {
 	start() {
 		this.board.draw();
 		
-		let levelTag = document.querySelector(".level");
-		levelTag.innerHTML = `Level: ${this.level}`;
 	}
 }
 
