@@ -45,7 +45,7 @@ $time = isset($_GET['time']);
         crossorigin="anonymous" referrerpolicy="no-referrer" />
       <!-- STYLE SHEETS -->
       <link rel="stylesheet" href="css/style.css" />
-      <link rel="stylesheet" href="scoreboard.css" />
+      <link rel="stylesheet" href="css/scoreboard.css" />
       <title>Penguins Pool Party Highscore</title>
     </head>
 
