@@ -100,7 +100,8 @@ class Board {
 		let startPointY = tile.y - icebergPoint[1];
 
 		//Kan het patroon hier geplaatst worden?
-		for (let point of pattern.points) {
+		for (let iceberg of pattern.icebergs) {
+			let point = iceberg.point;
 			let x = point[0] + startPointX;
 			let y = point[1] + startPointY;
 
@@ -110,6 +111,7 @@ class Board {
 			*/
 			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
 
+			console.log("x", x, "y", y);
 			let _tile = this.tiles[y]?.[x];
 
 			if (!_tile || _tile.penguin) {
