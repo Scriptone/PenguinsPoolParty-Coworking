@@ -242,6 +242,9 @@ main {
 	cursor: grab;
 }
 
+.dragging {
+	cursor: grabbing;
+}
 @keyframes pattern-error {
 	/* Wiggle and shake and make back ground color red and opacity .5 */
 	0%, 100% {

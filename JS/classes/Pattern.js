@@ -95,6 +95,7 @@ class Pattern {
 		this.dragging = iceberg;
 		this.startX = event.clientX;
 		this.startY = event.clientY;
+		iceberg.element.classList.add("dragging");
 	}
 
 	stopDrag(event) {
@@ -110,6 +111,8 @@ class Pattern {
 		} else {
 			this.reset();
 		}
+
+		iceberg.element.classList.remove("dragging");
 	}
 
 	drag(event) {
