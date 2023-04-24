@@ -195,7 +195,6 @@ class Pattern {
 		this.dragging = false;
 		this.startX = 0;
 		this.startY = 0;
-		
 
 		this.draw();
 	}
