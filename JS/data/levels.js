@@ -1,8 +1,5 @@
 import Penguin from "../classes/Penguin.js";
 const levels = {
-	0: {
-		Penguins: [],
-	},
 
 	1: {
 		Penguins: [

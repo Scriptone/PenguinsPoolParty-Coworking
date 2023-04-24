@@ -161,7 +161,7 @@ main {
 	gap: 5rem;
 	align-items: center;
 }
-#board {
+.board {
 	position: relative;
 	background-color: var(--secondary);
 	border-radius: 2rem;

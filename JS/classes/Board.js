@@ -1,9 +1,11 @@
 import Tile from "./Tile.js";
-
+const main = document.querySelector("main");
 class Board {
-	constructor(penguins) {
+	constructor(parent, penguins) {
 		this.penguins = penguins;
-		this.element = document.getElementById("board");
+		this.element = document.createElement("div");
+		this.element.classList.add("board");
+		parent.appendChild(this.element);
 		this.tiles = [];
 		this.height = 4;
 		this.width = 5;
@@ -11,6 +13,7 @@ class Board {
 	}
 
 	draw() {
+		
 		for (let y = 0; y < this.height; y++) {
 			this.tiles[y] = [];
 			for (let x = 0; x < this.width; x++) {
