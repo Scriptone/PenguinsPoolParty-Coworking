@@ -7,9 +7,9 @@ const game = document.querySelector(".game");
 class Game {
 	constructor() {}
 
-	init(level) {
+	init(difficulty, level) {
 		this.level = level;
-		this.board = new Board(game, levels[level].Penguins);
+		this.board = new Board(game, levels[difficulty][level].Penguins);
 		
 		this.patterns = patterns;
 		this.board.setPatterns(this.patterns);

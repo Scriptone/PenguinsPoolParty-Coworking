@@ -1,8 +1,36 @@
 
+.level {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	background-color: var(--primary);
+	color: var(--white);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	transition: all 0.3s;
+	cursor: pointer;
+}
 
+.level-header {
+	
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
 .levels-container {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	
+	/* Try to fit as many as possible, min 20rem, max 30 rem */
+	grid-template-columns: repeat(4, 1fr);
 	gap: 3rem;
 
+}
+
+.difficulty {
+	padding: 2rem;
+	border-radius: 0.5rem;
+	background-color: rgb(164 200 74 / 30%);
 }

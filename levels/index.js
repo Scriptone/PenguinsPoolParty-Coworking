@@ -23,6 +23,12 @@ const levelParent = document.querySelector(".levels");
 			
 			let levelContainer = document.createElement("div");
 			levelContainer.classList.add("level");
+
+			let levelHeader = document.createElement("h3");
+			levelHeader.innerText = `Level: ${level}`;
+			levelHeader.classList.add("level-header");
+			levelContainer.appendChild(levelHeader);
+
 			levelsContainer.appendChild(levelContainer);
 			level = levels[difficulty][level];
 			let penguins = level.Penguins;
