@@ -1,10 +1,16 @@
 <?php
+
+// Show all errors (for educational purposes)
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+
 // Set database connection constants
 define('DB_HOST', 'localhost');
 define('DB_USER', 'arne.haers');
 define('DB_PASS', 'Kqt20$r93');
 define('DB_NAME', 'penguinspoolparty_logins');
 
+date_default_timezone_set('Europe/Brussels');
 // Start the session
 session_start();
 
@@ -19,12 +25,14 @@ if (!$conn) {
 // Check if the login form was submitted
 if (isset($_POST['login'])) {
 	// Get the form data
-	$username = mysqli_real_escape_string($conn, $_POST['username']);
-	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$username = htmlentities(trim($_POST['username']));
+	$password = htmlentities(trim($_POST['password']));
 
 	// Query the database for the user
-	$query = "SELECT * FROM users WHERE username='$username'";
-	$result = mysqli_query($conn, $query);
+	$stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=?");
+	mysqli_stmt_bind_param($stmt, "s", $username);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
 
 	// Check if the user exists and the password is correct
 	if (mysqli_num_rows($result) == 1) {
@@ -52,12 +60,17 @@ if (isset($_POST['login'])) {
 // Check if the registration form was submitted
 if (isset($_POST['register'])) {
 	// Get the form data
-	$username = mysqli_real_escape_string($conn, $_POST['username']);
-	$email = mysqli_real_escape_string($conn, $_POST['email']);
-	$password = mysqli_real_escape_string($conn, $_POST['password']);
-	$confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+	$username = htmlentities(trim($_POST['username']));
+	$email = htmlentities(trim($_POST['email']));
+	$password = htmlentities(trim($_POST['password']));
+	$confirm_password = htmlentities(trim($_POST['confirm_password']));
 
 	// Validate the form data
+	if (!preg_match("/^[a-zA-Z0-9 ]*$/", $username)) {
+		$_SESSION['error'] = "Username can only contain letters, numbers, and spaces.";
+		header("Location: index.php");
+		exit();
+	}
 	if ($password !== $confirm_password) {
 		$_SESSION['error'] = "Passwords do not match.";
 		header("Location: index.php");
@@ -68,8 +81,9 @@ if (isset($_POST['register'])) {
 	$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 	// Insert the user into the database
-	$query = "INSERT INTO users (username, password, email) VALUES ('$username', '$hashed_password', '$email')";
-	if (mysqli_query($conn, $query)) {
+	$stmt = mysqli_prepare($conn, "INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+	mysqli_stmt_bind_param($stmt, "sss", $username, $hashed_password, $email);
+	if (mysqli_stmt_execute($stmt)) {
 		// Set the session variables
 		$_SESSION['loggedin'] = true;
 		$_SESSION['username'] = $username;
