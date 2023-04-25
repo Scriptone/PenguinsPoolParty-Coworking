@@ -130,6 +130,25 @@ const levels = {
 			],
 		},
 	},
+
+	"Junior": {
+		17 : {
+			Penguins: [],
+		}
+	},
+
+	"Expert": {
+		33 : {
+			Penguins: [],
+		}
+	},
+
+	"Master": {
+		49 : {
+			Penguins: [],
+		}
+	},
+
 };
 
 export default levels;

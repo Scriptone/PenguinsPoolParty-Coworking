@@ -1,4 +1,9 @@
-
+:root {
+	--starter: rgb(164 197 74 / 50%);
+	--junior: rgb(245 179 61 / 50%);
+	--expert: rgb(223 38 48 / 50%);
+	--master: rgb(131 65 142 / 50%);
+}
 .level {
 	display: flex;
 	flex-direction: column;
@@ -11,32 +16,43 @@
 	color: var(--white);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 	border: 0;
-	transition: all 0.3s;
+	transition: all 0.2s ease;
 	cursor: pointer;
 }
-
+.level:is(:hover, :focus-within) {
+	transform: scale(1.05);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
 .level-header {
-	
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 1rem;
 }
 .levels-container {
 	display: grid;
-	
+
 	/* Try to fit as many as possible, min 20rem, max 30 rem */
 	grid-template-columns: repeat(4, 1fr);
 	gap: 3rem;
-
 }
 
 .difficulty {
 	padding: 2rem;
 	border-radius: 0.5rem;
-	background-color: rgb(164 200 74 / 30%);
 }
 
-.level:is(:hover, :focus-within) {
-	transform: scale(1.05);
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+.starters {
+	background-color: var(--starter);
+}
+
+.junior {
+	background-color: var(--junior);
+}
+
+.expert {
+	background-color: var(--expert);
+}
+
+.master {
+	background-color: var(--master);
 }

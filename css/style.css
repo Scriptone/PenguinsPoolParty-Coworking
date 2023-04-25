@@ -166,24 +166,7 @@ main {
 	width: 70%;
 }
 
-.menu .btn {
-	display: inline-block;
-	width: 100%;
-	background-color: var(--primary);
-	color: var(--white);
-	padding: 0.75rem 1.5rem;
-	border-radius: 0.4rem;
-	text-align: center;
-	font-weight: bold;
-	text-decoration: none;
 
-	transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.menu .btn:hover {
-	background-color: var(--secondary);
-	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
-}
 
 #info-overlay {
 	position: absolute;
@@ -225,6 +208,32 @@ main {
 	background-color: var(--secondary);
 	border-radius: 2rem;
 	box-shadow: 0 2px 0.5rem rgb(0 0 0 / 50%);
+}
+
+/* cta */
+.buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+}
+
+.cta {
+	display: inline-block;
+	width: 100%;
+	background-color: var(--primary);
+	color: var(--white);
+	padding: 0.75rem 1.5rem;
+	border-radius: 0.4rem;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	border: 0;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta:hover {
+	background-color: var(--secondary);
+	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 }
 
 .tile {

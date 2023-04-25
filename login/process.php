@@ -1,8 +1,12 @@
 <?php
 
+
+
 // Show all errors (for educational purposes)
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
+
+
 
 // Set database connection constants
 define('DB_HOST', 'localhost');
@@ -10,15 +14,27 @@ define('DB_USER', 'arne.haers');
 define('DB_PASS', 'Kqt20$r93');
 define('DB_NAME', 'penguinspoolparty_logins');
 
+
+
 date_default_timezone_set('Europe/Brussels');
-// Start the session
-session_start();
+
+
+// Verbinding maken met de databank
+try {
+	$db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+	echo 'Verbindingsfout: ' . $e->getMessage();
+	
+	
+	exit;
+}
 
 // Connect to the database
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
 // Check for errors
 if (!$conn) {
+	echo "Connection failed: " . mysqli_connect_error();
 	die("Connection failed: " . mysqli_connect_error());
 }
 

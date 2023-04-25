@@ -1,5 +1,5 @@
-import levels from "../JS/data/levels.js";
-import Board from "../JS/classes/Board.js";
+import levels from "../data/levels.js";
+import Board from "../classes/Board.js";
 
 const levelParent = document.querySelector(".levels");
 ("use strict");
