@@ -1,5 +1,7 @@
 <!-- login.php -->
-<?php include('process.php'); ?>
+<?php 
+include('process.php'); 
+?>
 <!DOCTYPE html>
 <html>
 	<head>

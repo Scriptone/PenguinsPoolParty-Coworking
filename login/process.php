@@ -9,10 +9,10 @@ ini_set('display_errors', 1);
 
 
 // Set database connection constants
-define('DB_HOST', 'localhost');
-define('DB_USER', 'arne.haers');
-define('DB_PASS', 'Kqt20$r93');
-define('DB_NAME', 'penguinspoolparty_logins');
+$DB_HOST = 'localhost';
+$DB_USER = 'arne.haers'; //arne.haers
+$DB_PASS = 'Kqt20$r93'; //Kqt20$r93
+$DB_NAME = 'penguinspoolparty_logins'; //penguinspoolparty_logins
 
 
 
@@ -21,17 +21,28 @@ date_default_timezone_set('Europe/Brussels');
 
 // Verbinding maken met de databank
 try {
-	$db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS);
+	$db = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME . ';charset=utf8mb4', $DB_USER, $DB_PASS);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	echo "Connected to PLESK database.";
+} catch (PDOException $e) {
+
+
+	//Xampp
+	$DB_USER = 'root'; //arne.haers
+	$DB_PASS = ''; //Kqt20$r93
+	$DB_NAME = 'firstproject'; //penguinspoolparty_logins
+
+	$db = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME . ';charset=utf8mb4', $DB_USER, $DB_PASS);
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+	echo "Connected to XAMPP database.";
 } catch (PDOException $e) {
 	echo 'Verbindingsfout: ' . $e->getMessage();
-	
-	
-	exit;
 }
 
 // Connect to the database
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 // Check for errors
 if (!$conn) {
 	echo "Connection failed: " . mysqli_connect_error();

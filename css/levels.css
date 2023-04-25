@@ -4,6 +4,17 @@
 	--expert: rgb(223 38 48 / 50%);
 	--master: rgb(131 65 142 / 50%);
 }
+
+
+.levels-container {
+	display: grid;
+
+	/* Try to fit as many as possible, min 20rem, max 30 rem */
+	grid-template-columns: repeat(4, 1fr);
+	gap: 3rem;
+	
+}
+
 .level {
 	display: flex;
 	flex-direction: column;
@@ -19,6 +30,8 @@
 	transition: all 0.2s ease;
 	cursor: pointer;
 }
+
+
 .level:is(:hover, :focus-within) {
 	transform: scale(1.05);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
@@ -28,17 +41,11 @@
 	margin-top: 0;
 	margin-bottom: 1rem;
 }
-.levels-container {
-	display: grid;
 
-	/* Try to fit as many as possible, min 20rem, max 30 rem */
-	grid-template-columns: repeat(4, 1fr);
-	gap: 3rem;
-}
 
 .difficulty {
 	padding: 2rem;
-	border-radius: 0.5rem;
+	
 }
 
 .starters {
