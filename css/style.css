@@ -216,6 +216,7 @@ main {
 .game {
 	display: flex;
 	justify-content: center;
+	flex-flow: row-reverse;
 	gap: 5rem;
 	align-items: center;
 }
@@ -289,6 +290,7 @@ main {
 	padding: 2rem;
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 	border-radius: 2rem;
+	z-index: 2;
 }
 .pattern {
 	position: relative;

@@ -4,6 +4,12 @@ import Board from "../JS/classes/Board.js";
 const levelParent = document.querySelector(".levels");
 ("use strict");
 (function () {
+	const onLevelClicked = (difficulty, level, event) => {
+		sessionStorage.setItem("difficulty", difficulty);
+		sessionStorage.setItem("level", level);
+		window.location.href = `/spel`;
+	};
+
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");
@@ -18,10 +24,8 @@ const levelParent = document.querySelector(".levels");
 		levelsContainer.classList.add("levels-container");
 		difficultyContainer.appendChild(levelsContainer);
 
-
 		for (let level of Object.keys(levels[difficulty])) {
-			
-			let levelContainer = document.createElement("div");
+			let levelContainer = document.createElement("button");
 			levelContainer.classList.add("level");
 
 			let levelHeader = document.createElement("h3");
@@ -30,11 +34,17 @@ const levelParent = document.querySelector(".levels");
 			levelContainer.appendChild(levelHeader);
 
 			levelsContainer.appendChild(levelContainer);
-			level = levels[difficulty][level];
-			let penguins = level.Penguins;
+
+			let levelObject = levels[difficulty][level];
+			let penguins = levelObject.Penguins;
 
 			let board = new Board(levelContainer, penguins);
 			board.draw();
+
+			levelContainer.addEventListener(
+				"click",
+				onLevelClicked.bind(this, difficulty, level)
+			);
 		}
 	}
 })();
