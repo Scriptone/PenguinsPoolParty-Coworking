@@ -13,7 +13,6 @@ class Board {
 	}
 
 	draw() {
-		
 		for (let y = 0; y < this.height; y++) {
 			this.tiles[y] = [];
 			for (let x = 0; x < this.width; x++) {
@@ -57,7 +56,12 @@ class Board {
 
 	findAvailablePattern(pattern, iceberg) {
 		//Positie
-		let { startX, startY } = pattern;
+
+
+		let boundingIceberg = iceberg.element.getBoundingClientRect();
+
+		let startX = boundingIceberg.x + boundingIceberg.width / 2;
+		let startY = boundingIceberg.y + boundingIceberg.height / 2;
 
 		//Zoek dichtsbijzijnde tile
 		let tile = null;
