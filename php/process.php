@@ -55,6 +55,8 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
+session_start();
+
 $loggedin = $_SESSION['loggedin'];
 if ($loggedin == true) {
 	echo "Logged in.";
