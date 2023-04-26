@@ -4,10 +4,10 @@
     let overlay = document.querySelector("#info-overlay");
 
     btnInfo.addEventListener("click", function() {
-        if(overlay.style.display = "none") {
+        if(overlay.style.display === "none") {
             overlay.style.display = "block";
         }
-        if(overlay.style.display != "none") {
+        if(overlay.style.display !== "none") {
             overlay.style.display = "block";
         }
     })

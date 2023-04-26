@@ -1,19 +1,28 @@
 import levels from "../data/levels.js";
 import Board from "../classes/Board.js";
 
-const levelParent = document.querySelector(".levels");
+
 ("use strict");
 (function () {
+
+	const levelParent = document.querySelector(".levels");
+	const previousButton = document.querySelector(".btn-prev");
+	const nextButton = document.querySelector(".btn-next");
+
 	const onLevelClicked = (difficulty, level, event) => {
 		sessionStorage.setItem("difficulty", difficulty);
 		sessionStorage.setItem("level", level);
 		window.location.href = `/spel`;
 	};
 
+	
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");
 		difficultyContainer.classList.add(difficulty.toLowerCase());
+		if (difficulty === "Starters") {
+			difficultyContainer.classList.add("active");
+		}
 		levelParent.appendChild(difficultyContainer);
 
 		let heading = document.createElement("h2");
@@ -47,4 +56,25 @@ const levelParent = document.querySelector(".levels");
 			);
 		}
 	}
+
+	const onPreviousClicked = () => {
+		let currentDifficulty = document.querySelector(".active");
+		let previousDifficulty = currentDifficulty.previousElementSibling;
+		if (previousDifficulty === null) return;
+		currentDifficulty.classList.remove("active");
+		previousDifficulty.classList.add("active");
+	}
+
+	const onNextClicked = () => {
+		let currentDifficulty = document.querySelector(".active");
+		let nextDifficulty = currentDifficulty.nextElementSibling;
+		if (nextDifficulty === null) return;
+		currentDifficulty.classList.remove("active");
+		nextDifficulty.classList.add("active");
+	}
+
+	previousButton.addEventListener("click", onPreviousClicked);
+	nextButton.addEventListener("click", onNextClicked);
+
+
 })();

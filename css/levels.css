@@ -11,13 +11,19 @@
 }
 .difficulty {
 	padding: 2rem;
+	display: none;
 	
+}
+.difficulty.active {
+	display: block;
 }
 
 .levels-container {
-	display: grid;
-	
-	grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+
+	width: 100%;
 	gap: 3rem;
 	
 }
@@ -50,6 +56,13 @@
 }
 
 
+.buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
+	margin-bottom: 8rem;
+}
 
 
 .starters {
@@ -67,3 +80,4 @@
 .master {
 	background-color: var(--master);
 }
+

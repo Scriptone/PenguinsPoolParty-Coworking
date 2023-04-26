@@ -25,7 +25,7 @@ class Board {
 
 				tile.element.style.top =
 					y * Tile.tileHeight +
-					((x % 2 == 0 ? 1 : 0) * Tile.tileHeight) / 2 +
+					((x % 2 === 0 ? 1 : 0) * Tile.tileHeight) / 2 +
 					this.padding * 8 +
 					"px";
 
@@ -33,7 +33,7 @@ class Board {
 
 				// Add penguins to the board
 				for (let penguin of this.penguins) {
-					if (penguin.x == x && penguin.y == y) {
+					if (penguin.x === x && penguin.y === y) {
 						tile.addPenguin(penguin);
 					}
 				}
@@ -187,7 +187,7 @@ class Board {
 		}
 
 		this.patternsRemaining--;
-		if (this.patternsRemaining == 0) {
+		if (this.patternsRemaining === 0) {
 			this.onCompleteCallback();
 		}
 		return true; //Patroon geplaatst

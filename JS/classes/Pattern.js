@@ -32,11 +32,11 @@ class Pattern {
 		document.addEventListener("keydown", (event) => {
 			let key = event.key;
 
-			if (key == "ArrowUp" || key == "ArrowDown") {
+			if (key === "ArrowUp" || key === "ArrowDown") {
 				this.flip();
 				return;
 			}
-			let delta = key == "ArrowRight" ? 1 : key == "ArrowLeft" ? -1 : 0;
+			let delta = key === "ArrowRight" ? 1 : key === "ArrowLeft" ? -1 : 0;
 
 			if (delta == 0) return;
 			this.rotate(delta);
@@ -46,6 +46,8 @@ class Pattern {
 	}
 
 	draw() {
+
+		// TODO: Zorgen dat het patroon geen negatieve coordinaten heeft
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener("mousedown", this.mousedown);
 		});
@@ -92,9 +94,10 @@ class Pattern {
 		for (let iceberg of this.icebergs) {
 			iceberg.draw(this.offsetX, this.offsetY);
 		}
-		let result = this.board.selectPattern(this, this.dragging);
+		this.board.selectPattern(this, this.dragging);
 	}
 	startDrag(iceberg, event) {
+		event.preventDefault();
 		if (event.button != 0) return; //Only left click
 		this.dragging = iceberg;
 		this.startX = event.clientX;
@@ -105,6 +108,7 @@ class Pattern {
 	}
 
 	stopDrag(event) {
+		event.preventDefault();
 		//Dropped on the board
 		if (!this.dragging || event.button != 0) return; //Only left click
 		let iceberg = this.dragging;
@@ -122,6 +126,7 @@ class Pattern {
 	}
 
 	drag(event) {
+		event.preventDefault();
 		if (!this.dragging) return;
 
 		this.mouseX = event.clientX;
@@ -133,7 +138,7 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 		}
 
-		let result = this.board.selectPattern(this, this.dragging);
+		this.board.selectPattern(this, this.dragging);
 	}
 
 	rotate(delta) {
