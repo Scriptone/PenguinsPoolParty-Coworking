@@ -48,7 +48,7 @@ class Board {
 
 	setPatterns(patterns) {
 		this.patterns = patterns;
-
+		this.patternsRemaining = patterns.length;
 		for (let pattern of this.patterns) {
 			pattern.setBoard(this);
 		}
@@ -186,7 +186,16 @@ class Board {
 			_tile.addIceberg(iceberg);
 		}
 
+		this.patternsRemaining--;
+		if (this.patternsRemaining == 0) {
+			this.onCompleteCallback();
+		}
 		return true; //Patroon geplaatst
+	}
+
+	// Check if the game is over
+	onComplete(callback) {
+		this.onCompleteCallback = callback;
 	}
 }
 

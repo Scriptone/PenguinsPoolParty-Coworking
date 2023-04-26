@@ -46,10 +46,17 @@ import levels from "../data/levels.js";
 	});
 
 	if (level == totalLevels) {
-		nextLevel.style.display = "none";
+		nextLevel.style.filter = "grayscale(100%)";
+		nextLevel.style.pointerEvents = "none";
 	}
 
 	if (level == 1) {
-		previousLevel.style.display = "none";
+		previousLevel.style.filter = "grayscale(75%)";
+		previousLevel.style.pointerEvents = "none";
 	}
+
+
+	spel.onComplete(() => {
+		console.log("Level complete");
+	});
 })();

@@ -20,41 +20,50 @@ date_default_timezone_set('Europe/Brussels');
 
 
 // Verbinding maken met de databank
+$conn = null;
 try {
 	$db = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME . ';charset=utf8mb4', $DB_USER, $DB_PASS);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+	$conn = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 	echo "Connected to PLESK database.";
 } catch (PDOException $e) {
 
+	try {
+		//Xampp
+		$DB_USER = 'root'; //arne.haers
+		$DB_PASS = ''; //Kqt20$r93
+		$DB_NAME = 'firstproject'; //penguinspoolparty_logins
 
-	//Xampp
-	$DB_USER = 'root'; //arne.haers
-	$DB_PASS = ''; //Kqt20$r93
-	$DB_NAME = 'firstproject'; //penguinspoolparty_logins
+		$db = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME . ';charset=utf8mb4', $DB_USER, $DB_PASS);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$db = new PDO('mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME . ';charset=utf8mb4', $DB_USER, $DB_PASS);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$conn = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+		echo "Connected to XAMPP database.";
+	} catch (PDOException $e) {
+		echo 'Verbindingsfout: ' . $e->getMessage();
+	}
 
-	echo "Connected to XAMPP database.";
-} catch (PDOException $e) {
-	echo 'Verbindingsfout: ' . $e->getMessage();
 }
 
 // Connect to the database
-$conn = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+
 // Check for errors
 if (!$conn) {
 	echo "Connection failed: " . mysqli_connect_error();
 	die("Connection failed: " . mysqli_connect_error());
 }
 
+echo "Connected successfully";
 // Check if the login form was submitted
 if (isset($_POST['login'])) {
+	echo "Login form was submitted.";
 	// Get the form data
 	$username = htmlentities(trim($_POST['username']));
 	$password = htmlentities(trim($_POST['password']));
 
+	echo $username;
 	// Query the database for the user
 	$stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username=?");
 	mysqli_stmt_bind_param($stmt, "s", $username);
@@ -70,18 +79,26 @@ if (isset($_POST['login'])) {
 			$_SESSION['username'] = $username;
 
 			// Redirect to the home page
-			header("Location: ../index.html");
+
+			echo "Logged in.";
+			//header("Location: ../index.html");
 			exit();
 		} else {
 			$_SESSION['error'] = "Invalid password.";
-			header("Location: index.php");
+			echo "Invalid password.";
+
+			//header("Location: index.php");
 			exit();
 		}
 	} else {
 		$_SESSION['error'] = "Invalid username.";
-		header("Location: index.php");
+
+		echo "Invalid username.";
+		//header("Location: index.php");
 		exit();
 	}
+} else {
+	echo "Login form was not submitted.";
 }
 
 // Check if the registration form was submitted

@@ -5,12 +5,19 @@
 	--master: rgb(131 65 142 / 50%);
 }
 
+.levels {
+	width: 60%;
+	padding-inline: var(--margins);
+}
+.difficulty {
+	padding: 2rem;
+	
+}
 
 .levels-container {
 	display: grid;
-
-	/* Try to fit as many as possible, min 20rem, max 30 rem */
-	grid-template-columns: repeat(4, 1fr);
+	
+	grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
 	gap: 3rem;
 	
 }
@@ -28,12 +35,12 @@
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 	border: 0;
 	transition: all 0.2s ease;
-	cursor: pointer;
+	
 }
 
 
-.level:is(:hover, :focus-within) {
-	transform: scale(1.05);
+.levels .level:is(:hover, :focus-within) {
+	transform: scale(1.025);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 .level-header {
@@ -43,10 +50,7 @@
 }
 
 
-.difficulty {
-	padding: 2rem;
-	
-}
+
 
 .starters {
 	background-color: var(--starter);

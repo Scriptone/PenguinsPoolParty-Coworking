@@ -4,7 +4,7 @@
 	--primary: #0596ff;
 	--secondary: #48b3ff;
 	--bg: var(--white);
-	--ice: #EBF7FF;
+	--ice: #ebf7ff;
 
 	--margins: 2rem;
 }
@@ -166,8 +166,6 @@ main {
 	width: 70%;
 }
 
-
-
 #info-overlay {
 	position: absolute;
 	display: none;
@@ -177,23 +175,23 @@ main {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 2;
 	cursor: pointer;
 }
-.overlay-text{
+.overlay-text {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
-	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	padding: var(--margins);
 	max-width: 20rem;
 
 	background-color: var(--primary);
 	border-radius: 10px;
 	color: var(--white);
-  }
+}
 
 /* Game */
 .game {
@@ -323,7 +321,6 @@ main {
 	background: transparent url("../assets/iceberg.svg") no-repeat center;
 	opacity: 0.75;
 	cursor: grab;
-	
 }
 
 .iceberg.placed {

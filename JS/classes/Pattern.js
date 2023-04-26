@@ -104,16 +104,19 @@ class Pattern {
 		//Dropped on the board
 		if (!this.dragging || event.button != 0) return; //Only left click
 		let iceberg = this.dragging;
-		this.dragging = false;
+		
 
 		let board = this.board;
 		let result = board.drawPattern(this, iceberg);
 		if (result) {
-			this.element.remove();
+
+
+			//this.element.remove(); Niet zo mooi
+			this.element.style.opacity = 0;
 		} else {
 			this.reset();
 		}
-
+		this.dragging = false;
 		iceberg.element.classList.remove("dragging");
 	}
 

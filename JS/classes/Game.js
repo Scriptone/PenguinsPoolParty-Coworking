@@ -27,6 +27,10 @@ class Game {
 	start() {
 		this.board.draw();
 	}
+	
+	onComplete(callback) {
+		this.board.onComplete(callback);
+	}
 }
 
 export default Game;
