@@ -55,6 +55,13 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
+$loggedin = $_SESSION['loggedin'];
+if ($loggedin == true) {
+	echo "Logged in.";
+} else {
+	echo "Not logged in.";
+}
+
 echo "Connected successfully";
 // Check if the login form was submitted
 if (isset($_POST['login'])) {
