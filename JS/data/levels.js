@@ -208,18 +208,100 @@ const levels = {
 		32: {
 			Penguins: [new Penguin(0, 2), new Penguin(3, 1), new Penguin(4, 2)],
 		},
-
 	},
 
 	Expert: {
 		33: {
-			Penguins: [],
+			Penguins: [new Penguin(0, 1), new Penguin(1, 1)],
+		},
+		34: {
+			Penguins: [new Penguin(1, 0), new Penguin(1, 2), new Penguin(3, 0)],
+		},
+		35: {
+			Penguins: [new Penguin(0, 2), new Penguin(2, 0)],
+		},
+		36: {
+			Penguins: [new Penguin(0, 1), new Penguin(3, 0), new Penguin(4, 2)],
+		},
+		37: {
+			Penguins: [new Penguin(1, 1), new Penguin(3, 1), new Penguin(2, 2)],
+		},
+		38: {
+			Penguins: [new Penguin(0, 3), new Penguin(1, 2), new Penguin(3, 3)],
+		},
+		39: {
+			Penguins: [new Penguin(0, 3), new Penguin(1, 2), new Penguin(3, 1)],
+		},
+		40: {
+			Penguins: [new Penguin(0, 1), new Penguin(2, 0)],
+		},
+		41: {
+			Penguins: [new Penguin(1, 1), new Penguin(3, 0), new Penguin(4, 3)],
+		},
+		42: {
+			Penguins: [new Penguin(1, 3), new Penguin(2, 1)],
+		},
+		43: {
+			Penguins: [new Penguin(1, 2), new Penguin(2, 3), new Penguin(3, 2)],
+		},
+		44: {
+			Penguins: [new Penguin(3, 2), new Penguin(3, 3)],
+		},
+		45: {
+			Penguins: [new Penguin(1, 0), new Penguin(2, 1), new Penguin(3, 3)],
+		},
+		46: {
+			Penguins: [new Penguin(1, 1), new Penguin(2, 2), new Penguin(3, 0)],
+		},
+		47: {
+			Penguins: [new Penguin(2, 1), new Penguin(4, 1), new Penguin(3, 0)],
+		},
+		48: {
+			Penguins: [new Penguin(0, 3), new Penguin(3, 1), new Penguin(3, 2)],
 		},
 	},
 
 	Master: {
 		49: {
-			Penguins: [],
+			Penguins: [new Penguin(0, 0), new Penguin(0, 3), new Penguin(4, 0)],
+		},
+		49: {
+			Penguins: [new Penguin(0, 2), new Penguin(0, 3), new Penguin(1, 3)],
+		},
+		50: {
+			Penguins: [new Penguin(0, 2), new Penguin(0, 3), new Penguin(1, 3)],
+		},
+		51: {
+			Penguins: [new Penguin(0, 0), new Penguin(2, 1), new Penguin(4, 2)],
+		},
+		52: {
+			Penguins: [new Penguin(3, 0), new Penguin(4, 1), new Penguin(3, 3)],
+		},
+
+		53: {
+			Penguins: [new Penguin(1, 1), new Penguin(2, 1), new Penguin(3, 1)],
+		},
+		54: {
+			Penguins: [new Penguin(1, 0), new Penguin(4, 0), new Penguin(4, 1)],
+		},
+		55: {
+			Penguins: [new Penguin(2, 2), new Penguin(2, 3)],
+		},
+		56: {
+			Penguins: [new Penguin(0, 2), new Penguin(3, 0), new Penguin(4, 3)],
+		},
+
+		57: {
+			Penguins: [new Penguin(0, 1), new Penguin(2, 2)],
+		},
+		58: {
+			Penguins: [new Penguin(3, 3), new Penguin(4, 2)],
+		},
+		59: {
+			Penguins: [new Penguin(2, 0), new Penguin(3, 2)],
+		},
+		60: {
+			Penguins: [new Penguin(2, 0), new Penguin(2, 2)],
 		},
 	},
 };
