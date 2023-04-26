@@ -13,7 +13,7 @@ class Iceberg {
 		this.cache = []; //Each rotation point is cached
 	}
 
-	draw() {
+	draw(offsetX = 0, offsetY = 0) {
 		const element = this.element;
 		element.style.width = Iceberg.tileWidth + "px";
 		element.style.height = Iceberg.tileHeight + "px";
@@ -24,8 +24,8 @@ class Iceberg {
 			point[1] * Iceberg.tileHeight -
 			(Math.abs(point[0] % 2) * Iceberg.tileHeight) / 2;
 
-		element.style.left = this.left + this.pattern.padding * 8 + "px";
-		element.style.top = this.top + this.pattern.padding * 8 + "px";
+		element.style.left = this.left + offsetX + this.pattern.padding * 8 + "px";
+		element.style.top = this.top + offsetY + this.pattern.padding * 8 + "px";
 	}
 }
 

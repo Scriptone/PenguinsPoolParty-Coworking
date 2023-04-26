@@ -120,16 +120,11 @@ class Pattern {
 	drag(event) {
 		if (!this.dragging) return;
 
-		let offsetX = event.movementX;
-		let offsetY = event.movementY;
+		let offsetX = event.clientX - this.startX;
+		let offsetY = event.clientY - this.startY;
 
-		this.startX = event.clientX;
-		this.startY = event.clientY;
 		for (let iceberg of this.icebergs) {
-			let left = parseInt(iceberg.element.style.left);
-			let top = parseInt(iceberg.element.style.top);
-			iceberg.element.style.left = left + offsetX + "px";
-			iceberg.element.style.top = top + offsetY + "px";
+			iceberg.draw(offsetX, offsetY);
 		}
 
 		let result = this.board.selectPattern(this, this.dragging);
