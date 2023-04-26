@@ -89,6 +89,8 @@ class Pattern {
 			iceberg.element.style.top =
 				top + offsetY - Iceberg.tileHeight / 2 + "px";
 		}
+
+		let result = this.board.selectPattern(this, this.dragging);
 	}
 	startDrag(iceberg, event) {
 		if (event.button != 0) return; //Only left click

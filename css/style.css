@@ -262,7 +262,7 @@ main {
 	height: auto;
 	aspect-ratio: 1/1;
 	border-radius: 50%;
-	transition: background-color 0.3s ease;
+	transition: background-color 0.2s ease;
 	/* opacity: .5; voor de cijfers */
 }
 
