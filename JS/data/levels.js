@@ -143,6 +143,72 @@ const levels = {
 				new Penguin(3, 1),
 			],
 		},
+
+		19: {
+			Penguins: [
+				new Penguin(0, 3),
+				new Penguin(2, 3),
+				new Penguin(4, 3),
+				new Penguin(3, 1),
+			],
+		},
+
+		20: {
+			Penguins: [
+				new Penguin(1, 0),
+				new Penguin(1, 1),
+				new Penguin(0, 2),
+				new Penguin(0, 3),
+			],
+		},
+
+		21: {
+			Penguins: [new Penguin(1, 3), new Penguin(3, 2), new Penguin(4, 3)],
+		},
+
+		22: {
+			Penguins: [new Penguin(1, 2), new Penguin(2, 2), new Penguin(3, 2)],
+		},
+
+		23: {
+			Penguins: [new Penguin(1, 2), new Penguin(3, 0), new Penguin(4, 2)],
+		},
+
+		24: {
+			Penguins: [new Penguin(2, 1), new Penguin(2, 0)],
+		},
+
+		25: {
+			Penguins: [new Penguin(1, 1), new Penguin(2, 1), new Penguin(3, 2)],
+		},
+
+		26: {
+			Penguins: [new Penguin(0, 2), new Penguin(1, 2)],
+		},
+		27: {
+			Penguins: [new Penguin(0, 2), new Penguin(2, 1), new Penguin(4, 0)],
+		},
+
+		28: {
+			Penguins: [new Penguin(1, 0), new Penguin(1, 2), new Penguin(3, 1)],
+		},
+
+		29: {
+			Penguins: [new Penguin(0, 1), new Penguin(2, 3), new Penguin(4, 1)],
+		},
+
+		30: {
+			Penguins: [new Penguin(1, 1), new Penguin(2, 0), new Penguin(3, 0)],
+		},
+
+		31: {
+			Penguins: [new Penguin(1, 3), new Penguin(2, 0)],
+		},
+
+		32: {
+			Penguins: [new Penguin(0, 2), new Penguin(3, 1), new Penguin(4, 2)],
+		},
+
 	},
 
 	Expert: {

@@ -4,7 +4,7 @@ class Pattern {
 	constructor(points) {
 		this.element = document.createElement("div");
 		this.element.classList.add("pattern");
-		
+
 		this.padding = 2; // rem
 		this.width = 0;
 		this.height = 0;
@@ -18,6 +18,8 @@ class Pattern {
 		this.dragging = false;
 		this.startX = 0;
 		this.startY = 0;
+		this.offsetX = 0;
+		this.offsetY = 0;
 		this.totalOffsetX = 0;
 		this.totalOffsetY = 0;
 		this.rotation = 0;
@@ -47,13 +49,14 @@ class Pattern {
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener("mousedown", this.mousedown);
 		});
+
 		let mostLeft = 0;
 		let mostRight = 0;
 		let mostTop = 0;
 		let mostBottom = 0;
+
 		this.icebergs.forEach((iceberg) => {
-			let point = iceberg.point;
-			iceberg.draw();
+			iceberg.draw(this.offsetX, this.offsetY);
 
 			mostLeft = Math.min(mostLeft, iceberg.left);
 			mostRight = Math.max(mostRight, iceberg.left + Iceberg.tileWidth);
@@ -73,23 +76,22 @@ class Pattern {
 		this.element.style.width = this.width + this.padding * 16 + "px";
 		this.element.style.height = this.height + this.padding * 16 + "px";
 
-		if (!this.dragging) return;
-		let iceberg = this.dragging;
-		let { left, top } = iceberg.element.getBoundingClientRect();
-		let { startX, startY } = this;
-
-		let offsetX = startX - left;
-		let offsetY = startY - top;
-
-		for (let iceberg of this.icebergs) {
-			let left = parseInt(iceberg.element.style.left);
-			let top = parseInt(iceberg.element.style.top);
-			iceberg.element.style.left =
-				left + offsetX - Iceberg.tileWidth / 2 + "px";
-			iceberg.element.style.top =
-				top + offsetY - Iceberg.tileHeight / 2 + "px";
+		if (!this.dragging) {
+			return;
 		}
 
+		//Fix als je draait dat je muis nog steeds op dezelfde iceberg staat.
+		let bounding = this.dragging.element.getBoundingClientRect();
+
+		this.startX = bounding.left + bounding.width / 2 - this.offsetX;
+		this.startY = bounding.top + bounding.height / 2 - this.offsetY;
+
+		this.offsetX = this.mouseX - this.startX;
+		this.offsetY = this.mouseY - this.startY;
+
+		for (let iceberg of this.icebergs) {
+			iceberg.draw(this.offsetX, this.offsetY);
+		}
 		let result = this.board.selectPattern(this, this.dragging);
 	}
 	startDrag(iceberg, event) {
@@ -97,6 +99,8 @@ class Pattern {
 		this.dragging = iceberg;
 		this.startX = event.clientX;
 		this.startY = event.clientY;
+		this.offsetX = 0;
+		this.offsetY = 0;
 		iceberg.element.classList.add("dragging");
 	}
 
@@ -104,13 +108,10 @@ class Pattern {
 		//Dropped on the board
 		if (!this.dragging || event.button != 0) return; //Only left click
 		let iceberg = this.dragging;
-		
 
 		let board = this.board;
 		let result = board.drawPattern(this, iceberg);
 		if (result) {
-
-
 			//this.element.remove(); Niet zo mooi
 			this.element.style.opacity = 0;
 		} else {
@@ -123,11 +124,13 @@ class Pattern {
 	drag(event) {
 		if (!this.dragging) return;
 
-		let offsetX = event.clientX - this.startX;
-		let offsetY = event.clientY - this.startY;
+		this.mouseX = event.clientX;
+		this.mouseY = event.clientY;
+		this.offsetX = this.mouseX - this.startX;
+		this.offsetY = this.mouseY - this.startY;
 
 		for (let iceberg of this.icebergs) {
-			iceberg.draw(offsetX, offsetY);
+			iceberg.draw(this.offsetX, this.offsetY);
 		}
 
 		let result = this.board.selectPattern(this, this.dragging);
@@ -201,11 +204,12 @@ class Pattern {
 		this.dragging = false;
 		this.startX = 0;
 		this.startY = 0;
-		
+		this.offsetX = 0;
+		this.offsetY = 0;
 		this.element.classList.add("pattern--error");
 		setTimeout(() => {
 			this.element.classList.remove("pattern--error");
-		}, 500);
+		}, 250);
 		//this.element.classList.remove("pattern--error");
 
 		this.draw();

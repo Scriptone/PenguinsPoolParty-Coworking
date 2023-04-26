@@ -6,7 +6,7 @@
 }
 
 .levels {
-	width: 60%;
+	width: 70%;
 	padding-inline: var(--margins);
 }
 .difficulty {
@@ -17,7 +17,7 @@
 .levels-container {
 	display: grid;
 	
-	grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
 	gap: 3rem;
 	
 }

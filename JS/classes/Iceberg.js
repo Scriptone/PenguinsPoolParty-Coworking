@@ -26,6 +26,7 @@ class Iceberg {
 
 		element.style.left = this.left + offsetX + this.pattern.padding * 8 + "px";
 		element.style.top = this.top + offsetY + this.pattern.padding * 8 + "px";
+		//element.innerHTML = `${this.point[0]}, ${this.point[1]}`;
 	}
 }
 
