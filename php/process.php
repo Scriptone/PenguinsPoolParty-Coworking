@@ -112,12 +112,12 @@ if (isset($_POST['register'])) {
 	// Validate the form data
 	if (!preg_match("/^[a-zA-Z0-9 ]*$/", $username)) {
 		$_SESSION['error'] = "Username can only contain letters, numbers, and spaces.";
-		header("Location: index.php");
+		header("Location: ./register.php");
 		exit();
 	}
 	if ($password !== $confirm_password) {
 		$_SESSION['error'] = "Passwords do not match.";
-		header("Location: index.php");
+		header("Location: ./register.php");
 		exit();
 	}
 
@@ -133,11 +133,11 @@ if (isset($_POST['register'])) {
 		$_SESSION['username'] = $username;
 
 		// Redirect to the home page
-		header("Location: ../../index.html");
+		header("Location: ../index.html");
 		exit();
 	} else {
 		$_SESSION['error'] = "Error: " . mysqli_error($conn);
-		header("Location: index.php");
+		header("Location: ./register.php");
 		exit();
 	}
 }
