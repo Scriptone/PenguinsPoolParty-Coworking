@@ -81,20 +81,20 @@ if (isset($_POST['login'])) {
 			// Redirect to the home page
 
 			echo "Logged in.";
-			//header("Location: ../index.html");
+			header("Location: ../index.html");
 			exit();
 		} else {
 			$_SESSION['error'] = "Invalid password.";
 			echo "Invalid password.";
 
-			//header("Location: index.php");
+			header("Location: ./login.php");
 			exit();
 		}
 	} else {
 		$_SESSION['error'] = "Invalid username.";
 
 		echo "Invalid username.";
-		//header("Location: index.php");
+		header("Location: ./login.php");
 		exit();
 	}
 } else {
