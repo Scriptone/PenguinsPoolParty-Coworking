@@ -246,7 +246,8 @@ main {
 	color: black;
 	text-align: center;
 	user-select: none;
-	color: transparent; /* voor de cijfers */
+
+	/* color: transparent;  */
 }
 
 /* Voor elke hexagon een cirkel maken */
@@ -264,7 +265,7 @@ main {
 	aspect-ratio: 1/1;
 	border-radius: 50%;
 	transition: background-color 0.2s ease;
-	/* opacity: .5; voor de cijfers */
+	opacity: .5; 
 }
 
 .tile:not(.iceberg).selected::after {
@@ -305,7 +306,7 @@ main {
 .pattern {
 	position: relative;
 
-	border: 2px dashed black;
+	border: .2rem solid black;
 	border-radius: 1rem;
 	text-align: center;
 	transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -314,9 +315,11 @@ main {
 .pattern:is(:hover, :focus) {
 	border-color: var(--primary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
+	
 }
 .pattern.pattern--error {
-	animation: pattern-error 0.25s linear 0s 2;
+	animation: pattern-error 0.25s infinite;
+
 }
 
 .iceberg {
@@ -331,6 +334,21 @@ main {
 	cursor: default;
 }
 
+.iceberg:nth-child(1) {
+	background-color: red;
+}
+
+.iceberg:nth-child(2) {
+	background-color: blue;
+}
+
+.iceberg:nth-child(3) {
+	background-color: green;
+}
+
+.iceberg:nth-child(4) {
+	background-color: yellow;
+}
 .iceberg.dragging {
 	cursor: grabbing;
 }
@@ -340,6 +358,7 @@ main {
 	100% {
 		transform: translateX(0);
 		border-color: red;
+		filter: blur(0.05rem);
 	}
 	33% {
 		transform: translateX(-0.5rem);

@@ -230,7 +230,7 @@ const levels = {
 			Penguins: [new Penguin(0, 3), new Penguin(1, 2), new Penguin(3, 3)],
 		},
 		39: {
-			Penguins: [new Penguin(0, 3), new Penguin(1, 2), new Penguin(3, 1)],
+			Penguins: [new Penguin(0, 3), new Penguin(1, 2), new Penguin(2, 1)],
 		},
 		40: {
 			Penguins: [new Penguin(0, 1), new Penguin(2, 0)],
@@ -264,9 +264,6 @@ const levels = {
 	Master: {
 		49: {
 			Penguins: [new Penguin(0, 0), new Penguin(0, 3), new Penguin(4, 0)],
-		},
-		49: {
-			Penguins: [new Penguin(0, 2), new Penguin(0, 3), new Penguin(1, 3)],
 		},
 		50: {
 			Penguins: [new Penguin(0, 2), new Penguin(0, 3), new Penguin(1, 3)],
