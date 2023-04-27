@@ -25,7 +25,7 @@ class Board {
 
 				tile.element.style.top =
 					y * Tile.tileHeight +
-					((x % 2 === 0 ? 1 : 0) * Tile.tileHeight) / 2 +
+					((x % 2 === 1 ? 1 : 0) * Tile.tileHeight) / 2 +
 					this.padding * 8 +
 					"px";
 

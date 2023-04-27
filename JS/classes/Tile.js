@@ -1,6 +1,6 @@
 class Tile {
-	static tileWidth = 50;
-	static tileHeight = 44;
+	static tileWidth = 75;
+	static tileHeight = 66;
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;

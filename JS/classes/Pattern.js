@@ -1,5 +1,6 @@
 const patterns = document.querySelector(".patterns");
 import Iceberg from "./Iceberg.js";
+import Tile from "./Tile.js";
 class Pattern {
 	constructor(points) {
 		this.element = document.createElement("div");
@@ -61,9 +62,9 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 
 			mostLeft = Math.min(mostLeft, iceberg.left);
-			mostRight = Math.max(mostRight, iceberg.left + Iceberg.tileWidth);
+			mostRight = Math.max(mostRight, iceberg.left + Tile.tileWidth);
 			mostTop = Math.min(mostTop, iceberg.top);
-			mostBottom = Math.max(mostBottom, iceberg.top + Iceberg.tileHeight);
+			mostBottom = Math.max(mostBottom, iceberg.top + Tile.tileHeight);
 
 			this.mousedown = iceberg.element.addEventListener(
 				"mousedown",
