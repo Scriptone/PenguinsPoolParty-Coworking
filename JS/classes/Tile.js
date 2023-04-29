@@ -16,7 +16,7 @@ class Tile {
 		element.style.width = `${Tile.tileWidth}px`
 		element.style.height = `${Tile.tileHeight}px`
 
-		element.innerHTML = `${this.x}, ${this.y}`
+		// element.innerHTML = `${this.x}, ${this.y}`
 	}
 
 	addIceberg(iceberg) {
