@@ -284,7 +284,7 @@ main {
 	background: transparent url("../assets/penguin.svg") no-repeat center;
 	background-size: cover;
 	z-index: 2;
-	animation: penguin 0.5s infinite alternate;
+	animation: penguin 0.5s infinite alternate 1s;
 	transition: scale 0.3s ease, translate 0.3s ease;
 }
 
@@ -307,7 +307,7 @@ main {
 	position: relative;
 
 	border: .2rem solid black;
-	border-radius: 1rem;
+	border-radius: 1em;
 	text-align: center;
 	transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -351,6 +351,11 @@ main {
 } */
 .iceberg.dragging {
 	cursor: grabbing;
+}
+
+.locked {
+	filter: grayscale(100%);
+	pointer-events: none;
 }
 @keyframes pattern-error {
 	/* Wiggle and shake and make back ground color red and opacity .5 */

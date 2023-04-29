@@ -1,18 +1,19 @@
 const patterns = document.querySelector(".patterns");
 import Iceberg from "./Iceberg.js";
 import Tile from "./Tile.js";
+import Board from "./Board.js";
 class Pattern {
-	constructor(points) {
+	constructor(points, board) {
 		this.element = document.createElement("div");
 		this.element.classList.add("pattern");
-
+		this.board = board;
 		this.padding = 2; // rem
 		this.width = 0;
 		this.height = 0;
 		this.icebergs = [];
 
 		for (let point of points) {
-			let iceberg = new Iceberg(this, point);
+			let iceberg = new Iceberg(this, point, this.board.tileWidth, this.board.tileHeight);
 			this.icebergs.push(iceberg);
 		}
 
@@ -47,7 +48,6 @@ class Pattern {
 	}
 
 	draw() {
-
 		// TODO: Zorgen dat het patroon geen negatieve coordinaten heeft
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener("mousedown", this.mousedown);
@@ -62,9 +62,9 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 
 			mostLeft = Math.min(mostLeft, iceberg.left);
-			mostRight = Math.max(mostRight, iceberg.left + Tile.tileWidth);
+			mostRight = Math.max(mostRight, iceberg.left + iceberg.width);
 			mostTop = Math.min(mostTop, iceberg.top);
-			mostBottom = Math.max(mostBottom, iceberg.top + Tile.tileHeight);
+			mostBottom = Math.max(mostBottom, iceberg.top + iceberg.height);
 
 			this.mousedown = iceberg.element.addEventListener(
 				"mousedown",
@@ -219,9 +219,6 @@ class Pattern {
 		//this.element.classList.remove("pattern--error");
 
 		this.draw();
-	}
-	setBoard(board) {
-		this.board = board;
 	}
 }
 

@@ -1,21 +1,22 @@
 import levels from "../data/levels.js";
 import Board from "../classes/Board.js";
 
-
 ("use strict");
 (function () {
-
 	const levelParent = document.querySelector(".levels");
 	const previousButton = document.querySelector(".btn-prev");
 	const nextButton = document.querySelector(".btn-next");
 
 	const onLevelClicked = (difficulty, level, event) => {
-		sessionStorage.setItem("difficulty", difficulty);
-		sessionStorage.setItem("level", level);
+		const sessionData = {
+			difficulty,
+			level,
+		};
+		sessionStorage.setItem("data", JSON.stringify(sessionData));
 		window.location.href = `/spel`;
 	};
 
-	
+	const lastUnlockedLevel = sessionStorage.getItem("lastUnlockedLevel");
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");
@@ -34,8 +35,12 @@ import Board from "../classes/Board.js";
 		difficultyContainer.appendChild(levelsContainer);
 
 		for (let level of Object.keys(levels[difficulty])) {
+			level = Number(level);
 			let levelContainer = document.createElement("button");
-			levelContainer.classList.add("level");
+			levelContainer.classList.add(
+				"level",
+				level <= lastUnlockedLevel ? "unlocked" : "locked"
+			);
 
 			let levelHeader = document.createElement("h3");
 			levelHeader.innerText = `Level: ${level}`;
@@ -47,7 +52,7 @@ import Board from "../classes/Board.js";
 			let levelObject = levels[difficulty][level];
 			let penguins = levelObject.Penguins;
 
-			let board = new Board(levelContainer, penguins);
+			let board = new Board(levelContainer, penguins, 50, 44);
 			board.draw();
 
 			levelContainer.addEventListener(
@@ -63,7 +68,7 @@ import Board from "../classes/Board.js";
 		if (previousDifficulty === null) return;
 		currentDifficulty.classList.remove("active");
 		previousDifficulty.classList.add("active");
-	}
+	};
 
 	const onNextClicked = () => {
 		let currentDifficulty = document.querySelector(".active");
@@ -71,10 +76,8 @@ import Board from "../classes/Board.js";
 		if (nextDifficulty === null) return;
 		currentDifficulty.classList.remove("active");
 		nextDifficulty.classList.add("active");
-	}
+	};
 
 	previousButton.addEventListener("click", onPreviousClicked);
 	nextButton.addEventListener("click", onNextClicked);
-
-
 })();

@@ -1,28 +1,26 @@
 class Tile {
-	static tileWidth = 75;
-	static tileHeight = 66;
-	constructor(x, y) {
+	constructor(x, y, width, height) {
 		this.x = x;
 		this.y = y;
 		this.element = document.createElement("div");
 		this.iceberg = null;
 		this.penguin = null;
+		this.width = width;
+		this.height = height;
 	}
 
 	draw() {
 		const element = this.element;
-		element.classList.add("tile");
-		element.classList.add(`tile-${this.x}-${this.y}`);
-		element.style.width = `${Tile.tileWidth}px`
-		element.style.height = `${Tile.tileHeight}px`
+		element.classList.add("tile", `tile-${this.x}-${this.y}`);
+		element.style.width = `${this.width}px`;
+		element.style.height = `${this.height}px`;
 
 		// element.innerHTML = `${this.x}, ${this.y}`
 	}
 
 	addIceberg(iceberg) {
 		this.iceberg = iceberg;
-		this.element.classList.add("iceberg");
-		this.element.classList.add("placed");
+		this.element.classList.add("iceberg", "placed");
 	}
 
 	addPenguin(penguin) {

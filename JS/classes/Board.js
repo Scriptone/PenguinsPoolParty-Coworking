@@ -1,7 +1,10 @@
 import Tile from "./Tile.js";
+import Pattern from "./Pattern.js";
 const main = document.querySelector("main");
+
 class Board {
-	constructor(parent, penguins) {
+	static padding = 1;
+	constructor(parent, penguins, tileWidth = 75, tileHeight = 66) {
 		this.penguins = penguins;
 		this.element = document.createElement("div");
 		this.element.classList.add("board");
@@ -9,26 +12,27 @@ class Board {
 		this.tiles = [];
 		this.height = 4;
 		this.width = 5;
-		this.padding = 2;
+		this.tileWidth = tileWidth;
+		this.tileHeight = tileHeight;
 	}
 
 	draw() {
 		for (let y = 0; y < this.height; y++) {
 			this.tiles[y] = [];
 			for (let x = 0; x < this.width; x++) {
-				let tile = new Tile(x, y);
+				let tile = new Tile(x, y, this.tileWidth, this.tileHeight);
 				this.tiles[y][x] = tile;
 				tile.draw();
 
-				tile.element.style.left =
-					x * Tile.tileWidth * 0.75 + this.padding * 8 + "px";
+				tile.element.style.left = `${
+					x * this.tileWidth * 0.75 + Board.padding * 8
+				}px`;
 
-				tile.element.style.top =
-					y * Tile.tileHeight +
-					((x % 2 === 0 ? 1 : 0) * Tile.tileHeight) / 2 +
-					this.padding * 8 +
-					"px";
-
+				tile.element.style.top = `${
+					y * this.tileHeight +
+					((x % 2 === 0 ? 1 : 0) * this.tileHeight) / 2 +
+					Board.padding * 8
+				}px`;
 				this.element.appendChild(tile.element);
 
 				// Add penguins to the board
@@ -40,23 +44,25 @@ class Board {
 			}
 		}
 
-		this.boardWidth = (Tile.tileWidth / 4) * (this.width * 3 + 1);
-		this.boardHeight = this.height * Tile.tileHeight + Tile.tileHeight / 2;
-		this.element.style.width = this.boardWidth + this.padding * 16 + "px";
-		this.element.style.height = this.boardHeight + this.padding * 16 + "px";
+		this.boardWidth = (this.tileWidth / 4) * (this.width * 3 + 1);
+		this.boardHeight =
+			this.height * this.tileHeight + this.tileHeight / 2;
+		this.element.style.width = `${this.boardWidth + Board.padding * 16}px`;
+		this.element.style.height = `${
+			this.boardHeight + Board.padding * 16
+		}px`;
 	}
 
-	setPatterns(patterns) {
-		this.patterns = patterns;
-		this.patternsRemaining = patterns.length;
-		for (let pattern of this.patterns) {
-			pattern.setBoard(this);
+	setPatterns(patternPoints) {
+		this.patterns = [];
+		for (let patternPoint of patternPoints) {
+			let pattern = new Pattern(patternPoint, this);
+			this.patterns.push(pattern);
 		}
 	}
 
 	findAvailablePattern(pattern, iceberg) {
 		//Positie
-
 
 		let boundingIceberg = iceberg.element.getBoundingClientRect();
 
@@ -75,17 +81,17 @@ class Board {
 
 			if (
 				startX > tileX &&
-				startX < tileX + Tile.tileWidth &&
+				startX < tileX + this.tileWidth &&
 				startY > tileY &&
-				startY < tileY + Tile.tileHeight
+				startY < tileY + this.tileHeight
 			) {
 				tile = _tile;
 				break;
 			}
 
 			//Afstand berekenen
-			let tileCenterX = tileX + Tile.tileWidth / 2;
-			let tileCenterY = tileY + Tile.tileHeight / 2;
+			let tileCenterX = tileX + this.tileWidth / 2;
+			let tileCenterY = tileY + this.tileHeight / 2;
 
 			let _distance = Math.hypot(
 				tileCenterX - startX,
@@ -125,9 +131,9 @@ class Board {
 			let y = point[1] + startPointY;
 
 			/*
-	De patronen  zijn gebasseerd op de kolommen die lager staan, dus als 
-	je een patroon dropt op een kolom die hoger staat, dan moet je de y met 1 verlagen
-	*/
+			De patronen  zijn gebasseerd op de kolommen die lager staan, dus als 
+			je een patroon dropt op een kolom die hoger staat, dan moet je de y met 1 verlagen
+			*/
 			y = y + (startPointX % 2 == 1 && x % 2 == 0 ? -1 : 0);
 
 			let _tile = this.tiles[y]?.[x];
