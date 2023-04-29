@@ -19,6 +19,10 @@ import levels from "../data/levels.js";
 			})
 		);
 	};
+
+	const resetGame = () => {
+		location.reload();
+	};
 	console.log(difficulty, level);
 	let levelData = levels[difficulty]?.[level];
 	if (!levelData) {
@@ -33,19 +37,18 @@ import levels from "../data/levels.js";
 	nextLevel.addEventListener("click", function () {
 		level++;
 		setData(difficulty, level);
-		location.reload();
+		resetGame();
 	});
-
 	let previousLevel = document.querySelector(".previous-level");
 	previousLevel.addEventListener("click", function () {
 		level--;
 		setData(difficulty, level);
-		location.reload();
+		resetGame();
 	});
 
 	let restart = document.querySelector(".redo-level");
 	restart.addEventListener("click", function () {
-		location.reload();
+		resetGame();
 	});
 
 	console.log(level, totalLevels);

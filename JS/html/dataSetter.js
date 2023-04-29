@@ -10,7 +10,7 @@
 		sessionData = JSON.parse(sessionData);
 	}
 
-	// Some magic to get the user data from the server
+	//TODO Some magic to get the user data from the server
 	// and update the sessionData object
 	// ...
 	const lastUnlockedLevel = 5; // This is the last level the user has unlocked
