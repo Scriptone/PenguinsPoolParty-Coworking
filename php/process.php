@@ -16,18 +16,12 @@ date_default_timezone_set('Europe/Brussels');
 
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
+
 $username = $data['username'];
 $password = $data['password'];
+$confirmPassword = $data['confirm-password'];
+$email = $data['email'];
 
-//echo
-echo $username;
-echo $password;
-echo $email;
-
-echo print_r($_POST);
-
-// Perform any additional validation on the form data
-// ...
 
 // If the form data is valid, process it
 if (isValidForm()) {
@@ -43,8 +37,40 @@ if (isValidForm()) {
 
 function isValidForm()
 {
-	// Perform validation on the form data
-	// ...
+	global $username, $password, $confirmPassword, $email;
+	// Check if required fields have data
+	if (
+		!isset($username) || !isset($password) || !isset($confirmPassword) || !isset($email)
+		|| $username === '' || $password === '' || $confirmPassword === '' || $email === ''
+	) {
+		$_SESSION['error'] = 'Please fill out all required fields.';
+		return false;
+	}
+
+	// Check if the username is valid
+	if (!preg_match('/^[a-zA-Z0-9]{5,}$/', $username)) {
+		$_SESSION['error'] = 'Invalid username.';
+		return false;
+	}
+
+	// Check if the passwords match
+	if ($password !== $confirmPassword) {
+		$_SESSION['error'] = 'Passwords do not match.';
+		return false;
+	}
+
+	// Check if the password is valid
+	if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
+		$_SESSION['error'] = 'Invalid password.';
+		return false;
+	}
+
+	// Check if the email address is valid
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$_SESSION['error'] = 'Invalid email address.';
+		return false;
+	}
+	
 	return true; // Return true if the form data is valid
 }
 ?>
