@@ -1,5 +1,3 @@
-<!-- registration.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -55,7 +53,7 @@
 					</p>
 					<?php unset($_SESSION['error']); ?>
 				<?php } ?>
-				<form action="login" id = "login" class="form" novalidate>
+				<form action="" id = "login" class="form" novalidate>
 					<h1>Login</h1>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>
