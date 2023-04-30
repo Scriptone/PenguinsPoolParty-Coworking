@@ -1,18 +1,13 @@
 ("use strict");
 (function () {
-    let btnInfo = document.querySelector("#info");
-    let overlay = document.querySelector("#info-overlay");
+	const button = document.querySelector(".info");
+	const overlay = document.querySelector(".overlay");
 
-    btnInfo.addEventListener("click", function() {
-        if(overlay.style.display === "none") {
-            overlay.style.display = "block";
-        }
-        if(overlay.style.display !== "none") {
-            overlay.style.display = "block";
-        }
-    })
+	const toggleOverlay = () => {
+		overlay.classList.toggle("active");
+	};
 
-    overlay.addEventListener("click", function() {
-        overlay.style.display = "none";
-    })
+	button.addEventListener("click", toggleOverlay);
+
+	overlay.addEventListener("click", toggleOverlay);
 })();

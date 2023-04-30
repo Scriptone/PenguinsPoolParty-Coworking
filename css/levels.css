@@ -52,9 +52,16 @@
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
 }
 .level-header {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 1rem;
+}
+
+.difficulty-span {
+	text-transform: uppercase;
 }
 
 .buttons {
@@ -65,18 +72,18 @@
 	margin-bottom: 8rem;
 }
 
-.starters {
+.levels .starters {
 	background-color: var(--starter);
 }
 
-.junior {
+.levels .junior {
 	background-color: var(--junior);
 }
 
-.expert {
+.levels .expert {
 	background-color: var(--expert);
 }
 
-.master {
+.levels .master {
 	background-color: var(--master);
 }

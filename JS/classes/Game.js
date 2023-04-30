@@ -4,7 +4,7 @@ import patterns from "../data/patterns.js";
 
 const game = document.querySelector(".game");
 class Game {
-	constructor(levelId, level) {
+	constructor(difficulty, levelId, level) {
 		const levelContainer = document.createElement("section");
 		levelContainer.classList.add("level");
 		game.appendChild(levelContainer);
@@ -12,6 +12,12 @@ class Game {
 		const levelHeader = document.createElement("h3");
 		levelHeader.innerText = `Level: ${levelId}`;
 		levelHeader.classList.add("level-header");
+
+		const difficultySpan = document.createElement("span");
+		difficultySpan.innerText = `Difficulty: ${difficulty}`;
+		difficultySpan.classList.add(difficulty.toLowerCase(), "difficulty-span");
+
+		levelHeader.prepend(difficultySpan);	
 		levelContainer.appendChild(levelHeader);
 
 		this.level = level;

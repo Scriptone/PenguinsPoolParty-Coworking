@@ -52,7 +52,12 @@ import Board from "../classes/Board.js";
 			let levelObject = levels[difficulty][level];
 			let penguins = levelObject.Penguins;
 
-			let board = new Board(levelContainer, penguins, 50, 44);
+			let board = new Board({
+				parent: levelContainer,
+				penguins: penguins,
+				tileWidth: 50,
+				tileHeight: 44,
+			});
 			board.draw();
 
 			levelContainer.addEventListener(

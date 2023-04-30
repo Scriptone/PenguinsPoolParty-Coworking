@@ -22,10 +22,14 @@ class Board {
 		this.tileHeight = tileHeight;
 
 		this.patterns = [];
+		if (!patternPoints) {
+			return;
+		}
 		for (let patternPoint of patternPoints) {
 			let pattern = new Pattern(patternPoint, this);
 			this.patterns.push(pattern);
 		}
+		this.patternsRemaining = this.patterns.length;
 	}
 
 	draw() {
@@ -196,6 +200,7 @@ class Board {
 		}
 
 		this.patternsRemaining--;
+		console.log(this.patternsRemaining);
 		if (this.patternsRemaining === 0) {
 			this.onCompleteCallback();
 		}

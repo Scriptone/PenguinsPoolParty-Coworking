@@ -3,6 +3,8 @@ import levels from "../data/levels.js";
 ("use strict");
 
 (function () {
+	const victory = document.querySelector(".victory");
+
 	let totalLevels = 0;
 	for (let difficulty in levels) {
 		totalLevels += Object.keys(levels[difficulty]).length;
@@ -13,7 +15,7 @@ import levels from "../data/levels.js";
 	let levelData = levels[difficulty]?.[level] || levels.Starters[1];
 
 	const setData = (level) => {
-		let difficulty = null;
+		difficulty = null;
 		for (let diff in levels) {
 			if (levels[diff][level]) {
 				difficulty = diff;
@@ -40,7 +42,7 @@ import levels from "../data/levels.js";
 		console.log("Game cleaned up");
 
 		//Create new game with new levelData
-		spel = new Game(level, levelData);
+		spel = new Game(difficulty, level, levelData);
 		spel.start();
 
 		if (level === totalLevels) {
@@ -77,5 +79,12 @@ import levels from "../data/levels.js";
 
 	spel.onComplete(() => {
 		console.log("Level complete");
+		victory.classList.add("active");
+		setTimeout(() => {
+			victory.classList.remove("active");
+		}, 3000);
 	});
+
+	victory.addEventListener("click", () => victory.classList.remove("active"));
+	
 })();
