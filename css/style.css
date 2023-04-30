@@ -3,6 +3,7 @@
 	--black: #010111;
 	--primary: #0596ff;
 	--secondary: #48b3ff;
+	--error-color: #ff0000;
 	--bg: var(--white);
 	--ice: #ebf7ff;
 
@@ -137,8 +138,6 @@ nav a:is(:hover, :focus)::after {
 /* MAIN  */
 
 main {
-	display: grid;
-	place-items: center;
 	background-image: url("../assets/background.svg");
 	background-size: cover;
 }
@@ -269,7 +268,7 @@ main {
 	aspect-ratio: 1/1;
 	border-radius: 50%;
 	transition: background-color 0.2s ease;
-	opacity: .5; 
+	opacity: 0.5;
 }
 
 .tile:not(.iceberg).selected::after {
@@ -310,7 +309,7 @@ main {
 .pattern {
 	position: relative;
 
-	border: .2rem solid black;
+	border: 0.2rem solid black;
 	border-radius: 1em;
 	text-align: center;
 	transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -319,11 +318,9 @@ main {
 .pattern:is(:hover, :focus) {
 	border-color: var(--primary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
-	
 }
 .pattern.pattern--error {
 	animation: pattern-error 0.25s infinite;
-
 }
 
 .iceberg {
@@ -361,6 +358,126 @@ main {
 	filter: grayscale(100%);
 	pointer-events: none;
 }
+
+/* REGISTER & LOGIN */
+form {
+	/* you can put this also on the form tag */
+	background-color: #fdfdfd;
+	max-width: 31.25em; /* max-width of 500px by default em */
+	margin: 0 auto; /* align the section & the form to the center of the page */
+	padding: 5%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+form > div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+	margin-bottom: 1.75em;
+}
+
+div.radiobutton {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+div.checkbox {
+	display: flex;
+	flex-direction: row;
+	align-items: top;
+	gap: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+/* to be consistent with other elements, see form > div, gap */
+legend {
+	margin-bottom: 0.5em;
+}
+/* Label */
+label > span.field-label,
+legend > span.field-label {
+	display: block;
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+/* if there is an error */
+label > span.field-error,
+legend > span.field-error {
+	display: inline-block;
+	margin-top: 0.25em;
+	color: var(--error-color);
+}
+
+/* hints or explanation for the user */
+label > span.field-hint,
+legend > span.field-hint {
+	display: inline-block;
+	margin: 0.25em 0em;
+	color: #666;
+}
+
+input {
+	border: 1px solid #ccc;
+	font-size: 1.2em;
+	padding: 0.75em;
+	width: 90%; /* fallback if calc isn't working */
+	width: calc(100% - 1.5em); /* full width minus padding */
+}
+
+input.invalid {
+	color: var(--error-color);
+	outline-color: var(--error-color);
+}
+
+form .cta {
+	padding: 0.75em;
+	width: 90%; /* fallback if calc isn't working */
+	width: calc(100% - 1.5em); /* full width minus padding */
+}
+label > abbr {
+	color: var(--error-color);
+	text-decoration: none;
+}
+
+.errorSummary {
+	color: var(--error-color);
+	font-size: 1.2em;
+	font-weight: 600;
+	margin-bottom: 1.25em;
+	border: 1px solid var(--error-color);
+	padding: 1em;
+	border-radius: 0.5rem;
+}
+
+.errorSummary > ul {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+}
+
+.errorSummary > ul > li {
+	list-style: none;
+}
+
+.errorSummary.hidden {
+	display: none;
+}
+
+.errorLink,
+form span.field-error {
+	color: var(--error-color);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5em;
+}
+
 @keyframes pattern-error {
 	/* Wiggle and shake and make back ground color red and opacity .5 */
 	0%,

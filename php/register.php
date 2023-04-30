@@ -1,7 +1,5 @@
 <!-- registration.php -->
-<?php
-include('process.php');
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -23,8 +21,7 @@ include('process.php');
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
-		<script defer src="../JS/html/dataSetter.js"></script>
-		<script defer="defer" src="../JS/html/levels.js" type="module"></script>
+		<script defer src="../JS/classes/FormValidator.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -51,23 +48,51 @@ include('process.php');
 				</nav>
 			</header>
 			<main>
-				<h1>Registration</h1>
+
 				<?php if (isset($_SESSION['error'])) { ?>
 					<p>
 						<?php echo $_SESSION['error']; ?>
 					</p>
 					<?php unset($_SESSION['error']); ?>
 				<?php } ?>
-				<form method="post" action="">
-					<label for="username">Username:</label>
-					<input type="text" name="username" required><br>
-					<label for="password">Password:</label>
-					<input type="password" name="password" required><br>
-					<label for="confirm_password">Confirm Password:</label>
-					<input type="password" name="confirm_password" required><br>
-					<label for="email">Email:</label>
-					<input type="email" name="email" required><br>
-					<input type="submit" name="register" value="Register">
+				<form method="post" action="./process.php" class="form" novalidate>
+					<h1>Registreer om uw progressie bij te houden</h1>
+					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
+						<h2 id="errorSummary-heading">Er is een probleem</h2>
+						<ul></ul>
+					</div>
+					<div>
+						<label for="username">
+							<span class="field-label">Username</span>
+						</label>
+						<input type="text" name="username" id="username" autocomplete="given-name" autofocus required
+							tabindex="0" />
+					</div>
+
+					<div>
+						<label for="password">
+							<span class="field-label">Password</span>
+						</label>
+						<input type="password" name="password" id="password" required autocomplete="current-password" />
+					</div>
+
+					<div>
+						<label for="confirm-password">
+							<span class="field-label">Confirm password</span>
+						</label>
+						<input type="password" name="confirm-password" id="confirm-password" required
+							autocomplete="new-password" />
+					</div>
+
+					<div>
+						<label for="email">
+							<span class="field-label">Email</span>
+						</label>
+						<input type="email" name="email" id="email" required autocomplete="email" />
+
+						<div>
+							<button class="cta" type="submit">Registreer</button>
+						</div>
 				</form>
 			</main>
 			<footer></footer>
