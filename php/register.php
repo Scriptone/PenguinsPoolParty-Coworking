@@ -55,7 +55,7 @@
 					</p>
 					<?php unset($_SESSION['error']); ?>
 				<?php } ?>
-				<form method="post" action="./process.php" class="form" novalidate>
+				<form method="post" action="" class="form" id="register" novalidate>
 					<h1>Registreer om uw progressie bij te houden</h1>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>
@@ -93,6 +93,7 @@
 						<div>
 							<button class="cta" type="submit">Registreer</button>
 						</div>
+					</div>
 				</form>
 			</main>
 			<footer></footer>

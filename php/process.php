@@ -17,18 +17,9 @@ date_default_timezone_set('Europe/Brussels');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
-$username = $data['username'];
-$password = $data['password'];
-$confirmPassword = $data['confirm-password'];
-$email = $data['email'];
-
-
-// If the form data is valid, process it
-if (isValidForm()) {
-	// Insert the user data into a database or perform other necessary actions
-
-	$hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-
+function connect()
+{
+	global $DB_HOST, $DB_USER, $DB_PASS, $DB_NAME;
 	// Create a new database connection
 	$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
@@ -36,23 +27,94 @@ if (isValidForm()) {
 	if ($mysqli->connect_error) {
 		die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 	}
+	return $mysqli;
+}
+function register()
+{
+	global $data;
+	$username = $data['username'];
+	$password = $data['password'];
+	$email = $data['email'];
 
-	// Insert user data into database
-	$sql = "INSERT INTO users (username, password, email) VALUES ('" . $mysqli->real_escape_string($username) . "', '" . $mysqli->real_escape_string($hash) . "', '" . $mysqli->real_escape_string($email) . "')";
-	$insert = $mysqli->query($sql);
+
+	// If the form data is valid, process it
+	if (isValidForm()) {
+		// Insert the user data into a database or perform other necessary actions
+
+		$hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+
+		// Create a new database connection
+		$mysqli = connect();
+
+		// Insert user data into database
+		$sql = "INSERT INTO users (username, password, email) VALUES ('" . $mysqli->real_escape_string($username) . "', '" . $mysqli->real_escape_string($hash) . "', '" . $mysqli->real_escape_string($email) . "')";
+		$insert = $mysqli->query($sql);
 
 
-	// Return a response to the JavaScript code
+		// Return a response to the JavaScript code
 
-	echo "Form submitted successfully!";
-} else {
-	// Return an error response to the JavaScript code
-	echo "Form submission failed!";
+		echo "Form submitted successfully!";
+	} else {
+		// Return an error response to the JavaScript code
+		echo "Form submission failed!";
+	}
+
+	if (isset($_SESSION['error'])) {
+		echo $_SESSION['error'];
+	}
 }
 
-if (isset($_SESSION['error'])) {
-	echo $_SESSION['error'];
+function login()
+{
+	echo "login";
+	global $data;
+	$mysqli = connect();
+	$username = $data['username'];
+	$password = $data['password'];
+
+	// Check if credentials are valid
+	$sql = "SELECT * FROM users WHERE username = '" . $mysqli->real_escape_string($username) . "'";
+	$result = $mysqli->query($sql);
+	$user = $result->fetch_assoc();
+
+	if (password_verify($password, $user['password'])) {
+		// Set session variables
+		$_SESSION['user_id'] = $user['id'];
+		$_SESSION['username'] = $user['username'];
+		$_SESSION['logged_in'] = time();
+
+		// Update the logged_in column in the database
+		$sql = "UPDATE users SET logged_in = " . $_SESSION['logged_in'] . " WHERE id = " . $_SESSION['user_id'];
+		$result = $mysqli->query($sql);
+
+		// Redirect the user to the private members-only page
+		echo json_encode($_SESSION);
+	} else {
+		// If credentials are not valid, show an error message and return to the login page
+		$_SESSION['error'] = 'Invalid login credentials';
+		header('Location: login.php');
+	}
+
 }
+
+function logout()
+{
+
+}
+$action = $data['action'];
+
+switch ($action) {
+	case 'register':
+		register();
+		break;
+	case 'login':
+		login();
+		break;
+	case 'logout':
+		logout();
+		break;
+}
+
 
 function isValidForm()
 {

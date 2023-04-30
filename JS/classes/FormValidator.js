@@ -203,9 +203,10 @@
 
 		//Send to process.php
 		const formData = new FormData(this);
-		const data = Object.fromEntries(formData.entries());
-		console.log(data);
+		let data = Object.fromEntries(formData.entries());
+		data["action"] = form.id;
 
+		console.log(data);
 		const response = await fetch("/php/process.php", {
 			method: "POST",
 			body: JSON.stringify(data),
