@@ -192,7 +192,7 @@
 		console.log(data);
 
 		const xhr = new XMLHttpRequest();
-		xhr.open("POST", "process.php");
+		xhr.open("POST", "/php/process.php");
 		xhr.setRequestHeader("Content-Type", "application/json");
 
 		xhr.onreadystatechange = function () {

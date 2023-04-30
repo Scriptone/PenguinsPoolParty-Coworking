@@ -1,6 +1,6 @@
 <?php
 
-print_r($_POST);
+
 // Show all errors (for educational purposes)
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
@@ -13,9 +13,8 @@ $DB_NAME = 'penguinspoolparty_logins'; //penguinspoolparty_logins
 
 date_default_timezone_set('Europe/Brussels');
 // Retrieve the form data from the $_POST superglobal array
+print_r($_POST);
 $username = $_POST['username'];
-$password = $_POST['password'];
-$email = $_POST['email'];
 
 // Perform any additional validation on the form data
 // ...
