@@ -55,8 +55,8 @@ import Board from "../classes/Board.js";
 			let board = new Board({
 				parent: levelContainer,
 				penguins: penguins,
-				tileWidth: 50,
-				tileHeight: 44,
+				tileWidth: 20,
+				tileHeight: 17.6,
 			});
 			board.draw();
 

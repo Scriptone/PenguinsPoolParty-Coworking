@@ -28,8 +28,8 @@
 .levels-container {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-around;
-	gap: 2rem;
+	justify-content: center;
+	gap: 1.5rem;
 }
 
 .level {
@@ -48,8 +48,9 @@
 }
 
 .levels .level:is(:hover, :focus-within) {
-	transform: scale(1.025);
+	transform: scale(1.025) translate(0, -0.5rem);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+	cursor: grab;
 }
 .level-header {
 	width: 100%;
@@ -58,10 +59,6 @@
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 1rem;
-}
-
-.difficulty-span {
-	text-transform: uppercase;
 }
 
 .buttons {
@@ -86,4 +83,9 @@
 
 .levels .master {
 	background-color: var(--master);
+}
+
+.difficulty-span {
+	text-transform: uppercase;
+	text-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.2);
 }

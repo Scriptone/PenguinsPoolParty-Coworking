@@ -1,20 +1,14 @@
 <?php
 
-
-
 // Show all errors (for educational purposes)
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
-
-
 
 // Set database connection constants
 $DB_HOST = 'localhost';
 $DB_USER = 'arne.haers'; //arne.haers
 $DB_PASS = 'Kqt20$r93'; //Kqt20$r93
 $DB_NAME = 'penguinspoolparty_logins'; //penguinspoolparty_logins
-
-
 
 date_default_timezone_set('Europe/Brussels');
 
@@ -55,14 +49,6 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
-session_start();
-
-$loggedin = $_SESSION['loggedin'];
-if ($loggedin == true) {
-	echo "Logged in.";
-} else {
-	echo "Not logged in.";
-}
 
 echo "Connected successfully";
 // Check if the login form was submitted
@@ -90,7 +76,7 @@ if (isset($_POST['login'])) {
 			// Redirect to the home page
 
 			echo "Logged in.";
-			header("Location: ../index.html");
+			//header("Location: ../index.html");
 			exit();
 		} else {
 			$_SESSION['error'] = "Invalid password.";

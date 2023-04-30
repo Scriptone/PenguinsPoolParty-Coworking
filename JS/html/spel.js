@@ -36,6 +36,15 @@ import levels from "../data/levels.js";
 	let nextLevel = document.querySelector(".next-level");
 	let previousLevel = document.querySelector(".previous-level");
 	let restart = document.querySelector(".redo-level");
+
+	const onComplete = () => {
+		console.log("Level complete");
+			victory.classList.add("active");
+			setTimeout(() => {
+				victory.classList.remove("active");
+			}, 3000);
+	};
+
 	const restartGame = () => {
 		//location.reload();
 		spel?.cleanUp();
@@ -57,10 +66,13 @@ import levels from "../data/levels.js";
 		} else {
 			previousLevel.classList.remove("locked");
 		}
+
+		spel.onComplete(onComplete);
 	};
 
 	restartGame();
 
+	
 	nextLevel.addEventListener("click", function () {
 		level++;
 		setData(level);
@@ -77,14 +89,5 @@ import levels from "../data/levels.js";
 		restartGame();
 	});
 
-	spel.onComplete(() => {
-		console.log("Level complete");
-		victory.classList.add("active");
-		setTimeout(() => {
-			victory.classList.remove("active");
-		}, 3000);
-	});
-
 	victory.addEventListener("click", () => victory.classList.remove("active"));
-	
 })();
