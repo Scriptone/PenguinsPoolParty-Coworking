@@ -164,7 +164,7 @@
 
 	formValidator.addValidator({
 		name: "password",
-		method: (field) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+		method: (field) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value),
 		message: `Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number`,
 	});
 
