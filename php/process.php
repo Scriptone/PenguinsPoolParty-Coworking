@@ -29,6 +29,9 @@ if (isValidForm()) {
 	// ...
 
 	// Return a response to the JavaScript code
+	if (isset($_SESSION['error'])) {
+		echo $_SESSION['error'];
+	}
 	echo "Form submitted successfully!";
 } else {
 	// Return an error response to the JavaScript code
@@ -70,7 +73,7 @@ function isValidForm()
 		$_SESSION['error'] = 'Invalid email address.';
 		return false;
 	}
-	
+
 	return true; // Return true if the form data is valid
 }
 ?>
