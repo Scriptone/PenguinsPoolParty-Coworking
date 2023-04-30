@@ -73,7 +73,7 @@
 						<label for="username">
 							<span class="field-label">Username</span>
 						</label>
-						<input type="text" name="username" id="username" autocomplete="given-name" autofocus required
+						<input type="text" name="username" id="username" autocomplete="username" autofocus required
 							tabindex="0" />
 					</div>
 
