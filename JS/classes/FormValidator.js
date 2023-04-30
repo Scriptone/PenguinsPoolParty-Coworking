@@ -148,6 +148,15 @@
 	});
 
 	formValidator.addValidator({
+		name: "username",
+
+		//Regex
+		method: (field) => /^[a-zA-Z0-9]{5,}$/.test(field.value),
+		message:
+			"Username must be at least 5 characters long and may only contain letters and numbers",
+	});
+
+	formValidator.addValidator({
 		name: "password",
 		method: (field) => field.value.trim().length > 0,
 		message: "Password is a required field and was not filled in",
