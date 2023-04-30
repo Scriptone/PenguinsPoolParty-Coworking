@@ -34,11 +34,12 @@ function register()
 	global $data;
 	$username = $data['username'];
 	$password = $data['password'];
+	$confirmPassword = $data['confirm-password'];
 	$email = $data['email'];
 
 
 	// If the form data is valid, process it
-	if (isValidForm()) {
+	if (isValidForm($username, $password, $confirmPassword, $email)) {
 		// Insert the user data into a database or perform other necessary actions
 
 		$hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
@@ -115,16 +116,20 @@ switch ($action) {
 }
 
 
-function isValidForm()
+function isValidForm(...$fields)
 {
-	global $username, $password, $confirmPassword, $email;
-	// Check if required fields have data
-	if (
-		!isset($username) || !isset($password) || !isset($confirmPassword) || !isset($email)
-		|| $username === '' || $password === '' || $confirmPassword === '' || $email === ''
-	) {
-		$_SESSION['error'] = 'Please fill out all required fields.';
-		return false;
+	
+	$username = $fields[0];
+	$password = $fields[1];
+	$confirmPassword = $fields[2];
+	$email = $fields[3];
+
+	// Check if the form fields are empty
+	for ($i = 0; $i < count($fields); $i++) {
+		if (empty($fields[$i])) {
+			$_SESSION['error'] = 'All fields are required.';
+			return false;
+		}
 	}
 
 	// Check if the username is valid
