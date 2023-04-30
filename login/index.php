@@ -15,11 +15,12 @@
 			crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
 		<link rel="stylesheet" href="../css/style.css" />
-		<link rel="stylesheet" href="../css/levels.css" />
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
-		<script defer src="../JS/classes/FormValidator.js"></script>
+		<script defer src="../JS/html/dataSetter.js"></script>
+		<script defer="defer" src="../JS/html/overlay.js" type="module"></script>
+		<script defer="defer" src="../JS/classes/FormValidator.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -29,10 +30,10 @@
 				<nav>
 					<ul>
 						<li>
-							<a title="Home" class="nav-link fa fa-home" href="../" aria-current="page">Home</a>
+							<a title="Home" class="nav-link fa fa-home" href="../">Home</a>
 						</li>
-						<li>
-							<a title="help" class="nav-link fa fa-info" href="">Info</a>
+						<li id="info">
+							<a title="help" class="nav-link fa fa-info info">Info</a>
 						</li>
 
 						<li>
@@ -40,20 +41,29 @@
 						</li>
 
 						<li>
-							<a title="levels" class="nav-link fa fa-list" href="./">Level</a>
+							<a title="levels" class="nav-link fa fa-list" href="../levels/">Level</a>
+						</li>
+
+						<li>
+							<!-- Login -->
+							<a title="login" class="nav-link fa fa-user" href="./" aria-current="page">Login</a>
 						</li>
 					</ul>
 				</nav>
 			</header>
 			<main>
-
-				<?php if (isset($_SESSION['error'])) { ?>
-					<p>
-						<?php echo $_SESSION['error']; ?>
-					</p>
-					<?php unset($_SESSION['error']); ?>
-				<?php } ?>
-				<form action="" id = "login" class="form" novalidate>
+				<div class="overlay">
+					<div class="overlay-text">
+						<h2>How to play</h2>
+						<p>
+							Fill in the empty spaces on the board with the given pieces.<br></br>
+							Fit all the pieces in the board and win!<br></br>
+							Each level has a different difficulty where the penguin’s have a different
+							position.<br></br>
+						</p>
+					</div>
+				</div>
+				<form action="" id="login" class="form" novalidate>
 					<h1>Login</h1>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>
@@ -72,11 +82,13 @@
 							<span class="field-label">Password</span>
 						</label>
 						<input type="password" name="password" id="password" required autocomplete="current-password" />
+						<i class="fa fa-eye-slash" class="togglePassword"></i>
 					</div>
-						<div>
-							<button class="cta" type="submit">Login</button>
-						</div>
+					<a href="../register/">Not a member yet?</a>
+					<div>
+						<button class="cta" type="submit">Login</button>
 					</div>
+
 				</form>
 			</main>
 			<footer></footer>

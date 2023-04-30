@@ -4,6 +4,7 @@ import levels from "../data/levels.js";
 
 (function () {
 	const victory = document.querySelector(".victory");
+	victory?.addEventListener("click", () => victory.classList.remove("active"));
 
 	let totalLevels = 0;
 	for (let difficulty in levels) {
@@ -39,9 +40,9 @@ import levels from "../data/levels.js";
 
 	const onComplete = () => {
 		console.log("Level complete");
-			victory.classList.add("active");
+			victory?.classList.add("active");
 			setTimeout(() => {
-				victory.classList.remove("active");
+				victory?.classList.remove("active");
 			}, 3000);
 	};
 
@@ -89,5 +90,5 @@ import levels from "../data/levels.js";
 		restartGame();
 	});
 
-	victory.addEventListener("click", () => victory.classList.remove("active"));
+	
 })();

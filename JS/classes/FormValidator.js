@@ -252,4 +252,21 @@
 		//Reset form
 		this.reset();
 	});
+
+	//Moest er een passwoord zijn
+	const passwords = document.querySelectorAll("input[type='password']");
+	passwords.forEach((password) => {
+		//Knop voor visibility
+		const button = password.nextElementSibling;
+		button.addEventListener("click", function () {
+			let type = password.getAttribute("type");
+			type = type == "password" ? "text" : "password";
+			password.setAttribute(
+				"type",
+				type
+			);
+			button.classList.toggle("fa-eye-slash");
+			button.classList.toggle("fa-eye");
+		});
+	});
 })();
