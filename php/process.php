@@ -26,8 +26,23 @@ $email = $data['email'];
 // If the form data is valid, process it
 if (isValidForm()) {
 	// Insert the user data into a database or perform other necessary actions
-	// ...
+	
+	// Create a new database connection
+	$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 
+	// Output any connection error
+	if ($mysqli->connect_error) {
+		die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+	}
+
+	// Insert user data into database
+	$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $password . "', '" . $email . "')";
+	$insert = $mysqli->query($sql);
+
+	// Close the database connection
+	$mysqli->close();
+
+	
 	// Return a response to the JavaScript code
 	
 	echo "Form submitted successfully!";
