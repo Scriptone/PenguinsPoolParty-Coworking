@@ -164,7 +164,8 @@
 
 	formValidator.addValidator({
 		name: "password",
-		method: (field) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value),
+		method: (field) =>
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value),
 		message: `Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number`,
 	});
 
@@ -216,28 +217,31 @@
 		});
 
 		const result = await response.text();
-		
+
 		console.log(result);
 		try {
 			const json = JSON.parse(result);
 			console.log(json);
 			const error = json.error;
 			if (error) {
-				formValidator.errors.push({
-					name: "Server error",
-					message: error,
-
-				});
-				formValidator.showSummary();
+				console.error(error);
 			} else {
-				console.log("Success");
+				switch (json.action) {
+					case "register" || "login":
+						sessionStorage.setItem("username", json.username);
+						sessionStorage.setItem("logged_in", json.logged_in);
+						window.location.href = "/";
+						break;
+					case "logout":
+						sessionStorage.removeItem("username");
+						sessionStorage.removeItem("logged_in");
+						break;
+				}
 			}
-
 		} catch (error) {
 			formValidator.errors.push({
 				name: "Server error",
 				message: error,
-
 			});
 			formValidator.showSummary();
 		}

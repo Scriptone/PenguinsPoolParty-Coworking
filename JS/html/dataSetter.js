@@ -1,5 +1,6 @@
 "use strict";
 (function () {
+	const welcome_screen = document.querySelector(".welcome-screen");
 	let sessionData = sessionStorage.getItem("data");
 	if (!sessionData) {
 		sessionData = {
@@ -24,4 +25,10 @@
 			return value;
 		})
 	);
+
+	// Update the welcome screen
+	let username = sessionStorage.getItem("username") || "Guest";
+	let h2 = welcome_screen?.querySelector("h2");
+	if (!h2) return;
+	h2.innerHTML = `Welcome, ${username}!`;
 })();

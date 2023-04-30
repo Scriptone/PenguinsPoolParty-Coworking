@@ -91,7 +91,7 @@ function login()
 		echo json_encode($_SESSION);
 	} else {
 		// If credentials are not valid, show an error message and return to the login page
-		$_SESSION['error'] = 'Invalid login credentials: ' . !$user ? 'username wrong' : 'password wrong';
+		$_SESSION['error'] = 'Invalid login credentials.';
 		echo json_encode($_SESSION);
 	}
 
