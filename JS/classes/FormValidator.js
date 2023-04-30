@@ -226,7 +226,7 @@
 			if (error) {
 				console.error(error);
 			} else {
-				switch (json.action) {
+				switch (form.id) {
 					case "register" || "login":
 						sessionStorage.setItem("username", json.username);
 						sessionStorage.setItem("logged_in", json.logged_in);
