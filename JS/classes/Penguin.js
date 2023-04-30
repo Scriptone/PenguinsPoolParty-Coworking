@@ -9,6 +9,10 @@ class Penguin {
 		this.tile = tile;
 		this.tile.element.classList.add("penguin");
 	}
+
+	cleanUp() {
+		this.tile = null;
+	}
 }
 
 export default Penguin;

@@ -27,6 +27,15 @@ class Tile {
 		this.penguin = penguin;
 		penguin.setTile(this);
 	}
+
+	cleanUp() {
+		this.element.remove();
+		this.element = null;
+		this.iceberg?.cleanUp();
+		this.iceberg = null;
+		this.penguin?.cleanUp();
+		this.penguin = null;
+	}
 }
 
 export default Tile;

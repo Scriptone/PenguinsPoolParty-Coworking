@@ -4,7 +4,13 @@ const main = document.querySelector("main");
 
 class Board {
 	static padding = 1;
-	constructor(parent, penguins, tileWidth = 75, tileHeight = 66) {
+	constructor({
+		parent,
+		penguins,
+		tileWidth = 75,
+		tileHeight = 66,
+		patternPoints,
+	}) {
 		this.penguins = penguins;
 		this.element = document.createElement("div");
 		this.element.classList.add("board");
@@ -14,6 +20,12 @@ class Board {
 		this.width = 5;
 		this.tileWidth = tileWidth;
 		this.tileHeight = tileHeight;
+
+		this.patterns = [];
+		for (let patternPoint of patternPoints) {
+			let pattern = new Pattern(patternPoint, this);
+			this.patterns.push(pattern);
+		}
 	}
 
 	draw() {
@@ -45,20 +57,11 @@ class Board {
 		}
 
 		this.boardWidth = (this.tileWidth / 4) * (this.width * 3 + 1);
-		this.boardHeight =
-			this.height * this.tileHeight + this.tileHeight / 2;
+		this.boardHeight = this.height * this.tileHeight + this.tileHeight / 2;
 		this.element.style.width = `${this.boardWidth + Board.padding * 16}px`;
 		this.element.style.height = `${
 			this.boardHeight + Board.padding * 16
 		}px`;
-	}
-
-	setPatterns(patternPoints) {
-		this.patterns = [];
-		for (let patternPoint of patternPoints) {
-			let pattern = new Pattern(patternPoint, this);
-			this.patterns.push(pattern);
-		}
 	}
 
 	findAvailablePattern(pattern, iceberg) {
@@ -197,6 +200,20 @@ class Board {
 			this.onCompleteCallback();
 		}
 		return true; //Patroon geplaatst
+	}
+
+	cleanUp() {
+		for (let tile of this.tiles.flat()) {
+			tile.cleanUp();
+		}
+		this.tiles = [];
+		this.penguins = [];
+		this.element.remove();
+		this.element = null;
+
+		for (let pattern of this.patterns) {
+			pattern.cleanUp();
+		}
 	}
 
 	// Check if the game is over

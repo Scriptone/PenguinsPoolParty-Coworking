@@ -220,6 +220,19 @@ class Pattern {
 
 		this.draw();
 	}
+
+	cleanUp() {
+		this.element.remove();
+		this.element = null;
+		this.board = null;
+		for (let iceberg of this.icebergs) {
+			iceberg.cleanUp();
+		}
+		this.icebergs = null;
+		
+		
+
+	}
 }
 
 export default Pattern;

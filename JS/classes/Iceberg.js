@@ -29,6 +29,15 @@ class Iceberg  {
 		element.style.top = this.top + offsetY + this.pattern.padding * 8 + "px";
 		//element.innerHTML = `${this.point[0]}, ${this.point[1]}`;
 	}
+
+	cleanUp() {
+		this.element?.remove();
+		this.element = null;
+		this.pattern = null;
+		this.point = null;
+		this.initialPoint = null;
+		this.cache = null;
+	}
 }
 
 export default Iceberg;
