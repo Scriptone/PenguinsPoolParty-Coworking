@@ -214,6 +214,8 @@ class Board {
 		for (let pattern of this.patterns) {
 			pattern.cleanUp();
 		}
+		this.patterns = null;
+		this.onCompleteCallback = null;
 	}
 
 	// Check if the game is over

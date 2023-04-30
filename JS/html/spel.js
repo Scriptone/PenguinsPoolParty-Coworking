@@ -30,46 +30,50 @@ import levels from "../data/levels.js";
 		levelData = levels[difficulty]?.[level];
 	};
 
-	let spel = new Game(level, levelData);
-	spel.start();
-
-	const resetGame = () => {
+	let spel = null;
+	let nextLevel = document.querySelector(".next-level");
+	let previousLevel = document.querySelector(".previous-level");
+	let restart = document.querySelector(".redo-level");
+	const restartGame = () => {
 		//location.reload();
-		spel.cleanUp();
+		spel?.cleanUp();
 		console.log("Game cleaned up");
-		
+
 		//Create new game with new levelData
 		spel = new Game(level, levelData);
 		spel.start();
-		
+
+		if (level === totalLevels) {
+			nextLevel.classList.add("locked");
+		} else {
+			nextLevel.classList.remove("locked");
+		}
+
+		if (level === 1) {
+			console.log("Disabled");
+			previousLevel.classList.add("locked");
+		} else {
+			previousLevel.classList.remove("locked");
+		}
 	};
-	let nextLevel = document.querySelector(".next-level");
+
+	restartGame();
+
 	nextLevel.addEventListener("click", function () {
 		level++;
 		setData(level);
-		resetGame();
+		restartGame();
 	});
-	let previousLevel = document.querySelector(".previous-level");
+
 	previousLevel.addEventListener("click", function () {
 		level--;
 		setData(level);
-		resetGame();
+		restartGame();
 	});
 
-	let restart = document.querySelector(".redo-level");
 	restart.addEventListener("click", function () {
-		resetGame();
+		restartGame();
 	});
-
-	console.log(level, totalLevels);
-	if (level === totalLevels) {
-		nextLevel.classList.add("locked");
-	}
-
-	if (level === 1) {
-		console.log("Disabled");
-		previousLevel.classList.add("locked");
-	}
 
 	spel.onComplete(() => {
 		console.log("Level complete");
