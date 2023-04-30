@@ -74,7 +74,9 @@ function login()
 	$result = $mysqli->query($sql);
 	$user = $result->fetch_assoc();
 
-	if (password_verify($password, $user['password'])) {
+	//if no user
+
+	if ($user && password_verify($password, $user['password'])) {
 		// Set session variables
 		$_SESSION['user_id'] = $user['id'];
 		$_SESSION['username'] = $user['username'];
@@ -89,7 +91,7 @@ function login()
 		echo json_encode($_SESSION);
 	} else {
 		// If credentials are not valid, show an error message and return to the login page
-		$_SESSION['error'] = 'Invalid login credentials';
+		$_SESSION['error'] = 'Invalid login credentials: ' . !$user ? 'username wrong' : 'password wrong';
 		echo json_encode($_SESSION);
 	}
 
