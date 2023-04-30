@@ -1,6 +1,7 @@
 "use strict";
 (function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
+	console.log(welcome_screen);
 	let sessionData = sessionStorage.getItem("data");
 	if (!sessionData) {
 		sessionData = {
