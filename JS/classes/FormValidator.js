@@ -205,7 +205,8 @@
 		//Send to process.php
 		const formData = new FormData(this);
 		let data = Object.fromEntries(formData.entries());
-		data["action"] = form.id;
+		const action = this.id;
+		data["action"] = action;
 
 		console.log(data);
 		const response = await fetch("/php/process.php", {
@@ -226,8 +227,10 @@
 			if (error) {
 				console.error(error);
 			} else {
-				switch (form.id) {
-					case "register" || "login":
+				console.log(action);
+				switch (action) {
+					case "register":
+					case "login":
 						sessionStorage.setItem("username", json.username);
 						sessionStorage.setItem("logged_in", json.logged_in);
 						window.location.href = "/";
