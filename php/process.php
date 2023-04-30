@@ -53,21 +53,17 @@ function register()
 
 
 		// Return a response to the JavaScript code
-
-		echo "Form submitted successfully!";
-	} else {
-		// Return an error response to the JavaScript code
-		echo "Form submission failed!";
+		$_SESSION['user_id'] = $mysqli->insert_id;
+		$_SESSION['username'] = $username;
+		$_SESSION['logged_in'] = time();
+		$_SESSION['success'] = true;
 	}
 
-	if (isset($_SESSION['error'])) {
-		echo $_SESSION['error'];
-	}
+	echo json_encode($_SESSION);
 }
 
 function login()
 {
-	echo "login";
 	global $data;
 	$mysqli = connect();
 	$username = $data['username'];
@@ -83,7 +79,8 @@ function login()
 		$_SESSION['user_id'] = $user['id'];
 		$_SESSION['username'] = $user['username'];
 		$_SESSION['logged_in'] = time();
-
+		$_SESSION['success'] = true;
+		$_SESSION['error'] = false;
 		// Update the logged_in column in the database
 		$sql = "UPDATE users SET logged_in = " . $_SESSION['logged_in'] . " WHERE id = " . $_SESSION['user_id'];
 		$result = $mysqli->query($sql);
@@ -92,7 +89,8 @@ function login()
 		echo json_encode($_SESSION);
 	} else {
 		// If credentials are not valid, show an error message and return to the login page
-		echo 'Invalid login credentials';
+		$_SESSION['error'] = 'Invalid login credentials';
+		echo json_encode($_SESSION);
 	}
 
 }
@@ -118,7 +116,7 @@ switch ($action) {
 
 function isValidForm(...$fields)
 {
-	
+
 	$username = $fields[0];
 	$password = $fields[1];
 	$confirmPassword = $fields[2];
