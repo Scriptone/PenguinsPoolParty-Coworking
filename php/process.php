@@ -29,13 +29,15 @@ if (isValidForm()) {
 	// ...
 
 	// Return a response to the JavaScript code
-	if (isset($_SESSION['error'])) {
-		echo $_SESSION['error'];
-	}
+	
 	echo "Form submitted successfully!";
 } else {
 	// Return an error response to the JavaScript code
 	echo "Form submission failed!";
+}
+
+if (isset($_SESSION['error'])) {
+	echo $_SESSION['error'];
 }
 
 function isValidForm()
