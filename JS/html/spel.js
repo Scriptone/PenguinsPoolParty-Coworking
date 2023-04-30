@@ -10,7 +10,16 @@ import levels from "../data/levels.js";
 
 	let { difficulty, level } = JSON.parse(sessionStorage.getItem("data"));
 
-	const setData = (difficulty, level) => {
+	let levelData = levels[difficulty]?.[level] || levels.Starters[1];
+
+	const setData = (level) => {
+		let difficulty = null;
+		for (let diff in levels) {
+			if (levels[diff][level]) {
+				difficulty = diff;
+				break;
+			}
+		}
 		sessionStorage.setItem(
 			"data",
 			JSON.stringify({ difficulty, level }, (key, value) => {
@@ -18,31 +27,32 @@ import levels from "../data/levels.js";
 				return value;
 			})
 		);
+		levelData = levels[difficulty]?.[level];
 	};
 
-	const resetGame = () => {
-		location.reload();
-	};
-	console.log(difficulty, level);
-	let levelData = levels[difficulty]?.[level];
-	if (!levelData) {
-		level = 1;
-		(difficulty = "Starters"), (levelData = levels[difficulty]?.[level]);
-	}
-
-	const spel = new Game(level, levelData);
+	let spel = new Game(level, levelData);
 	spel.start();
 
+	const resetGame = () => {
+		//location.reload();
+		spel.cleanUp();
+		console.log("Game cleaned up");
+		
+		//Create new game with new levelData
+		spel = new Game(level, levelData);
+		spel.start();
+		
+	};
 	let nextLevel = document.querySelector(".next-level");
 	nextLevel.addEventListener("click", function () {
 		level++;
-		setData(difficulty, level);
+		setData(level);
 		resetGame();
 	});
 	let previousLevel = document.querySelector(".previous-level");
 	previousLevel.addEventListener("click", function () {
 		level--;
-		setData(difficulty, level);
+		setData(level);
 		resetGame();
 	});
 
