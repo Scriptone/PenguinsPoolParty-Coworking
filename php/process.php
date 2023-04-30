@@ -13,8 +13,18 @@ $DB_NAME = 'penguinspoolparty_logins'; //penguinspoolparty_logins
 
 date_default_timezone_set('Europe/Brussels');
 // Retrieve the form data from the $_POST superglobal array
-print_r($_POST);
-$username = $_POST['username'];
+
+$json = file_get_contents('php://input');
+$data = json_decode($json, true);
+$username = $data['username'];
+$password = $data['password'];
+
+//echo
+echo $username;
+echo $password;
+echo $email;
+
+echo print_r($_POST);
 
 // Perform any additional validation on the form data
 // ...

@@ -182,7 +182,7 @@
 		message: "E-mail does not match the expected format",
 	});
 
-	form.addEventListener("submit", function (event) {
+	form.addEventListener("submit", async function (event) {
 		event.preventDefault();
 		console.log("Gaat verzonden worden");
 
@@ -191,20 +191,16 @@
 		const data = Object.fromEntries(formData.entries());
 		console.log(data);
 
-		const xhr = new XMLHttpRequest();
-		xhr.open("POST", "/php/process.php");
-		xhr.setRequestHeader("Content-Type", "application/json");
+		const response = await fetch("/php/process.php", {
+			method: "POST",
+			body: JSON.stringify(data),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 
-		xhr.onreadystatechange = function () {
-			if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-				
-			}
-			console.log(this.responseText);
-		};
-
-		console.log(JSON.stringify(data));
-		
-		xhr.send(JSON.stringify(data));
+		const result = await response.text();
+		console.log(result);
 		//Reset form
 		this.reset();
 	});
