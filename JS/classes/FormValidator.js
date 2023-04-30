@@ -217,6 +217,7 @@
 
 		const result = await response.text();
 		
+		console.log(result);
 		try {
 			const json = JSON.parse(result);
 			console.log(json);
@@ -233,7 +234,12 @@
 			}
 
 		} catch (error) {
-			console.log(error);
+			formValidator.errors.push({
+				name: "Server error",
+				message: error,
+
+			});
+			formValidator.showSummary();
 		}
 
 		//Reset form
