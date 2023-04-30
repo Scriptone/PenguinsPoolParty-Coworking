@@ -187,7 +187,7 @@
 		console.log("Gaat verzonden worden");
 
 		//Send to process.php
-		const formData = new FormData(this.form);
+		const formData = new FormData(this);
 		const data = Object.fromEntries(formData.entries());
 		console.log(data);
 
@@ -201,8 +201,10 @@
 			}
 			console.log(this.responseText);
 		};
+
+		console.log(JSON.stringify(data));
 		
-		xhr.send(data);
+		xhr.send(JSON.stringify(data));
 		//Reset form
 		this.reset();
 	});
