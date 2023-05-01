@@ -135,6 +135,10 @@ class Pattern {
 		console.log("startDrag");
 		console.log(event);
 		event.preventDefault();
+
+		if (this.dragging) {
+			return;
+		}
 		if (!(event.button == 0 || event.touches)) return; //Only left click
 		this.dragging = iceberg;
 		this.startX = event.clientX || event.touches[0].clientX;
@@ -142,6 +146,8 @@ class Pattern {
 		this.offsetX = 0;
 		this.offsetY = 0;
 		iceberg.element.classList.add("dragging");
+
+
 	}
 
 	stopDrag(event) {
@@ -179,6 +185,20 @@ class Pattern {
 		}
 
 		this.board.selectPattern(this, this.dragging);
+
+		//If user is using more than 1 touch, check if they're attempting to rotate
+		if (event.touches && event.touches.length > 1) {
+			let touch1 = event.touches[0];
+			let touch2 = event.touches[1];
+			let angle = Math.atan2(
+				touch2.clientY - touch1.clientY,
+				touch2.clientX - touch1.clientX
+			);
+			let delta = Math.round((angle * 3) / Math.PI);
+			if (delta != this.rotation) {
+				this.rotate(delta);
+			}
+		}
 	}
 
 	rotate(delta) {
