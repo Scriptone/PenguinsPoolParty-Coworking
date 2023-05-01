@@ -23,12 +23,12 @@ class Pattern {
 		}
 
 		this.dragging = false;
-		this.startX = 0;
-		this.startY = 0;
-		this.offsetX = 0;
-		this.offsetY = 0;
-		this.totalOffsetX = 0;
-		this.totalOffsetY = 0;
+		this.startX = 0; // Start position of mouse
+		this.startY = 0; // Start position of mouse
+		this.offsetX = 0; // Offset of startX and currentX
+		this.offsetY = 0; // Offset of startY and currentY
+		this.left = 0; // Left position of pattern relative to original position
+		this.top = 0; // Top position of pattern relative to original position
 		this.rotation = 0;
 		this.flipped = false;
 
@@ -75,6 +75,7 @@ class Pattern {
 	}
 
 	draw() {
+		console.log(this.startX);
 		// TODO: Zorgen dat het patroon geen negatieve coordinaten heeft
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener(
@@ -116,7 +117,9 @@ class Pattern {
 		this.height = mostBottom - mostTop;
 		this.element.style.width = this.width + this.padding * 16 + "px";
 		this.element.style.height = this.height + this.padding * 16 + "px";
-
+		this.left = mostLeft;
+		this.top = mostTop;
+		console.log(mostLeft);
 		if (!this.dragging) {
 			return;
 		}
@@ -134,10 +137,9 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 		}
 		this.board.selectPattern(this, this.dragging);
+		console.log(this);
 	}
 	startDrag(iceberg, event) {
-		console.log("startDrag");
-		console.log(event);
 		event.preventDefault();
 
 		if (this.dragging) {
@@ -145,20 +147,17 @@ class Pattern {
 		}
 		if (!(event.button == 0 || event.touches)) return; //Only left click
 		this.dragging = iceberg;
-		this.startX = event.clientX || event.touches[0].clientX;
-		this.startY = event.clientY || event.touches[0].clientY;	
+		this.startX = (event.clientX || event.touches[0].clientX) + this.left;
+		this.startY = (event.clientY || event.touches[0].clientY) + this.top;
 		this.offsetX = 0;
 		this.offsetY = 0;
 		iceberg.element.classList.add("dragging");
-
-
 	}
 
 	stopDrag(event) {
 		event.preventDefault();
-		console.log("stopDrag");
 		//Dropped on the board
-		if (!(event.button == 0 || event.touches?.length == 1) || !this.dragging) return;
+		if (!(event.button == 0 || event.touches) || !this.dragging) return;
 		let iceberg = this.dragging;
 
 		let board = this.board;
@@ -176,7 +175,6 @@ class Pattern {
 
 	drag(event) {
 		event.preventDefault();
-		console.log("drag");
 		if (!this.dragging) return;
 
 		this.mouseX = event.clientX || event.touches[0].clientX;
@@ -189,8 +187,6 @@ class Pattern {
 		}
 
 		this.board.selectPattern(this, this.dragging);
-
-		
 	}
 
 	rotate(delta) {
@@ -236,6 +232,7 @@ class Pattern {
 	}
 
 	gestureChange(event) {
+		console.log("gestureChange");
 		if (!this.dragging) return;
 
 		let rotation = event.rotation;
@@ -248,7 +245,6 @@ class Pattern {
 		}
 	}
 
-	
 	flip() {
 		if (!this.dragging) return;
 
@@ -273,10 +269,9 @@ class Pattern {
 
 	reset() {
 		this.dragging = false;
-		this.startX = 0;
-		this.startY = 0;
-		this.offsetX = 0;
-		this.offsetY = 0;
+
+		this.offsetX = -this.left;
+		this.offsetY = -this.top;
 		this.element.classList.add("pattern--error");
 		setTimeout(() => {
 			this.element.classList.remove("pattern--error");

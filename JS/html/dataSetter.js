@@ -1,7 +1,6 @@
 "use strict";
 (function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
-	console.log(welcome_screen);
 	let sessionData = sessionStorage.getItem("data");
 	if (!sessionData) {
 		sessionData = {
@@ -30,7 +29,6 @@
 	// Update the welcome screen
 	let username = sessionStorage.getItem("username") || "Guest";
 	let h2 = welcome_screen?.querySelector("h2");
-	console.log(h2, username);
 	if (!h2) return;
 
 	h2.innerHTML = `Welcome, ${username}!`;
