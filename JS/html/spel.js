@@ -3,6 +3,8 @@ import levels from "../data/levels.js";
 ("use strict");
 
 (function () {
+	const maxwidth = 1000;
+
 	const victory = document.querySelector(".victory");
 	victory?.addEventListener("click", () =>
 		victory.classList.remove("active")
@@ -35,6 +37,22 @@ import levels from "../data/levels.js";
 		levelData = levels[difficulty]?.[level];
 	};
 
+	const onWindowResize = () => {
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+		const game = document.querySelector(".game");
+		if (!game) return;
+
+		//Above maxwidth, scale = 1, at 320px scale = .35
+		const scale = Math.min(1, Math.max(0.35, width / maxwidth));
+		game.style.transform = `scale(${scale}) `;
+
+		//TODO But also move it up according to the scale
+		
+
+
+	};
+
 	let spel = null;
 	let nextLevel = document.querySelector(".next-level");
 	let previousLevel = document.querySelector(".previous-level");
@@ -54,17 +72,14 @@ import levels from "../data/levels.js";
 		//Send data to server
 		const data = {
 			level,
-			time
+			time,
 		};
 		console.log(data);
-			
-
 	};
 
 	const restartGame = () => {
 		//location.reload();
 		spel?.cleanUp();
-		console.log("Game cleaned up");
 
 		//Create new game with new levelData
 		spel = new Game(difficulty, level, levelData);
@@ -104,4 +119,7 @@ import levels from "../data/levels.js";
 	restart.addEventListener("click", function () {
 		restartGame();
 	});
+
+	//If window size is adjusted, update .game css
+	window.addEventListener("resize", onWindowResize);
 })();

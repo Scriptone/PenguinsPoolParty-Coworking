@@ -48,6 +48,14 @@
 	transition: all 0.2s ease;
 }
 
+.level h3 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	font-size: clamp(1.5rem, 2vw, 1.5rem);
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
 .levels .level:is(:hover, :focus-within) {
 	transform: scale(1.025) translate(0, -0.5rem);
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);

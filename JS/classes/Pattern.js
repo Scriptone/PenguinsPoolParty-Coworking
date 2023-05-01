@@ -75,8 +75,8 @@ class Pattern {
 	}
 
 	draw() {
-		console.log(this.startX);
-		// TODO: Zorgen dat het patroon geen negatieve coordinaten heeft
+		
+		
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener(
 				"mousedown",
@@ -119,7 +119,7 @@ class Pattern {
 		this.element.style.height = this.height + this.padding * 16 + "px";
 		this.left = mostLeft;
 		this.top = mostTop;
-		console.log(mostLeft);
+		
 		if (!this.dragging) {
 			return;
 		}
