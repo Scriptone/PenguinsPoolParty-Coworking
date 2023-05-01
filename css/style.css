@@ -502,6 +502,7 @@ form span.field-error {
 	nav {
 		padding: 0;
 		grid-column: span 3;
+		overflow: hidden;
 		height: 0;
 		width: 100%;
 		
