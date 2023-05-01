@@ -49,11 +49,15 @@ class Pattern {
 			"touchend",
 			this.stopDrag.bind(this)
 		);
-		this.events.touchmove = window.addEventListener(
+		this.events.touchmove = document.addEventListener(
 			"touchmove",
 			this.drag.bind(this)
 		);
 
+		this.events.gesturechange = document.addEventListener(
+			"gesturechange",
+			this.gestureChange.bind(this)
+		);
 		this.events.keydown = document.addEventListener("keydown", (event) => {
 			let key = event.key;
 
@@ -154,7 +158,7 @@ class Pattern {
 		event.preventDefault();
 		console.log("stopDrag");
 		//Dropped on the board
-		if (!(event.button == 0 || event.touches) || !this.dragging) return;
+		if (!(event.button == 0 || event.touches?.length == 1) || !this.dragging) return;
 		let iceberg = this.dragging;
 
 		let board = this.board;
@@ -186,19 +190,7 @@ class Pattern {
 
 		this.board.selectPattern(this, this.dragging);
 
-		//If user is using more than 1 touch, check if they're attempting to rotate
-		if (event.touches && event.touches.length > 1) {
-			let touch1 = event.touches[0];
-			let touch2 = event.touches[1];
-			let angle = Math.atan2(
-				touch2.clientY - touch1.clientY,
-				touch2.clientX - touch1.clientX
-			);
-			let delta = Math.round((angle * 3) / Math.PI);
-			if (delta != this.rotation) {
-				this.rotate(delta);
-			}
-		}
+		
 	}
 
 	rotate(delta) {
@@ -243,6 +235,20 @@ class Pattern {
 		this.draw();
 	}
 
+	gestureChange(event) {
+		if (!this.dragging) return;
+
+		let rotation = event.rotation;
+		let lastRotation = this.lastRotation || rotation;
+		let delta = rotation - lastRotation;
+
+		if (Math.abs(delta) > 10) {
+			this.rotate(delta > 0 ? 1 : -1);
+			this.lastRotation = rotation;
+		}
+	}
+
+	
 	flip() {
 		if (!this.dragging) return;
 
