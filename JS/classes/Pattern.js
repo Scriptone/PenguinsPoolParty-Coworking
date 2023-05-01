@@ -13,7 +13,12 @@ class Pattern {
 		this.icebergs = [];
 
 		for (let point of points) {
-			let iceberg = new Iceberg(this, point, this.board.tileWidth, this.board.tileHeight);
+			let iceberg = new Iceberg(
+				this,
+				point,
+				this.board.tileWidth,
+				this.board.tileHeight
+			);
 			this.icebergs.push(iceberg);
 		}
 
@@ -30,6 +35,10 @@ class Pattern {
 		this.draw();
 		document.addEventListener("mouseup", this.stopDrag.bind(this));
 		document.addEventListener("mousemove", this.drag.bind(this));
+
+		//Touch
+		document.addEventListener("touchend", this.stopDrag.bind(this));
+		document.addEventListener("touchmove", this.drag.bind(this));
 
 		document.addEventListener("keydown", (event) => {
 			let key = event.key;
@@ -50,7 +59,7 @@ class Pattern {
 	draw() {
 		// TODO: Zorgen dat het patroon geen negatieve coordinaten heeft
 		this.icebergs.forEach((iceberg) => {
-			iceberg.element.removeEventListener("mousedown", this.mousedown);
+			iceberg.element.removeEventListener("mousedown", this.dragstart);
 		});
 
 		let mostLeft = 0;
@@ -66,8 +75,14 @@ class Pattern {
 			mostTop = Math.min(mostTop, iceberg.top);
 			mostBottom = Math.max(mostBottom, iceberg.top + iceberg.height);
 
-			this.mousedown = iceberg.element.addEventListener(
+			this.dragstart = iceberg.element.addEventListener(
 				"mousedown",
+				this.startDrag.bind(this, iceberg)
+			);
+
+			//Touch
+			this.dragstart = iceberg.element.addEventListener(
+				"touchstart",
 				this.startDrag.bind(this, iceberg)
 			);
 
@@ -229,9 +244,6 @@ class Pattern {
 			iceberg.cleanUp();
 		}
 		this.icebergs = null;
-		
-		
-
 	}
 }
 

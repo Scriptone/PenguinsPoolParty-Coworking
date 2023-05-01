@@ -4,7 +4,9 @@ import levels from "../data/levels.js";
 
 (function () {
 	const victory = document.querySelector(".victory");
-	victory?.addEventListener("click", () => victory.classList.remove("active"));
+	victory?.addEventListener("click", () =>
+		victory.classList.remove("active")
+	);
 
 	let totalLevels = 0;
 	for (let difficulty in levels) {
@@ -39,11 +41,24 @@ import levels from "../data/levels.js";
 	let restart = document.querySelector(".redo-level");
 
 	const onComplete = () => {
+		const currentTime = Date.now();
+		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
 		console.log("Level complete");
-			victory?.classList.add("active");
-			setTimeout(() => {
-				victory?.classList.remove("active");
-			}, 3000);
+		victory?.classList.add("active");
+		const h2 = victory?.querySelector("h2");
+		if (h2) h2.innerHTML = `Level ${level} completed in ${time} seconds!`;
+		setTimeout(() => {
+			victory?.classList.remove("active");
+		}, 3000);
+
+		//Send data to server
+		const data = {
+			level,
+			time
+		};
+		console.log(data);
+			
+
 	};
 
 	const restartGame = () => {
@@ -54,6 +69,7 @@ import levels from "../data/levels.js";
 		//Create new game with new levelData
 		spel = new Game(difficulty, level, levelData);
 		spel.start();
+		spel.startTime = Date.now();
 
 		if (level === totalLevels) {
 			nextLevel.classList.add("locked");
@@ -73,7 +89,6 @@ import levels from "../data/levels.js";
 
 	restartGame();
 
-	
 	nextLevel.addEventListener("click", function () {
 		level++;
 		setData(level);
@@ -89,6 +104,4 @@ import levels from "../data/levels.js";
 	restart.addEventListener("click", function () {
 		restartGame();
 	});
-
-	
 })();

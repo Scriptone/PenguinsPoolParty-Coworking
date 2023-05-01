@@ -56,6 +56,7 @@ function register()
 		$_SESSION['user_id'] = $mysqli->insert_id;
 		$_SESSION['username'] = $username;
 		$_SESSION['logged_in'] = time();
+		$_SESSION['error'] = false;
 		$_SESSION['success'] = true;
 	}
 
@@ -97,6 +98,18 @@ function login()
 
 }
 
+function log_level($level, $completedTime)
+{
+	$userId = $_SESSION['user_id'];
+	$mysqli = connect();
+	$sql = "INSERT INTO log_levels (user_id, level, completed_time) VALUES ('" . $mysqli->real_escape_string($userId) . "', '" . $mysqli->real_escape_string($level) . "', '" . $mysqli->real_escape_string($completedTime) . "')";
+	$insert = $mysqli->query($sql);
+
+	$_SESSION['error'] = false;
+	$_SESSION['success'] = true;
+	// Return a response to the JavaScript code
+	echo json_encode($_SESSION);
+}
 function logout()
 {
 
