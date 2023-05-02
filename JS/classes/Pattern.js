@@ -185,9 +185,19 @@ class Pattern {
 
 		this.board.selectPattern(this, this.dragging);
 
-		this.icebergs[0].element.innerHTML = event.rotation;
+		if (event.touches?.length == 2) {
+			let rotation =
+				(Math.atan2(
+					event.touches[0].pageY - event.touches[1].pageY,
+					event.touches[0].pageX - event.touches[1].pageX
+				) *
+					180) /
+				Math.PI;
+			this.rotate(rotation - this.rotation);
+			this.icebergs[0].element.innerHTML = event.rotation;
+		}
 
-	
+		
 	}
 
 	rotate(delta) {
@@ -231,7 +241,6 @@ class Pattern {
 
 		this.draw();
 	}
-
 
 	flip() {
 		if (!this.dragging) return;
