@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 $DB_HOST = 'localhost';
 $DB_USER = 'arne.haers'; //arne.haers
 $DB_PASS = 'Kqt20$r93'; //Kqt20$r93
-$DB_NAME = 'penguinspoolparty_logins'; //penguinspoolparty_logins
+$DB_NAME = 'PenguinsPoolParty'; //penguinspoolparty_logins
 
 date_default_timezone_set('Europe/Brussels');
 // Retrieve the form data from the $_POST superglobal array
@@ -56,6 +56,7 @@ function register()
 		$_SESSION['user_id'] = $mysqli->insert_id;
 		$_SESSION['username'] = $username;
 		$_SESSION['logged_in'] = time();
+
 		$_SESSION['error'] = false;
 		$_SESSION['success'] = true;
 	}
@@ -75,20 +76,17 @@ function login()
 	$result = $mysqli->query($sql);
 	$user = $result->fetch_assoc();
 
-	//if no user
 
 	if ($user && password_verify($password, $user['password'])) {
 		// Set session variables
 		$_SESSION['user_id'] = $user['id'];
 		$_SESSION['username'] = $user['username'];
+		$_SESSION['levels_completed'] = $user['levels_completed'];
 		$_SESSION['logged_in'] = time();
 		$_SESSION['success'] = true;
 		$_SESSION['error'] = false;
-		// Update the logged_in column in the database
-		$sql = "UPDATE users SET logged_in = " . $_SESSION['logged_in'] . " WHERE id = " . $_SESSION['user_id'];
-		$result = $mysqli->query($sql);
 
-		// Redirect the user to the private members-only page
+		// Return a response to the JavaScript code
 		echo json_encode($_SESSION);
 	} else {
 		// If credentials are not valid, show an error message and return to the login page
@@ -101,13 +99,27 @@ function login()
 function log_level($level, $completedTime)
 {
 	$userId = $_SESSION['user_id'];
-	$mysqli = connect();
-	$sql = "INSERT INTO log_levels (user_id, level, completed_time) VALUES ('" . $mysqli->real_escape_string($userId) . "', '" . $mysqli->real_escape_string($level) . "', '" . $mysqli->real_escape_string($completedTime) . "')";
-	$insert = $mysqli->query($sql);
+	$levels_completed = $_SESSION['levels_completed'];
 
-	$_SESSION['error'] = false;
-	$_SESSION['success'] = true;
-	// Return a response to the JavaScript code
+	if ($level >= $levels_completed + 1) {
+		$_SESSION['levels_completed'] = $level;
+		$levels_completed = $level;
+
+		//Indien geen userid return
+		if ($userId) {
+			$mysqli = connect();
+			$sql = "UPDATE users SET levels_completed = '" . $mysqli->real_escape_string($levels_completed) . "' WHERE id = '" . $mysqli->real_escape_string($userId) . "'";
+			$result = $mysqli->query($sql);
+		}
+
+
+		$_SESSION['success'] = true;
+		$_SESSION['error'] = false;
+
+	} else {
+		$_SESSION['error'] = 'Not a valid level to log.';
+		$_SESSION['success'] = false;
+	}
 	echo json_encode($_SESSION);
 }
 function logout()
@@ -125,6 +137,9 @@ switch ($action) {
 		break;
 	case 'logout':
 		logout();
+		break;
+	case 'log_level':
+		log_level($data['level'], $data['time']);
 		break;
 }
 

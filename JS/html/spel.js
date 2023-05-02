@@ -55,7 +55,7 @@ import levels from "../data/levels.js";
 	let previousLevel = document.querySelector(".previous-level");
 	let restart = document.querySelector(".redo-level");
 
-	const onComplete = () => {
+	const onComplete = async () => {
 		const currentTime = Date.now();
 		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
 		console.log("Level complete");
@@ -70,8 +70,24 @@ import levels from "../data/levels.js";
 		const data = {
 			level,
 			time,
+			action: "log_level",
 		};
-		console.log(data);
+		const response = await fetch("/php/process.php", {
+			method: "POST",
+			body: JSON.stringify(data),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const result = await response.text();
+		const json = JSON.parse(result);
+		console.log(json);
+
+		sessionStorage.setItem(
+			"levels_completed",
+			json.levels_completed || sessionStorage.getItem("levels_completed")
+		);
 	};
 
 	const restartGame = () => {

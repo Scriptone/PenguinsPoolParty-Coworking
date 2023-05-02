@@ -16,7 +16,7 @@ import Board from "../classes/Board.js";
 		window.location.href = `/spel`;
 	};
 
-	const lastUnlockedLevel = sessionStorage.getItem("lastUnlockedLevel");
+	const lastUnlockedLevel = sessionStorage.getItem("levels_completed") + 1;
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");

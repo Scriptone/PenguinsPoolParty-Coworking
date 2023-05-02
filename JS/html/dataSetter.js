@@ -11,12 +11,6 @@
 		sessionData = JSON.parse(sessionData);
 	}
 
-	//TODO Some magic to get the user data from the server
-	// and update the sessionData object
-	// ...
-	const lastUnlockedLevel = 5; // This is the last level the user has unlocked
-	sessionStorage.setItem("lastUnlockedLevel", lastUnlockedLevel);
-
 	// Update the sessionData object
 	sessionStorage.setItem(
 		"data",
@@ -25,6 +19,8 @@
 			return value;
 		})
 	);
+
+	sessionStorage.setItem("levels_completed", sessionStorage.getItem("levels_completed") || 0);
 
 	// Update the welcome screen
 	let username = sessionStorage.getItem("username") || "Guest";

@@ -135,7 +135,6 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 		}
 		this.board.selectPattern(this, this.dragging);
-		console.log(this);
 	}
 	startDrag(iceberg, event) {
 		event.preventDefault();

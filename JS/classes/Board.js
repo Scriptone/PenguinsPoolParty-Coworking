@@ -200,7 +200,6 @@ class Board {
 		}
 
 		this.patternsRemaining--;
-		console.log(this.patternsRemaining);
 		if (this.patternsRemaining === 0) {
 			this.onCompleteCallback();
 		}

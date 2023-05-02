@@ -233,6 +233,7 @@
 					case "login":
 						sessionStorage.setItem("username", json.username);
 						sessionStorage.setItem("logged_in", json.logged_in);
+						sessionStorage.setItem("levels_completed", json.levels_completed);
 						window.location.href = "/";
 						break;
 					case "logout":
