@@ -89,6 +89,7 @@ import levels from "../data/levels.js";
 				result.levels_completed ||
 					sessionStorage.getItem("levels_completed")
 			);
+			levels_completed = sessionStorage.getItem("levels_completed");
 			nextLevel.classList.remove("locked");
 		} catch (error) {
 			console.log(error);
@@ -104,7 +105,8 @@ import levels from "../data/levels.js";
 		spel.start();
 		spel.startTime = Date.now();
 
-		if (level === totalLevels || level === levels_completed + 1) {
+		levels_completed = sessionStorage.getItem("levels_completed");
+		if (level === totalLevels || level === (Number(levels_completed) + 1)) {
 			nextLevel.classList.add("locked");
 		} else {
 			nextLevel.classList.remove("locked");
