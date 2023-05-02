@@ -225,7 +225,7 @@
 			console.log(json);
 			const error = json.error;
 			if (error) {
-				console.error(error);
+				new Error(error);
 			} else {
 				console.log(action);
 				switch (action) {

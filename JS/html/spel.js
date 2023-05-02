@@ -81,6 +81,7 @@ import levels from "../data/levels.js";
 		});
 
 		const result = await response.text();
+		console.log(result);
 		const json = JSON.parse(result);
 		console.log(json);
 
