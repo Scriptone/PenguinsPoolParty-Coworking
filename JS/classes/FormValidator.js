@@ -209,7 +209,7 @@
 		data["action"] = action;
 
 		console.log(data);
-		const response = await fetch("/php/process.php", {
+		const response = await fetch("../php/process.php", {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: {

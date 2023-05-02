@@ -72,7 +72,7 @@ import levels from "../data/levels.js";
 			time,
 			action: "log_level",
 		};
-		const response = await fetch("/php/process.php", {
+		const response = await fetch("../php/process.php", {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: {
@@ -135,4 +135,5 @@ import levels from "../data/levels.js";
 	});
 
 	window.addEventListener("resize", onWindowResize);
+	onWindowResize();
 })();
