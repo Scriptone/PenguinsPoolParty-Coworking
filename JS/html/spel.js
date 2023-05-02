@@ -54,7 +54,7 @@ import levels from "../data/levels.js";
 	let nextLevel = document.querySelector(".next-level");
 	let previousLevel = document.querySelector(".previous-level");
 	let restart = document.querySelector(".redo-level");
-
+	let levels_completed = sessionStorage.getItem("levels_completed");
 	const onComplete = async () => {
 		const currentTime = Date.now();
 		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
@@ -67,29 +67,32 @@ import levels from "../data/levels.js";
 		}, 3000);
 
 		//Send data to server
-		let levels_completed = sessionStorage.getItem("levels_completed");
-		if (level <= levels_completed) return;
-		const data = {
-			level,
-			time,
-			action: "log_level",
-		};
-		const response = await fetch("../php/process.php", {
-			method: "POST",
-			body: JSON.stringify(data),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+		try {
+			if (level <= levels_completed) return;
+			const data = {
+				level,
+				time,
+				action: "log_level",
+			};
+			const response = await fetch("../php/process.php", {
+				method: "POST",
+				body: JSON.stringify(data),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
 
-		const result = await response.json();
-		console.log(result);
-
+			const result = await response.json();
+			console.log(result);
+		} catch (error) {
+			console.log(error);
+		}
 		sessionStorage.setItem(
 			"levels_completed",
 			result.levels_completed ||
 				sessionStorage.getItem("levels_completed")
 		);
+		nextLevel.classList.remove("locked");
 	};
 
 	const restartGame = () => {
@@ -101,7 +104,7 @@ import levels from "../data/levels.js";
 		spel.start();
 		spel.startTime = Date.now();
 
-		if (level === totalLevels) {
+		if (level === totalLevels || level === levels_completed + 1) {
 			nextLevel.classList.add("locked");
 		} else {
 			nextLevel.classList.remove("locked");

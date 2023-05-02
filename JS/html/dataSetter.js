@@ -1,8 +1,7 @@
 "use strict";
 (async function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
-	
-	
+
 	const loginLink = document.querySelector('.nav-link[href$="/login/"]');
 	const logoutLink = document.querySelector('.nav-link[href$="/logout/"]');
 
@@ -31,7 +30,6 @@
 	let h2 = welcome_screen?.querySelector("h2");
 	if (h2) h2.innerHTML = `Welcome, ${username}!`;
 
-	
 	// Get user info
 	if (username == "Guest") {
 		try {
@@ -44,11 +42,15 @@
 			});
 
 			const data = await result.json();
-			console.log(data);
 			if (data.username) {
-				console.log("This was needed, we existed on the server but not in the session")
+				console.log(
+					"This was needed, we existed on the server but not in the session"
+				);
 				sessionStorage.setItem("username", data.username);
-				sessionStorage.setItem("levels_completed", data.levels_completed);
+				sessionStorage.setItem(
+					"levels_completed",
+					data.levels_completed
+				);
 				username = data.username;
 			}
 		} catch (error) {
@@ -56,7 +58,8 @@
 		}
 	}
 
-	loginLink.parentElement.style.display = username == "Guest" ? "flex" : "none";
-	logoutLink.parentElement.style.display = username == "Guest" ? "none" : "flex";
-
+	loginLink.parentElement.style.display =
+		username == "Guest" ? "flex" : "none";
+	logoutLink.parentElement.style.display =
+		username == "Guest" ? "none" : "flex";
 })();
