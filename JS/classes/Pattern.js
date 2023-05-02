@@ -135,8 +135,11 @@ class Pattern {
 	startDrag(iceberg, event) {
 		event.preventDefault();
 
-		if (this.dragging) {
-			return;
+		//Check if any pattenrs are already being dragged
+		for (let pattern of this.board.patterns) {
+			if (pattern.dragging) {
+				return;
+			}
 		}
 		if (!(event.button == 0 || event.touches)) return; //Only left click
 		this.dragging = iceberg;
@@ -194,7 +197,7 @@ class Pattern {
 
 			if (this.oldRotation == null) this.oldRotation = rotation;
 			let deltaAngle = rotation - this.oldRotation;
-			if (Math.abs(deltaAngle) >= 60) {
+			if (Math.abs(deltaAngle) >= 70) {
 				this.oldRotation = rotation;
 				this.rotate(Math.sign(deltaAngle));
 			}
