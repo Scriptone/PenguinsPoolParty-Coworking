@@ -84,15 +84,15 @@ import levels from "../data/levels.js";
 
 			const result = await response.json();
 			console.log(result);
+			sessionStorage.setItem(
+				"levels_completed",
+				result.levels_completed ||
+					sessionStorage.getItem("levels_completed")
+			);
+			nextLevel.classList.remove("locked");
 		} catch (error) {
 			console.log(error);
 		}
-		sessionStorage.setItem(
-			"levels_completed",
-			result.levels_completed ||
-				sessionStorage.getItem("levels_completed")
-		);
-		nextLevel.classList.remove("locked");
 	};
 
 	const restartGame = () => {
