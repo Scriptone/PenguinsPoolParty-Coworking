@@ -154,7 +154,11 @@ class Pattern {
 	stopDrag(event) {
 		event.preventDefault();
 		//Dropped on the board
-		if (!(event.button == 0 || event.touches) || !this.dragging) return;
+		if (
+			!(event.button == 0 || event.touches?.length == 1) ||
+			!this.dragging
+		)
+			return;
 		let iceberg = this.dragging;
 
 		let board = this.board;
