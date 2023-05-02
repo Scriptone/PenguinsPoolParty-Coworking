@@ -1,6 +1,10 @@
 "use strict";
 (async function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
+	const loginLink = document.querySelector(".nav-link[href='./login/']");
+	const logoutLink = document.querySelector(".nav-link[href='./logout/']");
+
+	logoutLink.parentElement.style.display = "none";
 	let sessionData = sessionStorage.getItem("data");
 	if (!sessionData) {
 		sessionData = {
@@ -25,6 +29,7 @@
 	let h2 = welcome_screen?.querySelector("h2");
 	if (h2) h2.innerHTML = `Welcome, ${username}!`;
 
+	
 	// Get user info
 	if (username == "Guest") {
 		try {
@@ -48,5 +53,8 @@
 			console.log("Something failed", error);
 		}
 	}
+
+	loginLink.parentElement.style.display = username == "Guest" ? "flex" : "none";
+	logoutLink.parentElement.style.display = username == "Guest" ? "none" : "flex";
 
 })();

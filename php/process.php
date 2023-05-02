@@ -47,27 +47,24 @@ function register()
 		// Create a new database connection
 		$mysqli = connect();
 
+		//Indien user op gast account levels complete, dan slaan we deze op in de database.
+		$levels_completed = isset($_SESSION['levels_completed']) && !isset($_SESSION['user_id']) ? $_SESSION['levels_completed'] : 0;
+
 		// Insert user data into database
-		$sql = "INSERT INTO users (username, password, email) VALUES ('" . $mysqli->real_escape_string($username) . "', '" . $mysqli->real_escape_string($hash) . "', '" . $mysqli->real_escape_string($email) . "')";
+		$sql = "INSERT INTO users (username, password, email, levels_completed) VALUES ('" . $mysqli->real_escape_string($username) . "', '" . $mysqli->real_escape_string($hash) . "', '" . $mysqli->real_escape_string($email) . "', '" . $mysqli->real_escape_string($levels_completed) . "')";
 		$insert = $mysqli->query($sql);
 
 
 		// Return a response to the JavaScript code
 		$_SESSION['user_id'] = $mysqli->insert_id;
 		$_SESSION['username'] = $username;
-		$_SESSION['levels_completed'] = isset($_SESSION['levels_completed']) ? $_SESSION['levels_completed'] : 0; // Set levels completed to 0 if not set
-		$_SESSION['logged_in'] = time();
+		$_SESSION['levels_completed'] = $levels_completed;
+
 
 		$_SESSION['error'] = false;
 		$_SESSION['success'] = true;
 
-		if ($_SESSION["levels_completed"] > 0) {
-			// Update levels completed
-			$sql = "UPDATE users SET levels_completed = '" . $mysqli->real_escape_string($_SESSION['levels_completed']) . "' WHERE id = '" . $mysqli->real_escape_string($_SESSION['user_id']) . "'";
-			$result = $mysqli->query($sql);
-
-			// User speelde al wat levels op gast account, dus we moeten deze nu updaten
-		}
+		
 	}
 
 	echo json_encode($_SESSION);
@@ -134,7 +131,10 @@ function log_level($level, $completedTime)
 }
 function logout()
 {
-
+	session_destroy();
+	$_SESSION['success'] = true;
+	$_SESSION['error'] = false;
+	echo json_encode($_SESSION);
 }
 
 function highscores()

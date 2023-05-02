@@ -230,7 +230,6 @@
 					case "register":
 					case "login":
 						sessionStorage.setItem("username", result.username);
-						sessionStorage.setItem("logged_in", result.logged_in);
 						sessionStorage.setItem("levels_completed", result.levels_completed);
 						window.location.href = "../";
 						console.log(result)
