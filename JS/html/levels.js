@@ -14,10 +14,10 @@ import Board from "../classes/Board.js";
 		};
 		sessionStorage.setItem("data", JSON.stringify(sessionData));
 		window.location.href = `../spel`;
-		console.log("Level clicked", difficulty, level);
 	};
 
-	const lastUnlockedLevel = Number(sessionStorage.getItem("levels_completed") || 0) + 1;
+	const lastUnlockedLevel =
+		Number(sessionStorage.getItem("levels_completed") || 0) + 1;
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");

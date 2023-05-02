@@ -223,21 +223,27 @@
 		try {
 			const error = result.error;
 			if (error) {
-				new Error(error);
+				formValidator.errors.push({
+					name: "Server error",
+					message: error,
+				});
+				formValidator.showSummary();
 			} else {
 				console.log(action);
 				switch (action) {
 					case "register":
 					case "login":
 						sessionStorage.setItem("username", result.username);
-						sessionStorage.setItem("levels_completed", result.levels_completed);
+						sessionStorage.setItem(
+							"levels_completed",
+							result.levels_completed
+						);
+						sessionStorage.setItem(
+							"level",
+							result.levels_completed + 1
+						);
 						window.location.href = "../";
-						console.log(result)
-						break;
-					case "logout":
-						sessionStorage.removeItem("username");
-						sessionStorage.removeItem("logged_in");
-						break;
+						console.log(result);
 				}
 			}
 		} catch (error) {
@@ -260,10 +266,7 @@
 		button.addEventListener("click", function () {
 			let type = password.getAttribute("type");
 			type = type == "password" ? "text" : "password";
-			password.setAttribute(
-				"type",
-				type
-			);
+			password.setAttribute("type", type);
 			button.classList.toggle("fa-eye-slash");
 			button.classList.toggle("fa-eye");
 		});

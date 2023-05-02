@@ -11,31 +11,11 @@ import levels from "../data/levels.js";
 	);
 
 	let totalLevels = 0;
+	let level = sessionStorage.getItem("level") || 1;
+	let levels_completed = sessionStorage.getItem("levels_completed") || 0;
 	for (let difficulty in levels) {
 		totalLevels += Object.keys(levels[difficulty]).length;
 	}
-
-	let { difficulty, level } = JSON.parse(sessionStorage.getItem("data"));
-
-	let levelData = levels[difficulty]?.[level] || levels.Starters[1];
-
-	const setData = (level) => {
-		difficulty = null;
-		for (let diff in levels) {
-			if (levels[diff][level]) {
-				difficulty = diff;
-				break;
-			}
-		}
-		sessionStorage.setItem(
-			"data",
-			JSON.stringify({ difficulty, level }, (key, value) => {
-				if (!isNaN(value)) value = Number(value);
-				return value;
-			})
-		);
-		levelData = levels[difficulty]?.[level];
-	};
 
 	const onWindowResize = () => {
 		const width = window.innerWidth;
@@ -51,17 +31,21 @@ import levels from "../data/levels.js";
 	};
 
 	let spel = null;
+
 	let nextLevel = document.querySelector(".next-level");
 	let previousLevel = document.querySelector(".previous-level");
 	let restart = document.querySelector(".redo-level");
-	let levels_completed = sessionStorage.getItem("levels_completed");
+
 	const onComplete = async () => {
+		console.log("Level complete");
+
 		const currentTime = Date.now();
 		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
-		console.log("Level complete");
+
 		victory?.classList.add("active");
 		const h2 = victory?.querySelector("h2");
 		if (h2) h2.innerHTML = `Level ${level} completed in ${time} seconds!`;
+
 		setTimeout(() => {
 			victory?.classList.remove("active");
 		}, 3000);
@@ -101,12 +85,21 @@ import levels from "../data/levels.js";
 		spel?.cleanUp();
 
 		//Create new game with new levelData
+		let difficulty = null;
+		for (let _difficulty in levels) {
+			if (levels[_difficulty][level]) {
+				difficulty = _difficulty;
+				break;
+			}
+		}
+
+		const levelData = levels[difficulty][level];
 		spel = new Game(difficulty, level, levelData);
 		spel.start();
 		spel.startTime = Date.now();
 
 		levels_completed = sessionStorage.getItem("levels_completed");
-		if (level === totalLevels || level === (Number(levels_completed) + 1)) {
+		if (level === totalLevels || level === Number(levels_completed) + 1) {
 			nextLevel.classList.add("locked");
 		} else {
 			nextLevel.classList.remove("locked");
@@ -125,13 +118,11 @@ import levels from "../data/levels.js";
 
 	nextLevel.addEventListener("click", function () {
 		level++;
-		setData(level);
 		restartGame();
 	});
 
 	previousLevel.addEventListener("click", function () {
 		level--;
-		setData(level);
 		restartGame();
 	});
 

@@ -6,29 +6,12 @@
 	const logoutLink = document.querySelector('.nav-link[href$="/logout/"]');
 
 	logoutLink.parentElement.style.display = "none";
-	let sessionData = sessionStorage.getItem("data");
-	if (!sessionData) {
-		sessionData = {
-			difficulty: "Starters",
-			level: 1,
-		};
-	} else {
-		sessionData = JSON.parse(sessionData);
-	}
 
-	// Update the sessionData object
-	sessionStorage.setItem(
-		"data",
-		JSON.stringify(sessionData, (key, value) => {
-			if (!isNaN(value)) value = Number(value);
-			return value;
-		})
-	);
+	let level = sessionStorage.getItem("level");
+	sessionStorage.setItem("level", level || 1);
 
 	// Update the welcome screen
 	let username = sessionStorage.getItem("username") || "Guest";
-	let h2 = welcome_screen?.querySelector("h2");
-	if (h2) h2.innerHTML = `Welcome, ${username}!`;
 
 	// Get user info
 	if (username == "Guest") {
@@ -57,6 +40,9 @@
 			console.log("Something failed", error);
 		}
 	}
+
+	let h2 = welcome_screen?.querySelector("h2");
+	if (h2) h2.innerHTML = `Welcome, ${username}!`;
 
 	loginLink.parentElement.style.display =
 		username == "Guest" ? "flex" : "none";
