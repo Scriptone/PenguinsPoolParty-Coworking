@@ -1,8 +1,10 @@
 "use strict";
 (async function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
-	const loginLink = document.querySelector(".nav-link[href='./login/']");
-	const logoutLink = document.querySelector(".nav-link[href='./logout/']");
+	
+	
+	const loginLink = document.querySelector('.nav-link[href$="/login/"]');
+	const logoutLink = document.querySelector('.nav-link[href$="/logout/"]');
 
 	logoutLink.parentElement.style.display = "none";
 	let sessionData = sessionStorage.getItem("data");

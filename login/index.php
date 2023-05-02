@@ -51,13 +51,16 @@
 						</li>
 
 						<li class="nav-item" style="--fade: 0.4s">
-							<a title="levels" class="nav-link fa fa-list" href="../levels/"
-								>Level</a>
+							<a title="levels" class="nav-link fa fa-list" href="../levels/">Level</a>
 						</li>
 
 						<li class="nav-item" style="--fade: 0.5s">
 							<!-- Login -->
-							<a title="login" class="nav-link fa fa-user" href="../login/" aria-current="page">Login</a>
+							<a title="login" class="nav-link fa fa-sign-in-alt" href="../login/">Login</a>
+						</li>
+						<li class="nav-item" style="--fade: 0.5s">
+							<!-- Login -->
+							<a title="login" class="nav-link fa fa-sign-out-alt" href="../logout/">Logout</a>
 						</li>
 					</ul>
 				</nav>
