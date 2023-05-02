@@ -67,6 +67,8 @@ import levels from "../data/levels.js";
 		}, 3000);
 
 		//Send data to server
+		let levels_completed = sessionStorage.getItem("levels_completed");
+		if (level <= levels_completed) return;
 		const data = {
 			level,
 			time,
@@ -85,7 +87,8 @@ import levels from "../data/levels.js";
 
 		sessionStorage.setItem(
 			"levels_completed",
-			result.levels_completed || sessionStorage.getItem("levels_completed")
+			result.levels_completed ||
+				sessionStorage.getItem("levels_completed")
 		);
 	};
 
@@ -105,7 +108,6 @@ import levels from "../data/levels.js";
 		}
 
 		if (level === 1) {
-			console.log("Disabled");
 			previousLevel.classList.add("locked");
 		} else {
 			previousLevel.classList.remove("locked");

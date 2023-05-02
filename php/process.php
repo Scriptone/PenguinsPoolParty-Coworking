@@ -55,11 +55,19 @@ function register()
 		// Return a response to the JavaScript code
 		$_SESSION['user_id'] = $mysqli->insert_id;
 		$_SESSION['username'] = $username;
-		$_SESSION['levels_completed'] = 0;
+		$_SESSION['levels_completed'] = isset($_SESSION['levels_completed']) ? $_SESSION['levels_completed'] : 0; // Set levels completed to 0 if not set
 		$_SESSION['logged_in'] = time();
 
 		$_SESSION['error'] = false;
 		$_SESSION['success'] = true;
+
+		if ($_SESSION["levels_completed"] > 0) {
+			// Update levels completed
+			$sql = "UPDATE users SET levels_completed = '" . $mysqli->real_escape_string($_SESSION['levels_completed']) . "' WHERE id = '" . $mysqli->real_escape_string($_SESSION['user_id']) . "'";
+			$result = $mysqli->query($sql);
+
+			// User speelde al wat levels op gast account, dus we moeten deze nu updaten
+		}
 	}
 
 	echo json_encode($_SESSION);
@@ -100,8 +108,8 @@ function login()
 
 function log_level($level, $completedTime)
 {
-	$userId = $_SESSION['user_id'];
-	$levels_completed = $_SESSION['levels_completed'];
+	$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+	$levels_completed = isset($_SESSION['levels_completed']) ? $_SESSION['levels_completed'] : 0;
 
 	if ($level >= $levels_completed + 1) {
 		$_SESSION['levels_completed'] = $level;
@@ -129,7 +137,8 @@ function logout()
 
 }
 
-function highscores() {
+function highscores()
+{
 	$mysqli = connect();
 	$sql = "SELECT * FROM users ORDER BY levels_completed DESC";
 	$result = $mysqli->query($sql);
@@ -137,7 +146,8 @@ function highscores() {
 	echo json_encode($users);
 }
 
-function get_user() {
+function get_user()
+{
 	if (isset($_SESSION['user_id'])) {
 		$mysqli = connect();
 		$sql = "SELECT * FROM users WHERE id = '" . $mysqli->real_escape_string($_SESSION['user_id']) . "'";
