@@ -187,17 +187,18 @@ class Pattern {
 
 		if (event.touches?.length == 2) {
 			let rotation =
-				(Math.atan2(
+				Math.atan2(
 					event.touches[0].pageY - event.touches[1].pageY,
 					event.touches[0].pageX - event.touches[1].pageX
-				) *
-					180) /
-				Math.PI;
-			this.rotate(rotation - this.rotation);
-			this.icebergs[0].element.innerHTML = event.rotation;
-		}
+				) * 180;
 
-		
+			if (this.oldRotation == null) this.oldRotation = rotation;
+			let deltaAngle = rotation - this.oldRotation;
+			if (Math.abs(deltaAngle) >= 60) {
+				this.oldRotation = rotation;
+				this.rotate(Math.sign(deltaAngle));
+			}
+		}
 	}
 
 	rotate(delta) {
