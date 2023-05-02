@@ -54,10 +54,6 @@ class Pattern {
 			this.drag.bind(this)
 		);
 
-		this.events.gesturechange = document.addEventListener(
-			"gesturechange",
-			this.gestureChange.bind(this)
-		);
 		this.events.keydown = document.addEventListener("keydown", (event) => {
 			let key = event.key;
 
@@ -155,7 +151,7 @@ class Pattern {
 		event.preventDefault();
 		//Dropped on the board
 		if (
-			!(event.button == 0 || event.touches?.length == 1) ||
+			!(event.button == 0 || event.touches?.length != 1) ||
 			!this.dragging
 		)
 			return;
@@ -188,6 +184,10 @@ class Pattern {
 		}
 
 		this.board.selectPattern(this, this.dragging);
+
+		this.icebergs[0].element.innerHTML = event.rotation;
+
+	
 	}
 
 	rotate(delta) {
@@ -232,19 +232,6 @@ class Pattern {
 		this.draw();
 	}
 
-	gestureChange(event) {
-		console.log("gestureChange");
-		if (!this.dragging) return;
-
-		let rotation = event.rotation;
-		let lastRotation = this.lastRotation || rotation;
-		let delta = rotation - lastRotation;
-
-		if (Math.abs(delta) > 10) {
-			this.rotate(delta > 0 ? 1 : -1);
-			this.lastRotation = rotation;
-		}
-	}
 
 	flip() {
 		if (!this.dragging) return;
