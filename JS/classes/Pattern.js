@@ -75,8 +75,6 @@ class Pattern {
 	}
 
 	draw() {
-		
-		
 		this.icebergs.forEach((iceberg) => {
 			iceberg.element.removeEventListener(
 				"mousedown",
@@ -119,7 +117,7 @@ class Pattern {
 		this.element.style.height = this.height + this.padding * 16 + "px";
 		this.left = mostLeft;
 		this.top = mostTop;
-		
+
 		if (!this.dragging) {
 			return;
 		}

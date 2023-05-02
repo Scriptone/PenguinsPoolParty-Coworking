@@ -15,9 +15,12 @@ class Game {
 
 		const difficultySpan = document.createElement("span");
 		difficultySpan.innerText = `Difficulty: ${difficulty}`;
-		difficultySpan.classList.add(difficulty.toLowerCase(), "difficulty-span");
+		difficultySpan.classList.add(
+			difficulty.toLowerCase(),
+			"difficulty-span"
+		);
 
-		levelHeader.prepend(difficultySpan);	
+		levelHeader.prepend(difficultySpan);
 		levelContainer.appendChild(levelHeader);
 
 		this.level = level;

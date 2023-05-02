@@ -48,9 +48,6 @@ import levels from "../data/levels.js";
 		game.style.transform = `scale(${scale}) `;
 
 		//TODO But also move it up according to the scale
-		
-
-
 	};
 
 	let spel = null;
@@ -120,6 +117,5 @@ import levels from "../data/levels.js";
 		restartGame();
 	});
 
-	//If window size is adjusted, update .game css
 	window.addEventListener("resize", onWindowResize);
 })();

@@ -15,51 +15,64 @@
 			crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
 		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/levels.css" />
+		<link rel="stylesheet" href="../css/normalize.css" />
+		<link rel="stylesheet" href="../css/common.css" />
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
 		<script defer src="../JS/html/dataSetter.js"></script>
-		<script defer="defer" src="../JS/html/overlay.js" type="module"></script>
+		<script defer="defer" src="../JS/html/index.js" type="module"></script>
 		<script defer="defer" src="../JS/classes/FormValidator.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<header>
+		<header>
+			<div class="container">
 				<h1>Penguins Pool Party</h1>
 				<a href="../" class="logo" title="logo"></a>
+
+				<button class="hamburger-btn" aria-expanded="false">
+					<svg class="hamburger" viewBox="0 0 100 100">
+						<line class="line top" x1="90" x2="10" y1="40" y2="40"></line>
+						<line class="line bottom" x1="10" x2="90" y1="60" y2="60"></line>
+					</svg>
+				</button>
 				<nav>
-					<ul>
-						<li>
+					<ul class="nav-menu">
+						<li class="nav-item" style="--fade: 0.1s">
 							<a title="Home" class="nav-link fa fa-home" href="../">Home</a>
 						</li>
-						<li id="info">
+						<li id="info" class="nav-item" style="--fade: 0.2s">
 							<a title="help" class="nav-link fa fa-info info">Info</a>
 						</li>
 
-						<li>
+						<li class="nav-item" style="--fade: 0.3s">
 							<a title="highscores" class="nav-link fa fa-trophy" href="../highscores/">Scores</a>
 						</li>
 
-						<li>
-							<a title="levels" class="nav-link fa fa-list" href="../levels/">Level</a>
+						<li class="nav-item" style="--fade: 0.4s">
+							<a title="levels" class="nav-link fa fa-list" href="../levels/"
+								>Level</a>
 						</li>
 
-						<li>
+						<li class="nav-item" style="--fade: 0.5s">
 							<!-- Login -->
-							<a title="login" class="nav-link fa fa-user" href="./" aria-current="page">Login</a>
+							<a title="login" class="nav-link fa fa-user" href="../login/" aria-current="page">Login</a>
 						</li>
 					</ul>
 				</nav>
-			</header>
-			<main>
+			</div>
+		</header>
+		<main>
+			<div class="container">
 				<div class="overlay">
 					<div class="overlay-text">
 						<h2>How to play</h2>
 						<p>
-							Fill in the empty spaces on the board with the given pieces.<br></br>
-							Fit all the pieces in the board and win!<br></br>
-							Each level has a different difficulty where the penguin’s have a different
-							position.<br></br>
+							Fill in the empty spaces on the board with the given
+							pieces. Fit all the pieces in the board and win!
+							Each level has a different difficulty where the
+							penguin’s have a different position.
 						</p>
 					</div>
 				</div>
@@ -90,8 +103,9 @@
 					</div>
 
 				</form>
-			</main>
-			<footer></footer>
-		</div>
+			</div>
+		</main>
+		<footer></footer>
+
 	</body>
 </html>
