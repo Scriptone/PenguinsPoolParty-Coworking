@@ -80,14 +80,12 @@ import levels from "../data/levels.js";
 			},
 		});
 
-		const result = await response.text();
+		const result = await response.json();
 		console.log(result);
-		const json = JSON.parse(result);
-		console.log(json);
 
 		sessionStorage.setItem(
 			"levels_completed",
-			json.levels_completed || sessionStorage.getItem("levels_completed")
+			result.levels_completed || sessionStorage.getItem("levels_completed")
 		);
 	};
 

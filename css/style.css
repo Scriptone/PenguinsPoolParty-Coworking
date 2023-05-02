@@ -23,6 +23,13 @@ html {
 	font-family: "Poppins", sans-serif;
 }
 
+body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+
+}
+
 body,
 figure {
 	margin: 0;
@@ -495,6 +502,35 @@ form span.field-error {
 	gap: 0.5em;
 }
 
+/* HIGHSCORES */
+.highscores-table {
+	width: 50%;
+	margin: 0 auto;
+	border-collapse: collapse;
+
+}
+
+.highscores-table th,
+.highscores-table td {
+  padding: 10px;
+  text-align: center;
+  border: 3px solid #f2f2f2;
+}
+
+.highscores-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+
+
+/* FOOTER */
+footer {
+	background-color: var(--primary);
+	color: var(--white);
+	padding: 1rem;
+	text-align: center;
+}
 /* MEDIA QUERIES */
 @media (max-width: 65rem) {
 	nav {

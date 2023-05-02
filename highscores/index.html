@@ -6,13 +6,17 @@
 
 		<!-- Poppins -->
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 			rel="stylesheet" />
 
 		<!-- Font awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
 			integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-			crossorigin="anonymous" referrerpolicy="no-referrer" />
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
 		<link rel="stylesheet" href="../css/style.css" />
 		<link rel="stylesheet" href="../css/levels.css" />
@@ -23,7 +27,10 @@
 		<!-- SCRIPTS -->
 		<script defer src="../JS/html/dataSetter.js"></script>
 		<script defer="defer" src="../JS/html/index.js" type="module"></script>
-		<script defer="defer" src="../JS/classes/FormValidator.js"></script>
+		<script
+			defer="defer"
+			src="../JS/html/highscores.js"
+			type="module"></script>
 	</head>
 	<body>
 		<header>
@@ -33,30 +40,63 @@
 
 				<button class="hamburger-btn" aria-expanded="false">
 					<svg class="hamburger" viewBox="0 0 100 100">
-						<line class="line top" x1="90" x2="10" y1="40" y2="40"></line>
-						<line class="line bottom" x1="10" x2="90" y1="60" y2="60"></line>
+						<line
+							class="line top"
+							x1="90"
+							x2="10"
+							y1="40"
+							y2="40"></line>
+						<line
+							class="line bottom"
+							x1="10"
+							x2="90"
+							y1="60"
+							y2="60"></line>
 					</svg>
 				</button>
 				<nav>
 					<ul class="nav-menu">
 						<li class="nav-item" style="--fade: 0.1s">
-							<a title="Home" class="nav-link fa fa-home" href="../">Home</a>
+							<a
+								title="Home"
+								class="nav-link fa fa-home"
+								href="../"
+								>Home</a
+							>
 						</li>
 						<li id="info" class="nav-item" style="--fade: 0.2s">
-							<a title="help" class="nav-link fa fa-info info">Info</a>
+							<a title="help" class="nav-link fa fa-info info"
+								>Info</a
+							>
 						</li>
 
 						<li class="nav-item" style="--fade: 0.3s">
-							<a title="highscores" class="nav-link fa fa-trophy" href="../highscores">Scores</a>
+							<a
+								title="highscores"
+								class="nav-link fa fa-trophy"
+								href="../highscores"
+								aria-current="page"
+								>Scores</a
+							>
 						</li>
 
 						<li class="nav-item" style="--fade: 0.4s">
-							<a title="levels" class="nav-link fa fa-list" href="../levels/">Level</a>
+							<a
+								title="levels"
+								class="nav-link fa fa-list"
+								href="../levels/"
+								>Level</a
+							>
 						</li>
 
 						<li class="nav-item" style="--fade: 0.5s">
 							<!-- Login -->
-							<a title="login" class="nav-link fa fa-user" href="../login/" aria-current="page">Login</a>
+							<a
+								title="login"
+								class="nav-link fa fa-user"
+								href="../login/"
+								>Login</a
+							>
 						</li>
 					</ul>
 				</nav>
@@ -75,29 +115,19 @@
 						</p>
 					</div>
 				</div>
-				<ul>
-					<li>
-						abc
-					</li>
-					<li>
-						def
-					</li>
-					<li>
-						ghi
-					</li>
-					<li>
-						jkl
-					</li>
-					<li>
-						mno
-					</li>
-					<li>
-						pqr
-					</li>
-				</ul>
+
+				<table class="highscores-table">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>User</th>
+							<th>Levels completed</th>
+						</tr>
+					</thead>
+					<tbody class="highscores-body"></tbody>
+				</table>
 			</div>
 		</main>
 		<footer></footer>
-
 	</body>
 </html>

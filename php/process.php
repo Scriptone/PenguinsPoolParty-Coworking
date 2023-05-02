@@ -1,6 +1,6 @@
 <?php
 
-
+session_start();
 // Show all errors (for educational purposes)
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
@@ -55,6 +55,7 @@ function register()
 		// Return a response to the JavaScript code
 		$_SESSION['user_id'] = $mysqli->insert_id;
 		$_SESSION['username'] = $username;
+		$_SESSION['levels_completed'] = 0;
 		$_SESSION['logged_in'] = time();
 
 		$_SESSION['error'] = false;
@@ -63,6 +64,8 @@ function register()
 
 	echo json_encode($_SESSION);
 }
+
+
 
 function login()
 {
@@ -82,7 +85,6 @@ function login()
 		$_SESSION['user_id'] = $user['id'];
 		$_SESSION['username'] = $user['username'];
 		$_SESSION['levels_completed'] = $user['levels_completed'];
-		$_SESSION['logged_in'] = time();
 		$_SESSION['success'] = true;
 		$_SESSION['error'] = false;
 
@@ -126,6 +128,25 @@ function logout()
 {
 
 }
+
+function highscores() {
+	$mysqli = connect();
+	$sql = "SELECT * FROM users ORDER BY levels_completed DESC";
+	$result = $mysqli->query($sql);
+	$users = $result->fetch_all(MYSQLI_ASSOC);
+	echo json_encode($users);
+}
+
+function get_user() {
+	if (isset($_SESSION['user_id'])) {
+		$mysqli = connect();
+		$sql = "SELECT * FROM users WHERE id = '" . $mysqli->real_escape_string($_SESSION['user_id']) . "'";
+		$result = $mysqli->query($sql);
+		$user = $result->fetch_assoc();
+		return $user;
+	}
+	return false;
+}
 $action = $data['action'];
 
 switch ($action) {
@@ -140,6 +161,12 @@ switch ($action) {
 		break;
 	case 'log_level':
 		log_level($data['level'], $data['time']);
+		break;
+	case 'highscores':
+		highscores();
+		break;
+	case 'get_user':
+		echo json_encode(get_user());
 		break;
 }
 

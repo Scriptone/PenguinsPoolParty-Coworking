@@ -1,5 +1,5 @@
 "use strict";
-(function () {
+(async function () {
 	const welcome_screen = document.querySelector(".welcome-screen");
 	let sessionData = sessionStorage.getItem("data");
 	if (!sessionData) {
@@ -20,12 +20,33 @@
 		})
 	);
 
-	sessionStorage.setItem("levels_completed", sessionStorage.getItem("levels_completed") || 0);
-
 	// Update the welcome screen
 	let username = sessionStorage.getItem("username") || "Guest";
 	let h2 = welcome_screen?.querySelector("h2");
-	if (!h2) return;
+	if (h2) h2.innerHTML = `Welcome, ${username}!`;
 
-	h2.innerHTML = `Welcome, ${username}!`;
+	// Get user info
+	if (username == "Guest") {
+		try {
+			const result = await fetch("../../php/process.php", {
+				method: "POST",
+				body: JSON.stringify({ action: "get_user" }),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			const data = await result.json();
+			console.log(data);
+			if (data.username) {
+				console.log("This was needed, we existed on the server but not in the session")
+				sessionStorage.setItem("username", data.username);
+				sessionStorage.setItem("levels_completed", data.levels_completed);
+				username = data.username;
+			}
+		} catch (error) {
+			console.log("Something failed", error);
+		}
+	}
+
 })();

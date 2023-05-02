@@ -217,13 +217,11 @@
 			},
 		});
 
-		const result = await response.text();
+		const result = await response.json();
 
 		console.log(result);
 		try {
-			const json = JSON.parse(result);
-			console.log(json);
-			const error = json.error;
+			const error = result.error;
 			if (error) {
 				new Error(error);
 			} else {
@@ -231,10 +229,11 @@
 				switch (action) {
 					case "register":
 					case "login":
-						sessionStorage.setItem("username", json.username);
-						sessionStorage.setItem("logged_in", json.logged_in);
-						sessionStorage.setItem("levels_completed", json.levels_completed);
-						window.location.href = "/";
+						sessionStorage.setItem("username", result.username);
+						sessionStorage.setItem("logged_in", result.logged_in);
+						sessionStorage.setItem("levels_completed", result.levels_completed);
+						window.location.href = "../";
+						console.log(result)
 						break;
 					case "logout":
 						sessionStorage.removeItem("username");
