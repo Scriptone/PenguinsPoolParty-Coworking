@@ -107,7 +107,7 @@ nav {
 	color: inherit;
 	cursor: pointer;
 
-	font-size: clamp(0.8rem, 4vw, 1.5rem);
+	font-size: 1.2rem;
 }
 
 .nav-link::before {
@@ -406,7 +406,7 @@ form {
 	background-color: #fdfdfd;
 	max-width: 31.25em; /* max-width of 500px by default em */
 	margin: 0 auto; /* align the section & the form to the center of the page */
-	padding: 5%;
+	padding: var(--margins);
 	border: 1px solid #ddd;
 	border-radius: 5px;
 }
@@ -465,7 +465,6 @@ input {
 	background: transparent;
 	color: inherit;
 	cursor: pointer;
-	
 }
 
 input.invalid {
