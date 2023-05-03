@@ -99,7 +99,6 @@ nav {
 .nav-link {
 	font-family: inherit;
 	display: flex;
-	
 	flex-flow: row wrap;
 	align-items: center;
 	gap: 0.5rem;
@@ -142,6 +141,8 @@ nav {
 
 .hamburger {
 	transition: rotate 0.8s 0.1s;
+	width: 100%;
+	height: 100%;
 }
 
 .hamburger .line {
@@ -452,13 +453,19 @@ input {
 	border: 1px solid #ccc;
 	font-size: 1.2em;
 	padding: 0.75em;
-	width: 100%;
+	width: 98%; /* vraag niet waarom */
 }
 
-input + i {
-	width: moz-fit-content;
-	width: fit-content;
-	margin-left: -2rem;
+.toggle-password {
+	width: 10%;
+	aspect-ratio: 1/1;
+	margin-left: -3rem;
+	padding: 0.25rem;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+	
 }
 
 input.invalid {
@@ -468,7 +475,7 @@ input.invalid {
 
 form .cta {
 	padding: 0.75em;
-	width: 100%;
+	width: 98%;
 }
 label > abbr {
 	color: var(--error-color);

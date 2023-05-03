@@ -16,9 +16,10 @@
 			integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
 			crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
+		<link rel="stylesheet" href="../css/normalize.css" />
 		<link rel="stylesheet" href="../css/style.css" />
 		<link rel="stylesheet" href="../css/levels.css" />
-		<link rel="stylesheet" href="../css/normalize.css" />
+
 
 		<title>Penguins Pool Party</title>
 
@@ -100,7 +101,7 @@
 							<span class="field-label">Password</span>
 						</label>
 						<input type="password" name="password" id="password" required autocomplete="current-password" />
-						<i class="fa fa-eye-slash" class="togglePassword"></i>
+						<button class="toggle-password fa fa-eye-slash" type="button"></button>
 					</div>
 
 					<div>
@@ -109,7 +110,7 @@
 						</label>
 						<input type="password" name="confirm-password" id="confirm-password" required
 							autocomplete="new-password" />
-						<i class="fa fa-eye-slash" class="togglePassword"></i>
+						<button class="toggle-password fa fa-eye-slash" type="button"></button>
 					</div>
 
 					<div>
@@ -119,7 +120,7 @@
 						<input type="email" name="email" id="email" required autocomplete="email" />
 					</div>
 					<div>
-						<button class="cta" type="submit">Registreer</button>
+						<button class="cta" type="submit">Register</button>
 					</div>
 
 				</form>

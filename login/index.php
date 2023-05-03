@@ -16,9 +16,9 @@
 			integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
 			crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
+		<link rel="stylesheet" href="../css/normalize.css" />
 		<link rel="stylesheet" href="../css/style.css" />
 		<link rel="stylesheet" href="../css/levels.css" />
-		<link rel="stylesheet" href="../css/normalize.css" />
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
@@ -99,7 +99,7 @@
 							<span class="field-label">Password</span>
 						</label>
 						<input type="password" name="password" id="password" required autocomplete="current-password" />
-						<i class="fa fa-eye-slash" class="togglePassword"></i>
+						<button class="toggle-password fa fa-eye-slash" type= "button"></button>
 					</div>
 
 					<div>
