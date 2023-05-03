@@ -48,13 +48,6 @@
 	transition: all 0.2s ease;
 }
 
-.level h3 {
-	margin-top: 0;
-	margin-bottom: 0.5rem;
-	font-size: clamp(1.5rem, 2vw, 1.5rem);
-	font-weight: 700;
-	text-transform: uppercase;
-}
 
 .levels .level:is(:hover, :focus-within) {
 	transform: scale(1.025) translate(0, -0.5rem);
@@ -62,13 +55,17 @@
 	cursor: grab;
 }
 .level-header {
-	width: 100%;
+	
 	display: flex;
 	justify-content: space-around;
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 1rem;
+
+	font-size: 1.3rem;
+	text-transform: uppercase;
 }
+
 
 .buttons {
 	display: flex;

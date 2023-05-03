@@ -52,16 +52,28 @@
 				...validatorObject,
 				field,
 			});
+
+			
+			if (validatorObject.hint) {
+				const hint = this.createInlineHint(validatorObject);
+				field.labels[0].appendChild(hint);
+			}
 		}
 
-		createInlineError(error) {
+		createInlineHint(validator) {
+			const span = document.createElement("span");
+			span.classList.add("field-hint");
+			span.innerText = validator.hint;
+			return span;
+		}
+		createInlineError(validator) {
 			const span = document.createElement("span");
 			span.classList.add("field-error");
-			span.innerText = error.message;
-			span.id = `${error.name}-error`;
+			span.innerText = validator.message;
+			span.id = `${validator.name}-error`;
 
 			const warning = document.createElement("i");
-			warning.classList.add("fa", "fa-warning");
+			warning.classList.add("fa", "fa-exclamation-triangle");
 			span.insertBefore(warning, span.firstChild);
 			return span;
 		}
@@ -125,7 +137,7 @@
 				link.classList.add("errorLink");
 
 				const warning = document.createElement("i");
-				warning.classList.add("fa", "fa-warning");
+				warning.classList.add("fa", "fa-exclamation-triangle");
 				link.insertBefore(warning, link.firstChild);
 				list.appendChild(listItem);
 			});
@@ -167,6 +179,7 @@
 		method: (field) =>
 			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value),
 		message: `Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number`,
+		hint: `8 characters, 1 uppercase, 1 lowercase, 1 number`,
 	});
 
 	formValidator.addValidator({
@@ -196,6 +209,7 @@
 					/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 				),
 		message: "E-mail does not match the expected format",
+		hint: `E.g. name@domain.com`,
 	});
 
 	form.addEventListener("submit", async function (event) {

@@ -4,6 +4,8 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="../assets/penguin.svg" type="image/x-icon" />
 		<!-- Poppins -->
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -17,7 +19,6 @@
 		<link rel="stylesheet" href="../css/style.css" />
 		<link rel="stylesheet" href="../css/levels.css" />
 		<link rel="stylesheet" href="../css/normalize.css" />
-		<link rel="stylesheet" href="../css/common.css" />
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
@@ -100,11 +101,11 @@
 						<input type="password" name="password" id="password" required autocomplete="current-password" />
 						<i class="fa fa-eye-slash" class="togglePassword"></i>
 					</div>
-					<a href="../register/">Not a member yet?</a>
+
 					<div>
 						<button class="cta" type="submit">Login</button>
 					</div>
-
+					<a href="../register/">Not a member yet?</a>
 				</form>
 			</div>
 		</main>

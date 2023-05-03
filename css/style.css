@@ -27,7 +27,6 @@ body {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
-
 }
 
 body,
@@ -65,7 +64,7 @@ header .container {
 
 header {
 	background-color: var(--primary);
-	padding-block: 1rem;
+	padding-block: 0.5rem;
 }
 
 header h1 {
@@ -171,7 +170,7 @@ nav {
 main {
 	background-image: url("../assets/background.svg");
 	background-size: cover;
-	padding-block: 5rem;
+	padding-block: var(--margins);
 }
 
 .welcome-screen {
@@ -182,7 +181,7 @@ main {
 }
 
 .welcome-screen h2 {
-	font-size: clamp(3rem, 4vw, 4rem);
+	font-size: clamp(3rem, 4vw, 3.5rem);
 	font-weight: 700;
 
 	color: var(--white);
@@ -200,7 +199,7 @@ main {
 	width: clamp(16rem, 70vw, 25rem);
 	background-color: var(--ice);
 	border: 4px solid var(--primary);
-	margin: 5rem auto;
+	margin: var(--margins) auto;
 }
 
 .menu ul {
@@ -399,7 +398,9 @@ main {
 
 /* REGISTER & LOGIN */
 form {
-	/* you can put this also on the form tag */
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 	background-color: #fdfdfd;
 	max-width: 31.25em; /* max-width of 500px by default em */
 	margin: 0 auto; /* align the section & the form to the center of the page */
@@ -417,6 +418,11 @@ legend {
 	margin-bottom: 0.5em;
 }
 /* Label */
+label {
+	display: inline-block;
+	margin-bottom: .25rem;
+}
+
 label > span.field-label,
 legend > span.field-label {
 	display: block;
@@ -449,7 +455,7 @@ input {
 }
 
 input + i {
-	display: inline-block;
+	width: moz-fit-content;
 	width: fit-content;
 	margin-left: -2rem;
 }
@@ -468,6 +474,11 @@ label > abbr {
 	text-decoration: none;
 }
 
+form > a {
+	color: var(--primary);
+	font-size: clamp(0.8em, 1.2vw, 1.5em);
+	text-align: center;
+}
 .errorSummary {
 	color: var(--error-color);
 	font-size: 1.2em;
@@ -493,6 +504,7 @@ label > abbr {
 	display: none;
 }
 
+
 .errorLink,
 form span.field-error {
 	color: var(--error-color);
@@ -504,25 +516,34 @@ form span.field-error {
 
 /* HIGHSCORES */
 .highscores-table {
-	width: 50%;
+	width: clamp(20rem, 100%, 50rem); /* min, preferred, max */
 	margin: 0 auto;
 	border-collapse: collapse;
-
 }
 
 .highscores-table th,
 .highscores-table td {
-  padding: 10px;
-  text-align: center;
-  border: 3px solid #f2f2f2;
+	padding: 1rem;
+	text-align: center;
+	border: 3px solid var(--white);
 }
 
 .highscores-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+	font-size: clamp(1rem, 2vw, 1.5rem);
+	background-color: #dde;
+	font-weight: 700;
 }
 
+.highscores-table td {
+	font-size: clamp(.9rem, 2vw, 1.4rem);
+	background-color: var(--primary);
+	color: var(--white);
+	font-weight: bold;
+}
 
+.highscores-table tr:nth-child(even) td {
+	background-color: var(--secondary);
+}
 
 /* FOOTER */
 footer {
