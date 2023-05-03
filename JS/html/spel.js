@@ -11,7 +11,7 @@ import levels from "../data/levels.js";
 	);
 
 	let totalLevels = 0;
-	let level = sessionStorage.getItem("level") || 1;
+	let level = Number(sessionStorage.getItem("level")) || 1;
 	let levels_completed = sessionStorage.getItem("levels_completed") || 0;
 	for (let difficulty in levels) {
 		totalLevels += Object.keys(levels[difficulty]).length;
@@ -81,6 +81,7 @@ import levels from "../data/levels.js";
 	};
 
 	const restartGame = () => {
+		sessionStorage.setItem("level", level);
 		//location.reload();
 		spel?.cleanUp();
 
@@ -98,8 +99,9 @@ import levels from "../data/levels.js";
 		spel.start();
 		spel.startTime = Date.now();
 
-		levels_completed = sessionStorage.getItem("levels_completed");
-		if (level === totalLevels || level === Number(levels_completed) + 1) {
+		levels_completed = Number(sessionStorage.getItem("levels_completed"));
+
+		if (level === totalLevels || level === levels_completed + 1) {
 			nextLevel.classList.add("locked");
 		} else {
 			nextLevel.classList.remove("locked");
