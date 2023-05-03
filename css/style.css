@@ -72,7 +72,7 @@ header h1 {
 	justify-self: center;
 	white-space: nowrap;
 	color: var(--white);
-	font-size: clamp(0.8rem, 4vw, 2.5rem);
+	font-size: clamp(0.8rem, 4vw, 2rem);
 	margin: 1rem;
 }
 .logo {
@@ -99,7 +99,8 @@ nav {
 .nav-link {
 	font-family: inherit;
 	display: flex;
-	flex-direction: column;
+	
+	flex-flow: row wrap;
 	align-items: center;
 	gap: 0.5rem;
 	text-transform: lowercase;
@@ -117,7 +118,7 @@ nav {
 .nav-link::after {
 	content: "";
 	display: block;
-	width: 0;
+	width: 30%;
 	height: 3px;
 	background-color: var(--white);
 	transition: width 0.3s ease;
@@ -284,7 +285,7 @@ main {
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta:hover {
+.cta:is(:hover, :focus) {
 	background-color: var(--secondary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 }
@@ -420,7 +421,7 @@ legend {
 /* Label */
 label {
 	display: inline-block;
-	margin-bottom: .25rem;
+	margin-bottom: 0.25rem;
 }
 
 label > span.field-label,
@@ -504,7 +505,6 @@ form > a {
 	display: none;
 }
 
-
 .errorLink,
 form span.field-error {
 	color: var(--error-color);
@@ -535,7 +535,7 @@ form span.field-error {
 }
 
 .highscores-table td {
-	font-size: clamp(.9rem, 2vw, 1.4rem);
+	font-size: clamp(0.9rem, 2vw, 1.4rem);
 	background-color: var(--primary);
 	color: var(--white);
 	font-weight: bold;
@@ -591,7 +591,7 @@ footer {
 
 	.hamburger-btn[aria-expanded="false"] + nav {
 		opacity: 1;
-		height: 25rem;
+		height: 27rem;
 		padding: 2rem;
 		animation: navHide var(--nav-animation-time) ease-in-out forwards
 			var(--nav-animation-time);
@@ -749,7 +749,7 @@ footer {
 
 	100% {
 		opacity: 1;
-		height: 25rem;
+		height: 27rem;
 		padding: 2rem;
 	}
 }
@@ -757,7 +757,7 @@ footer {
 @keyframes navHide {
 	0% {
 		opacity: 1;
-		height: 25rem;
+		height: 27rem;
 		padding: 2rem;
 	}
 
