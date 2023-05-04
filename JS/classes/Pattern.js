@@ -31,6 +31,7 @@ class Pattern {
 		this.top = 0; // Top position of pattern relative to original position
 		this.rotation = 0;
 		this.flipped = false;
+		this.dragged = false;
 
 		this.draw();
 
@@ -133,8 +134,6 @@ class Pattern {
 		this.board.selectPattern(this, this.dragging);
 	}
 	startDrag(iceberg, event) {
-		event.preventDefault();
-
 		//Check if any pattenrs are already being dragged
 		for (let pattern of this.board.patterns) {
 			if (pattern.dragging) {
@@ -151,14 +150,17 @@ class Pattern {
 	}
 
 	stopDrag(event) {
-		event.preventDefault();
 		//Dropped on the board
 		if (
 			!(event.button == 0 || event.touches?.length != 1) ||
 			!this.dragging
 		)
 			return;
+
 		let iceberg = this.dragging;
+		iceberg.element.classList.remove("dragging");
+		this.dragging = null;
+		if (!this.dragged) return; //Als we enkel geklikt hebben, dan moet de code niet runnen.
 
 		let board = this.board;
 		let result = board.drawPattern(this, iceberg);
@@ -169,14 +171,14 @@ class Pattern {
 		} else {
 			this.reset();
 		}
-		this.dragging = false;
-		iceberg.element.classList.remove("dragging");
+
+		this.dragged = false;
 	}
 
 	drag(event) {
-		event.preventDefault();
 		if (!this.dragging) return;
 
+		this.dragged = true;
 		this.mouseX = event.clientX || event.touches[0].clientX;
 		this.mouseY = event.clientY || event.touches[0].clientY;
 		this.offsetX = this.mouseX - this.startX;
@@ -252,7 +254,7 @@ class Pattern {
 		this.flipped = !this.flipped;
 
 		for (let iceberg of this.icebergs) {
-			let point = iceberg.point;
+			let point = iceberg.initialPoint;
 			let x = point[0];
 			let y = point[1];
 
@@ -261,11 +263,11 @@ class Pattern {
 
 			point = [newX, newY];
 
-			iceberg.point = point;
+			iceberg.initialPoint = point;
 			iceberg.cache = [];
 		}
 
-		this.draw();
+		this.rotate(0);
 	}
 
 	reset() {

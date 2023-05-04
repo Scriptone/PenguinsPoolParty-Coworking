@@ -56,12 +56,13 @@
 }
 .level-header {
 	display: flex;
+	width: 100%;
 	justify-content: space-around;
 	font-weight: 700;
 	margin-top: 0;
 	margin-bottom: 1rem;
 
-	font-size: 1.3rem;
+	font-size: 1rem;
 	text-transform: uppercase;
 }
 
