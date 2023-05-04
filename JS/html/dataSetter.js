@@ -48,4 +48,5 @@
 		username == "Guest" ? "flex" : "none";
 	logoutLink.parentElement.style.display =
 		username == "Guest" ? "none" : "flex";
+
 })();

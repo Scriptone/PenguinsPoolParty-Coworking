@@ -7,24 +7,22 @@ import Board from "../classes/Board.js";
 	const previousButton = document.querySelector(".btn-prev");
 	const nextButton = document.querySelector(".btn-next");
 
-	const onLevelClicked = (difficulty, level, event) => {
-		const sessionData = {
-			difficulty,
-			level,
-		};
-		sessionStorage.setItem("data", JSON.stringify(sessionData));
+	const onLevelClicked = (level, event) => {
+		sessionStorage.setItem("level", level);
 		window.location.href = `../spel`;
 	};
 
 	const lastUnlockedLevel =
 		Number(sessionStorage.getItem("levels_completed") || 0) + 1;
+
 	for (let difficulty of Object.keys(levels)) {
 		let difficultyContainer = document.createElement("section");
 		difficultyContainer.classList.add("difficulty");
 		difficultyContainer.classList.add(difficulty.toLowerCase());
-		if (difficulty === "Starters") {
+
+		if (difficulty === "Starters")
 			difficultyContainer.classList.add("active");
-		}
+
 		levelParent.appendChild(difficultyContainer);
 
 		let heading = document.createElement("h2");
@@ -37,6 +35,7 @@ import Board from "../classes/Board.js";
 
 		for (let level of Object.keys(levels[difficulty])) {
 			level = Number(level);
+
 			let levelContainer = document.createElement("button");
 			levelContainer.classList.add(
 				"level",
@@ -46,8 +45,8 @@ import Board from "../classes/Board.js";
 			let levelHeader = document.createElement("h3");
 			levelHeader.innerText = `Level: ${level}`;
 			levelHeader.classList.add("level-header");
-			levelContainer.appendChild(levelHeader);
 
+			levelContainer.appendChild(levelHeader);
 			levelsContainer.appendChild(levelContainer);
 
 			let levelObject = levels[difficulty][level];
@@ -63,7 +62,7 @@ import Board from "../classes/Board.js";
 
 			levelContainer.addEventListener(
 				"click",
-				onLevelClicked.bind(this, difficulty, level)
+				onLevelClicked.bind(this, level)
 			);
 		}
 	}

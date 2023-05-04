@@ -81,6 +81,11 @@ import levels from "../data/levels.js";
 	};
 
 	const restartGame = () => {
+		levels_completed =
+			Number(sessionStorage.getItem("levels_completed")) || 0;
+
+		//Just to be sure
+		level = Math.min(Math.max(1, level), levels_completed + 1, totalLevels);
 		sessionStorage.setItem("level", level);
 		//location.reload();
 		spel?.cleanUp();
@@ -98,8 +103,6 @@ import levels from "../data/levels.js";
 		spel = new Game(difficulty, level, levelData);
 		spel.start();
 		spel.startTime = Date.now();
-
-		levels_completed = Number(sessionStorage.getItem("levels_completed"));
 
 		if (level === totalLevels || level === levels_completed + 1) {
 			nextLevel.classList.add("locked");

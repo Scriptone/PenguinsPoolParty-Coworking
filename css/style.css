@@ -286,7 +286,7 @@ main {
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta:is(:hover, :focus-within) {
+.cta:not(.locked):is(:hover, :focus-within) {
 	background-color: var(--secondary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 }
