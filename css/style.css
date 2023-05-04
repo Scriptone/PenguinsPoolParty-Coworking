@@ -393,6 +393,17 @@ main {
 	cursor: grabbing;
 }
 
+/* debug */
+.point {
+	position: absolute;
+	
+	transform: translate(-50%, -50%);
+	width: 0.5rem;
+	height: 0.5rem;
+	background-color: red;
+	border-radius: 50%;
+}
+
 .locked {
 	filter: grayscale(100%);
 	pointer-events: none;

@@ -110,8 +110,8 @@ class Pattern {
 
 		this.width = mostRight - mostLeft;
 		this.height = mostBottom - mostTop;
-		this.element.style.width = this.width + this.padding * 16 + "px";
-		this.element.style.height = this.height + this.padding * 16 + "px";
+		this.element.style.width = `${this.width + this.padding * 16}px`;
+		this.element.style.height = `${this.height + this.padding * 16}px`;
 		this.left = mostLeft;
 		this.top = mostTop;
 
@@ -142,8 +142,10 @@ class Pattern {
 		}
 		if (!(event.button == 0 || event.touches)) return; //Only left click
 		this.dragging = iceberg;
-		this.startX = (event.clientX || event.touches[0].clientX) + this.left;
-		this.startY = (event.clientY || event.touches[0].clientY) + this.top;
+		this.mouseX = event.clientX || event.touches[0].clientX;
+		this.mouseY = event.clientY || event.touches[0].clientY;
+		this.startX = this.mouseX + this.left;
+		this.startY = this.mouseY + this.top;
 		this.offsetX = 0;
 		this.offsetY = 0;
 		iceberg.element.classList.add("dragging");
@@ -176,6 +178,7 @@ class Pattern {
 	}
 
 	drag(event) {
+		// console.log("drag");
 		if (!this.dragging) return;
 
 		this.dragged = true;
@@ -211,8 +214,9 @@ class Pattern {
 
 		this.rotation = (this.rotation + delta) % 6;
 		// if between 0 and 3 keep it there, between 3 - 6 it should become -3 - -1
-		if (this.rotation > 3) this.rotation -= 6;
-		if (this.rotation < -3) this.rotation += 6;
+
+		this.rotation = this.rotation >= 3 ? this.rotation - 6 : this.rotation;
+		this.rotation = this.rotation <= -3 ? this.rotation + 6 : this.rotation;
 
 		this.width = 0;
 		this.height = 0;
@@ -231,11 +235,18 @@ class Pattern {
 				newX = x * Math.cos(angle) - y * Math.sin(angle);
 				newY = x * Math.sin(angle) + y * Math.cos(angle);
 
+				// let newSpan = document.createElement("span");
+				// newSpan.classList.add("point");
+				// newSpan.style.left = newX * 16 + "px";
+				// newSpan.style.top = newY * 16 + "px";
+				// this.element.appendChild(newSpan);
 				newX = Math.round(newX);
 				newY = Math.round(newY);
 
 				//Hacky way om newY te fixen voor sommige cases
+				let oldY = newY;
 				newY = Math.abs(newX % 2) == 1 && newY < 0 ? newY + 1 : newY;
+				// oldY != newY && console.log("Fixed Y", oldY, newY);
 			}
 
 			point = [newX, newY];
