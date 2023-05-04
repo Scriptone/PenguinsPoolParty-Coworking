@@ -270,7 +270,7 @@ main {
 	justify-content: center;
 	gap: 2rem;
 	flex-wrap: wrap;
-	width: clamp(16rem, 70vw, 25rem);
+	width: clamp(16rem, 70vw, 70rem);
 	margin-inline: auto;
 }
 
