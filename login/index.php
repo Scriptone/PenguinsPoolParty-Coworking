@@ -24,7 +24,7 @@
 		<!-- SCRIPTS -->
 		<script defer src="../JS/html/dataSetter.js"></script>
 		<script defer="defer" src="../JS/html/index.js" type="module"></script>
-		<script defer="defer" src="../JS/classes/FormValidator.js"></script>
+		<script defer="defer" src="../JS/html/login.js" type="module"></script>
 	</head>
 	<body>
 		<header>
