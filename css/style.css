@@ -422,7 +422,11 @@ form {
 	border-radius: 5px;
 }
 
-form > div {
+form h2 {
+	margin-top: 0;
+	font-size: clamp(1.5rem, 2vw, 2rem);
+}
+form > div:not(:last-child) {
 	margin-bottom: 1.5rem;
 }
 

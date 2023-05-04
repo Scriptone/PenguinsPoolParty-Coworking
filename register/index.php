@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<form method="post" action="" class="form" id="register" novalidate>
-					<h1>Register to keep track of your progress!</h1>
+					<h2>Register to keep track of your progress!</h2>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>
 						<ul></ul>
@@ -126,7 +126,7 @@
 				</form>
 			</div>
 		</main>
-		<footer></footer>
+		
 
 	</body>
 </html>
