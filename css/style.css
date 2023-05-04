@@ -88,7 +88,7 @@ nav {
 }
 .nav-menu {
 	display: flex;
-	align-items: center;
+	align-items: left;
 	gap: 2rem;
 }
 .nav-item {
@@ -106,7 +106,8 @@ nav {
 	text-decoration: none;
 	color: inherit;
 	cursor: pointer;
-
+	/*flex-wrap: wrap;*/
+	/*width: 80%;*/
 	font-size: 1.2rem;
 }
 
@@ -121,6 +122,7 @@ nav {
 	height: 3px;
 	background-color: var(--white);
 	transition: width 0.3s ease;
+	/*flex: 0 0 33.3333%;*/
 }
 
 .nav-link:is(:hover, :focus-within)::after,
@@ -584,12 +586,14 @@ footer {
 	}
 
 	.nav-menu {
+		align-items: left;
 		flex-direction: column;
 		gap: 3rem;
 	}
 	.nav-item .nav-link {
 		flex-direction: row;
 	}
+	
 	.hamburger-btn {
 		display: flex;
 	}

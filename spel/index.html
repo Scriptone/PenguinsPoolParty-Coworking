@@ -34,6 +34,7 @@
 		<script defer src="../JS/html/dataSetter.js"></script>
 		<script defer="defer" src="../JS/html/index.js"></script>
 		<script defer="defer" src="../JS/html/spel.js" type="module"></script>
+		<script defer="defer" src="../JS/html/audio.js" type="module"></script>
 	</head>
 	<body>
 		<header>
@@ -115,6 +116,10 @@
 			</div>
 		</header>
 		<main>
+			<!--<audio type="audio/mp3" src="/assets/music/X2Download.app - kirby music to make u feel better (128 kbps).mp3" loop autoplay ></audio>-->
+			<audio id="audio1" loop autoplay hidden>
+				<source src="/assets/music/X2Download.app - kirby music to make u feel better (128 kbps).mp3"  type="audio/mp3">
+			</audio>
 			<div class="container">
 				<div class="overlay">
 					<div class="overlay-text">
