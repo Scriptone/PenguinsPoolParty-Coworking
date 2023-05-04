@@ -255,6 +255,7 @@ main {
 	align-items: center;
 	margin-block: var(--margins);
 	flex-wrap: wrap;
+	user-select: none; /*! Zeer belangrijk! */
 }
 .board {
 	position: relative;
