@@ -73,6 +73,11 @@ import Board from "../classes/Board.js";
 		if (previousDifficulty === null) return;
 		currentDifficulty.classList.remove("active");
 		previousDifficulty.classList.add("active");
+
+		if (!previousDifficulty.previousElementSibling)
+			previousButton.classList.add("locked");
+
+		nextButton.classList.remove("locked");
 	};
 
 	const onNextClicked = () => {
@@ -81,8 +86,15 @@ import Board from "../classes/Board.js";
 		if (nextDifficulty === null) return;
 		currentDifficulty.classList.remove("active");
 		nextDifficulty.classList.add("active");
+
+		if (!nextDifficulty.nextElementSibling)
+			nextButton.classList.add("locked");
+
+		previousButton.classList.remove("locked");
 	};
 
 	previousButton.addEventListener("click", onPreviousClicked);
 	nextButton.addEventListener("click", onNextClicked);
+
+	previousButton.classList.add("locked");
 })();

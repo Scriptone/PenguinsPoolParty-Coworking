@@ -6,7 +6,7 @@
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="../assets/penguin.svg" type="image/x-icon" />
-		<script src="../JS/html/logout.js"></script>
+		<script src="../JS/html/logout.js" type="module"></script>
 	</head>
 	<body>
 		<h1>Logout</h1>
