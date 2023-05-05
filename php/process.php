@@ -210,7 +210,7 @@ function isValidForm(...$fields)
 	}
 
 	// Check if the password is valid
-	if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $password)) {
+	if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/', $password)) {
 		$_SESSION['error'] = 'Invalid password.';
 		return false;
 	}

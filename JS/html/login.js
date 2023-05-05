@@ -29,13 +29,19 @@ import FormValidator from "../classes/FormValidator.js";
 		message: "Password is a required field and was not filled in",
 	});
 
-	formValidator.addValidator({
-		name: "password",
-		method: (field) =>
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(field.value),
-		message: `Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter and one number`,
-		hint: `8 characters, 1 uppercase, 1 lowercase, 1 number`,
-	});
+	if (form.id === "register")
+		//Enkel bij register.
+		formValidator.addValidator({
+			name: "password",
+			//method field, at least 7 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character
+			method: (field) =>
+				/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/.test(
+					field.value
+				),
+			message:
+				"Password must be at least 7 characters long and contain at least 1 uppercase, 1 lowercase, 1 number and 1 special character",
+			hint: `E.g. Password123!`,
+		});
 
 	formValidator.addValidator({
 		name: "confirm-password",
@@ -92,11 +98,7 @@ import FormValidator from "../classes/FormValidator.js";
 		try {
 			const error = result.error;
 			if (error) {
-				formValidator.errors.push({
-					name: "Server error",
-					message: error,
-				});
-				formValidator.showSummary();
+				throw new Error(error);
 			} else {
 				console.log(action);
 				switch (action) {
@@ -114,6 +116,8 @@ import FormValidator from "../classes/FormValidator.js";
 						window.location.href = "../";
 						console.log(result);
 				}
+				//Reset form
+				this.reset();
 			}
 		} catch (error) {
 			formValidator.errors.push({
@@ -122,9 +126,6 @@ import FormValidator from "../classes/FormValidator.js";
 			});
 			formValidator.showSummary();
 		}
-
-		//Reset form
-		this.reset();
 	});
 
 	//Moest er een passwoord zijn

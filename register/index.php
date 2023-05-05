@@ -82,7 +82,7 @@
 						</p>
 					</div>
 				</div>
-				<form method="post" action="" class="form" id="register" novalidate>
+				<form method="post" action="" class="form hidden" id="register" novalidate>
 					<h2>Register to keep track of your progress!</h2>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>

@@ -80,7 +80,7 @@
 						</p>
 					</div>
 				</div>
-				<form action="" id="login" class="form" novalidate>
+				<form action="" id="login" class="form hidden" novalidate>
 					<h2>Login</h2>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">
 						<h2 id="errorSummary-heading">Er is een probleem</h2>
