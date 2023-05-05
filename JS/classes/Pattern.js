@@ -133,12 +133,12 @@ class Pattern {
 		document.addEventListener("touchmove", this.drag, { passive: false });
 
 		console.log(this.lastTouch);
-		if (this.lastTouch && Date.now() - this.lastTouch < 300) {
+		if (this.lastTouch && performance.now() - this.lastTouch < 300) {
 			this.flip();
 			this.lastTouch = null;
 			return;
 		}
-		this.lastTouch = Date.now();
+		this.lastTouch = performance.now();
 	}
 
 	stopDrag(event) {
