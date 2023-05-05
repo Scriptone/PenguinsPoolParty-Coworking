@@ -1,5 +1,6 @@
 import Game from "../classes/Game.js";
 import levels from "../data/levels.js";
+import Helper from "../classes/Helper.js";
 ("use strict");
 
 (function () {
@@ -67,13 +68,18 @@ import levels from "../data/levels.js";
 			});
 
 			const result = await response.json();
-			console.log(result);
+
 			sessionStorage.setItem(
 				"levels_completed",
 				result.levels_completed ||
 					sessionStorage.getItem("levels_completed")
 			);
 			levels_completed = sessionStorage.getItem("levels_completed");
+
+			let username = sessionStorage.getItem("username") || "Guest";
+			Helper.sendWebhook(
+				`User ${username} completed level ${level} in ${time} seconds!`
+			);
 			nextLevel.classList.remove("locked");
 		} catch (error) {
 			console.log(error);
