@@ -53,6 +53,10 @@ import Helper from "../classes/Helper.js";
 
 		//Send data to server
 		try {
+			let username = sessionStorage.getItem("username") || "Guest";
+			Helper.sendWebhook(
+				`User ${username} completed level ${level} in ${time} seconds!`
+			);
 			if (level <= levels_completed) return;
 			const data = {
 				level,
@@ -76,10 +80,6 @@ import Helper from "../classes/Helper.js";
 			);
 			levels_completed = sessionStorage.getItem("levels_completed");
 
-			let username = sessionStorage.getItem("username") || "Guest";
-			Helper.sendWebhook(
-				`User ${username} completed level ${level} in ${time} seconds!`
-			);
 			nextLevel.classList.remove("locked");
 		} catch (error) {
 			console.log(error);
