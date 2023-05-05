@@ -3,6 +3,7 @@
 	--junior: rgb(245 179 61 / 50%);
 	--expert: rgb(223 38 48 / 50%);
 	--master: rgb(131 65 142 / 50%);
+	--community: rgb(0 0 0 / 50%);
 }
 
 .levels {
@@ -19,7 +20,7 @@
 	display: block;
 }
 
-.difficulty h2 {
+.difficulty h4 {
 	text-transform: uppercase;
 	color: var(--white);
 	margin-top: 0;
@@ -83,6 +84,9 @@
 	background-color: var(--master);
 }
 
+.levels .community {
+	background-color: var(--community);
+}
 .difficulty-span {
 	text-transform: uppercase;
 	text-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.2);

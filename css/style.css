@@ -21,6 +21,7 @@ html {
 	background-color: var(--bg);
 	color: var(--primary);
 	font-family: "Poppins", sans-serif;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -266,6 +267,7 @@ dialog .cta:not(.locked):is(:hover, :focus-within) {
 	flex-wrap: wrap;
 	width: clamp(16rem, 70vw, 70rem);
 	margin-inline: auto;
+	margin-block: var(--margins);
 }
 
 .cta {

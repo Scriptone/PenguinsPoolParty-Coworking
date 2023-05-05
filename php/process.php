@@ -64,7 +64,7 @@ function register()
 		$_SESSION['error'] = false;
 		$_SESSION['success'] = true;
 
-		
+
 	}
 
 	echo json_encode($_SESSION);
@@ -157,6 +157,49 @@ function get_user()
 	}
 	return false;
 }
+
+function get_community_levels()
+{
+	$mysqli = connect();
+
+	try {
+		$sql = "CREATE TABLE IF NOT EXISTS community_levels (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		user_id INT(6) NOT NULL,
+		penguins VARCHAR(255) NOT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+		)";
+		$mysqli->query($sql);
+
+
+		$sql = "SELECT * FROM community_levels ORDER BY id ASC";
+		$result = $mysqli->query($sql);
+		$levels = $result->fetch_all(MYSQLI_ASSOC);
+		echo json_encode($levels);
+	} catch (Exception $e) {
+		echo json_encode($e->getMessage());
+	}
+}
+
+function add_community_level($level)
+{
+	$penguins = $level['penguins'];
+	//stringify penguins
+	$penguins = json_encode($penguins);
+	$mysqli = connect();
+	$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
+
+	if ($userId) {
+		$sql = "INSERT INTO community_levels (user_id, penguins) VALUES ('" . $mysqli->real_escape_string($userId) . "', '" . $mysqli->real_escape_string($penguins) . "')";
+		$result = $mysqli->query($sql);
+		$_SESSION['success'] = true;
+		$_SESSION['error'] = false;
+	} else {
+		$_SESSION['error'] = 'You need to be logged in to add a level.';
+		$_SESSION['success'] = false;
+	}
+	echo json_encode($_SESSION);
+}
 $action = $data['action'];
 
 switch ($action) {
@@ -178,6 +221,13 @@ switch ($action) {
 	case 'get_user':
 		echo json_encode(get_user());
 		break;
+	case 'get_community_levels':
+		get_community_levels();
+		break;
+	case 'add_community_level':
+		add_community_level($data['level']);
+		break;
+
 }
 
 
