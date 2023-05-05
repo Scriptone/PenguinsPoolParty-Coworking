@@ -3,9 +3,9 @@ import Board from "../classes/Board.js";
 
 ("use strict");
 (function () {
-	const levelParent = document.querySelector(".levels");
-	const previousButton = document.querySelector(".btn-prev");
-	const nextButton = document.querySelector(".btn-next");
+	const levelParent = document.querySelector(".our .levels");
+	const previousButton = document.querySelectorAll(".btn-prev");
+	const nextButton = document.querySelectorAll(".btn-next");
 
 	const onLevelClicked = (level, event) => {
 		sessionStorage.setItem("level", level);
@@ -93,8 +93,12 @@ import Board from "../classes/Board.js";
 		previousButton.classList.remove("locked");
 	};
 
-	previousButton.addEventListener("click", onPreviousClicked);
-	nextButton.addEventListener("click", onNextClicked);
+	nextButton.forEach((button) => {
+		button.addEventListener("click", onNextClicked);
+	});
 
-	previousButton.classList.add("locked");
+	previousButton.forEach((button) => {
+		button.addEventListener("click", onPreviousClicked);
+		previousButton.classList.add("locked");
+	});
 })();
