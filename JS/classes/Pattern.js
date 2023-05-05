@@ -114,12 +114,6 @@ class Pattern {
 		if (!(event.button == 0 || event.touches)) return; //Only left click or touch
 
 		//Double tap?
-		if (this.lastTouch && Date.now() - this.lastTouch < 300) {
-			this.flip();
-			this.lastTouch = null;
-			return;
-		}
-		this.lastTouch = Date.now();
 
 		this.dragging = iceberg;
 		this.mouseX = event.clientX || event.touches[0].clientX;
@@ -137,6 +131,14 @@ class Pattern {
 		//Touch
 		document.addEventListener("touchend", this.stopDrag);
 		document.addEventListener("touchmove", this.drag, { passive: false });
+
+		console.log(this.lastTouch);
+		if (this.lastTouch && Date.now() - this.lastTouch < 300) {
+			this.flip();
+			this.lastTouch = null;
+			return;
+		}
+		this.lastTouch = Date.now();
 	}
 
 	stopDrag(event) {
@@ -259,7 +261,6 @@ class Pattern {
 
 	flip() {
 		if (!this.dragging) return;
-
 		this.flipped = !this.flipped;
 
 		for (let iceberg of this.icebergs) {
