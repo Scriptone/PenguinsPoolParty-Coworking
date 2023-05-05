@@ -114,26 +114,43 @@
 		</header>
 		<main>
 			<div class="container">
-				<div class="overlay">
-					<div class="overlay-text">
-						<h2>How to play</h2>
-						<p>
-							Fill in the empty spaces on the board with the given
-							pieces. Fit all the pieces in the board and win!
-							Each level has a different difficulty where the
-							penguin’s have a different position.
-						</p>
+				<dialog class="info-dialog">
+					<h2>How to play</h2>
+					<p>
+						Fill in the empty spaces on the board with the given
+						pieces. Fit all the pieces in the board and win! Each
+						level has a different difficulty where the penguin's
+						have a different position.
+					</p>
+					<button class="close-btn cta">Got it!</button>
+				</dialog>
+
+				<h2 class="title">Choose a level</h2>
+				<section class="our">
+					<h3>Onze levels</h3>
+					<div class="levels"></div>
+					<div class="buttons">
+						<button class="cta btn-prev" title="previous level">
+							<i class="fa fa-arrow-left"></i>
+						</button>
+						<button class="cta btn-next" title="next level">
+							<i class="fa fa-arrow-right"></i>
+						</button>
 					</div>
-				</div>
-				<div class="levels"></div>
-				<div class="buttons">
-					<button class="cta btn-prev" title="previous level">
-						<i class="fa fa-arrow-left"></i>
-					</button>
-					<button class="cta btn-next" title="next level">
-						<i class="fa fa-arrow-right"></i>
-					</button>
-				</div>
+				</section>
+				<section class="community">
+					<h3>Community levels</h3>
+					<div class="levels"></div>
+
+					<div class="buttons">
+						<button class="cta btn-prev" title="previous level">
+							<i class="fa fa-arrow-left"></i>
+						</button>
+						<button class="cta btn-next" title="next level">
+							<i class="fa fa-arrow-right"></i>
+						</button>
+					</div>
+				</section>
 			</div>
 		</main>
 		<footer></footer>

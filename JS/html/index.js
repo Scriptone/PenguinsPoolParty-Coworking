@@ -1,12 +1,8 @@
 ("use strict");
 (function () {
 	const button = document.querySelector(".info");
-	const overlay = document.querySelector(".overlay");
+	const infoDialog = document.querySelector(".info-dialog");
 	const hamburger = document.querySelector(".hamburger-btn");
-
-	const toggleOverlay = () => {
-		overlay.classList.toggle("active");
-	};
 
 	const toggleHamburger = () => {
 		hamburger.setAttribute(
@@ -19,6 +15,8 @@
 
 	hamburger.addEventListener("click", toggleHamburger);
 
-	button.addEventListener("click", toggleOverlay);
-	overlay.addEventListener("click", toggleOverlay);
+	button.addEventListener("click", () => infoDialog.showModal());
+	infoDialog
+		.querySelector(".close-btn")
+		.addEventListener("click", () => infoDialog.close());
 })();

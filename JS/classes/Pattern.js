@@ -44,7 +44,7 @@ class Pattern {
 		this.rotation = 0;
 		this.flipped = false;
 		this.dragged = false;
-
+		this.lastTouch = null;
 		this.draw();
 
 		document.addEventListener("keydown", (event) => {
@@ -111,7 +111,16 @@ class Pattern {
 				return;
 			}
 		}
-		if (!(event.button == 0 || event.touches)) return; //Only left click
+		if (!(event.button == 0 || event.touches)) return; //Only left click or touch
+
+		//Double tap?
+		if (this.lastTouch && Date.now() - this.lastTouch < 300) {
+			this.flip();
+			this.lastTouch = null;
+			return;
+		}
+		this.lastTouch = Date.now();
+
 		this.dragging = iceberg;
 		this.mouseX = event.clientX || event.touches[0].clientX;
 		this.mouseY = event.clientY || event.touches[0].clientY;

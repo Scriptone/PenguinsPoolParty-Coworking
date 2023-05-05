@@ -25,12 +25,11 @@
 		<!-- STYLE SHEETS -->
 		<link rel="stylesheet" href="css/normalize.css" />
 		<link rel="stylesheet" href="css/style.css" />
-		
 
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
-		<script defer src="./JS/html/dataSetter.js"></script>
+		<script src="./JS/html/dataSetter.js" type="module"></script>
 		<script src="./JS/html/index.js" type="module"></script>
 	</head>
 	<body>
@@ -117,17 +116,16 @@
 				<section class="welcome-screen">
 					<h2>Welcome, Guest</h2>
 				</section>
-				<div class="overlay">
-					<div class="overlay-text">
-						<h2>How to play</h2>
-						<p>
-							Fill in the empty spaces on the board with the given
-							pieces. Fit all the pieces in the board and win!
-							Each level has a different difficulty where the
-							penguin’s have a different position.
-						</p>
-					</div>
-				</div>
+				<dialog class="info-dialog">
+					<h2>How to play</h2>
+					<p>
+						Fill in the empty spaces on the board with the given
+						pieces. Fit all the pieces in the board and win! Each
+						level has a different difficulty where the penguin’s
+						have a different position.
+					</p>
+					<button class="close-btn cta">Got it!</button>
+				</dialog>
 				<section class="menu">
 					<h2>Penguins Pool Party</h2>
 					<ul class="menu-options">

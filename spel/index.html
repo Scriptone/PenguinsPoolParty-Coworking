@@ -31,7 +31,7 @@
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
-		<script defer src="../JS/html/dataSetter.js"></script>
+		<script src="../JS/html/dataSetter.js" type="module"></script>
 		<script src="../JS/html/index.js" type="module"></script>
 		<script src="../JS/html/spel.js" type="module"></script>
 		<script src="../JS/html/audio.js" type="module"></script>
@@ -123,17 +123,16 @@
 					type="audio/mp3" />
 			</audio>
 			<div class="container">
-				<div class="overlay">
-					<div class="overlay-text">
-						<h2>How to play</h2>
-						<p>
-							Fill in the empty spaces on the board with the given
-							pieces. Fit all the pieces in the board and win!
-							Each level has a different difficulty where the
-							penguin’s have a different position.
-						</p>
-					</div>
-				</div>
+				<dialog class="info-dialog">
+					<h2>How to play</h2>
+					<p>
+						Fill in the empty spaces on the board with the given
+						pieces. Fit all the pieces in the board and win! Each
+						level has a different difficulty where the penguin’s
+						have a different position.
+					</p>
+					<button class="close-btn cta">Got it!</button>
+				</dialog>
 				<div class="game">
 					<div class="patterns"></div>
 				</div>

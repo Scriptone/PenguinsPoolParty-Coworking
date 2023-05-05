@@ -71,17 +71,16 @@
 		</header>
 		<main>
 			<div class="container">
-				<div class="overlay">
-					<div class="overlay-text">
-						<h2>How to play</h2>
-						<p>
-							Fill in the empty spaces on the board with the given
-							pieces. Fit all the pieces in the board and win!
-							Each level has a different difficulty where the
-							penguin’s have a different position.
-						</p>
-					</div>
-				</div>
+				<dialog class="info-dialog">
+					<h2>How to play</h2>
+					<p>
+						Fill in the empty spaces on the board with the given
+						pieces. Fit all the pieces in the board and win! Each
+						level has a different difficulty where the penguin’s
+						have a different position.
+					</p>
+					<button class="close-btn cta">Got it!</button>
+				</dialog>
 				<form method="post" action="" class="form hidden" id="register" novalidate>
 					<h2>Register to keep track of your progress!</h2>
 					<div class="errorSummary" role="group" aria-labelledby="errorSummary-heading" tabindex="-1">

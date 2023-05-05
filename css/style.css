@@ -110,13 +110,13 @@ nav {
 
 .nav-link::before {
 	font-family: "Font Awesome 5 Free";
-	margin-right: .5rem;
+	margin-right: 0.5rem;
 }
 
 .nav-link::after {
 	content: "";
 	display: block;
-	margin-top: .25rem;
+	margin-top: 0.25rem;
 	width: 30%;
 	height: 3px;
 	background-color: var(--white);
@@ -218,32 +218,25 @@ main {
 	width: 100%;
 }
 
-.overlay {
-	position: absolute;
-	display: none;
-	width: 100%;
-	height: 100%;
-	inset: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 1000;
-	cursor: pointer;
-}
-
-.overlay.active {
-	display: block;
-}
-.overlay-text {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
+dialog {
 	padding: var(--margins);
 	max-width: 20rem;
 
 	background-color: var(--primary);
 	border-radius: 10px;
 	color: var(--white);
+}
+
+dialog .cta {
+	background-color: var(--white);
+	color: var(--primary);
+	transition: translate 0.2s ease;
+}
+
+dialog .cta:not(.locked):is(:hover, :focus-within) {
+	translate: 0 -10%;
+	background-color: var(--white);
+	color: var(--primary);
 }
 
 /* Game */
@@ -401,7 +394,7 @@ main {
 /* debug */
 .point {
 	position: absolute;
-	
+
 	transform: translate(-50%, -50%);
 	width: 0.5rem;
 	height: 0.5rem;
@@ -599,7 +592,7 @@ footer {
 	.nav-link::after {
 		margin-top: 0.2rem;
 	}
-	
+
 	.hamburger-btn {
 		display: flex;
 	}
