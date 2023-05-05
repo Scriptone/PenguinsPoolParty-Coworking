@@ -25,7 +25,7 @@ import levels from "../data/levels.js";
 
 		//Above maxwidth, scale = 1, at 320px scale = .35
 		const scale = Math.min(1, Math.max(0.35, width / maxwidth));
-		game.style.transform = `scale(${scale}) `;
+		//game.style.transform = `scale(${scale}) `;
 
 		//TODO But also move it up according to the scale
 	};

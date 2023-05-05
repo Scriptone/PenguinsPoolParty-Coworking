@@ -11,7 +11,11 @@ class Pattern {
 		this.width = 0;
 		this.height = 0;
 		this.icebergs = [];
-		this.events = {};
+
+		//Dit idee komt van chatgpt om het ervoor te zorgen dat ik die events ook kan verwijderen.
+		this.stopDrag = this.stopDrag.bind(this);
+		this.drag = this.drag.bind(this);
+
 		for (let point of points) {
 			let iceberg = new Iceberg(
 				this,
@@ -20,6 +24,14 @@ class Pattern {
 				this.board.tileHeight
 			);
 			this.icebergs.push(iceberg);
+			iceberg.element.addEventListener(
+				"mousedown",
+				this.startDrag.bind(this, iceberg)
+			);
+			iceberg.element.addEventListener(
+				"touchstart",
+				this.startDrag.bind(this, iceberg)
+			);
 		}
 
 		this.dragging = false;
@@ -35,27 +47,7 @@ class Pattern {
 
 		this.draw();
 
-		//Mouse
-		this.events.mouseup = document.addEventListener(
-			"mouseup",
-			this.stopDrag.bind(this)
-		);
-		this.events.mousemove = document.addEventListener(
-			"mousemove",
-			this.drag.bind(this)
-		);
-
-		//Touch
-		this.events.touchend = document.addEventListener(
-			"touchend",
-			this.stopDrag.bind(this)
-		);
-		this.events.touchmove = document.addEventListener(
-			"touchmove",
-			this.drag.bind(this)
-		);
-
-		this.events.keydown = document.addEventListener("keydown", (event) => {
+		document.addEventListener("keydown", (event) => {
 			let key = event.key;
 
 			if (key === "ArrowUp" || key === "ArrowDown") {
@@ -72,17 +64,6 @@ class Pattern {
 	}
 
 	draw() {
-		this.icebergs.forEach((iceberg) => {
-			iceberg.element.removeEventListener(
-				"mousedown",
-				this.events.mousedown
-			);
-			iceberg.element.removeEventListener(
-				"touchstart",
-				this.events.touchstart
-			);
-		});
-
 		let mostLeft = 0;
 		let mostRight = 0;
 		let mostTop = 0;
@@ -95,16 +76,6 @@ class Pattern {
 			mostRight = Math.max(mostRight, iceberg.left + iceberg.width);
 			mostTop = Math.min(mostTop, iceberg.top);
 			mostBottom = Math.max(mostBottom, iceberg.top + iceberg.height);
-
-			this.events.mousedown = iceberg.element.addEventListener(
-				"mousedown",
-				this.startDrag.bind(this, iceberg)
-			);
-			this.events.touchstart = iceberg.element.addEventListener(
-				"touchstart",
-				this.startDrag.bind(this, iceberg)
-			);
-
 			this.element.appendChild(iceberg.element);
 		});
 
@@ -149,6 +120,14 @@ class Pattern {
 		this.offsetX = 0;
 		this.offsetY = 0;
 		iceberg.element.classList.add("dragging");
+
+		//Mouse
+		document.addEventListener("mouseup", this.stopDrag);
+		document.addEventListener("mousemove", this.drag);
+
+		//Touch
+		document.addEventListener("touchend", this.stopDrag);
+		document.addEventListener("touchmove", this.drag, { passive: false });
 	}
 
 	stopDrag(event) {
@@ -162,6 +141,15 @@ class Pattern {
 		let iceberg = this.dragging;
 		iceberg.element.classList.remove("dragging");
 		this.dragging = null;
+
+		document.removeEventListener("mouseup", this.stopDrag);
+		document.removeEventListener("mousemove", this.drag);
+
+		document.removeEventListener("touchend", this.stopDrag);
+		document.removeEventListener("touchmove", this.drag, {
+			passive: false,
+		});
+
 		if (!this.dragged) return; //Als we enkel geklikt hebben, dan moet de code niet runnen.
 
 		let board = this.board;
@@ -178,6 +166,7 @@ class Pattern {
 	}
 
 	drag(event) {
+		event.preventDefault();
 		// console.log("drag");
 		if (!this.dragging) return;
 
@@ -303,9 +292,6 @@ class Pattern {
 			iceberg.cleanUp();
 		}
 		this.icebergs = null;
-		for (let event of Object.keys(this.events)) {
-			document.removeEventListener(event, this.events[event]);
-		}
 	}
 }
 
