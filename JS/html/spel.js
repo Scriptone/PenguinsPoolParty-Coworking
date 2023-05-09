@@ -1,6 +1,7 @@
 import Game from "../classes/Game.js";
 import levels from "../data/levels.js";
 import Helper from "../classes/Helper.js";
+import { showVictoryDialog } from "../html/victoryScreen.js";
 ("use strict");
 
 (function () {
@@ -42,6 +43,8 @@ import Helper from "../classes/Helper.js";
 
 		const currentTime = Date.now();
 		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
+
+		showVictoryDialog(time);
 
 		victory?.classList.add("active");
 		const h2 = victory?.querySelector("h2");
