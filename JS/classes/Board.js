@@ -68,9 +68,9 @@ class Board {
 		}px`;
 	}
 
-	findAvailablePattern(pattern, iceberg) {
+	findAvailablePattern(pattern) {
 		//Positie
-
+		let iceberg = pattern.icebergs[0];
 		let boundingIceberg = iceberg.element.getBoundingClientRect();
 
 		let startX = boundingIceberg.x + boundingIceberg.width / 2;
@@ -154,10 +154,10 @@ class Board {
 		return [tile, startPointX, startPointY];
 	}
 
-	selectPattern(pattern, iceberg) {
+	selectPattern(pattern) {
 		//Plaats het patroon
 		let [tile, startPointX, startPointY] =
-			this.findAvailablePattern(pattern, iceberg) || [];
+			this.findAvailablePattern(pattern) || [];
 
 		//Verwijder de vorige selectie
 		for (let tile of this.tiles.flat()) {
@@ -180,10 +180,10 @@ class Board {
 
 		return true; //Patroon geplaatst
 	}
-	drawPattern(pattern, iceberg) {
+	drawPattern(pattern) {
 		//Plaats het patroon
 		let [tile, startPointX, startPointY] =
-			this.findAvailablePattern(pattern, iceberg) || [];
+			this.findAvailablePattern(pattern) || [];
 
 		if (!tile) {
 			return false;

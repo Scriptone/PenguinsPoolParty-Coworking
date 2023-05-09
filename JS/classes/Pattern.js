@@ -164,7 +164,7 @@ class Pattern {
 		if (!this.dragged) return; //Als we enkel geklikt hebben, dan moet de code niet runnen.
 
 		let board = this.board;
-		let result = board.drawPattern(this, iceberg);
+		let result = board.drawPattern(this);
 		if (result) {
 			//this.element.remove(); Niet zo mooi
 			this.element.style.opacity = 0;
@@ -191,7 +191,7 @@ class Pattern {
 			iceberg.draw(this.offsetX, this.offsetY);
 		}
 
-		this.board.selectPattern(this, this.dragging);
+		this.board.selectPattern(this);
 
 		if (event.touches?.length == 2) {
 			let rotation =
