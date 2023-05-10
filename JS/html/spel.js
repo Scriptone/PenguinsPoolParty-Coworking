@@ -1,5 +1,7 @@
 import Game from "../classes/Game.js";
 import levels from "../data/levels.js";
+import Helper from "../classes/Helper.js";
+import { showVictoryDialog } from "../html/victoryScreen.js";
 ("use strict");
 
 (function () {
@@ -42,6 +44,8 @@ import levels from "../data/levels.js";
 		const currentTime = Date.now();
 		const time = Math.floor((currentTime - spel.startTime) / 10) / 100;
 
+		showVictoryDialog(time);
+
 		victory?.classList.add("active");
 		const h2 = victory?.querySelector("h2");
 		if (h2) h2.innerHTML = `Level ${level} completed in ${time} seconds!`;
@@ -52,6 +56,10 @@ import levels from "../data/levels.js";
 
 		//Send data to server
 		try {
+			let username = sessionStorage.getItem("username") || "Guest";
+			Helper.sendWebhook(
+				`User ${username} completed level ${level} in ${time} seconds!`
+			);
 			if (level <= levels_completed) return;
 			const data = {
 				level,
@@ -67,13 +75,14 @@ import levels from "../data/levels.js";
 			});
 
 			const result = await response.json();
-			console.log(result);
+
 			sessionStorage.setItem(
 				"levels_completed",
 				result.levels_completed ||
 					sessionStorage.getItem("levels_completed")
 			);
 			levels_completed = sessionStorage.getItem("levels_completed");
+
 			nextLevel.classList.remove("locked");
 		} catch (error) {
 			console.log(error);

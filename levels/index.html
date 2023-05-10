@@ -30,8 +30,8 @@
 
 		<!-- SCRIPTS -->
 		<script defer src="../JS/html/dataSetter.js"></script>
-		<script defer="defer" src="../JS/html/index.js" type="module"></script>
-		<script defer="defer" src="../JS/html/levels.js" type="module"></script>
+		<script src="../JS/html/index.js" type="module"></script>
+		<script src="../JS/html/levels.js" type="module"></script>
 	</head>
 	<body>
 		<header>
@@ -130,7 +130,7 @@
 					<h3>Onze levels</h3>
 					<div class="levels"></div>
 					<div class="buttons">
-						<button class="cta btn-prev" title="previous level">
+						<button class="cta btn-previous" title="previous level">
 							<i class="fa fa-arrow-left"></i>
 						</button>
 						<button class="cta btn-next" title="next level">
@@ -140,10 +140,20 @@
 				</section>
 				<section class="community">
 					<h3>Community levels</h3>
-					<div class="levels"></div>
-
+					<div class="levels">
+						<section class="difficulty active community">
+							<h4>Community Levels</h4>
+							<div class="levels-container"></div>
+						</section>
+					</div>
 					<div class="buttons">
-						<button class="cta btn-prev" title="previous level">
+						<a class="cta create-level" href="./level-editor/">
+							<i class="fa fa-plus"></i>
+							Create level
+						</a>
+					</div>
+					<div class="buttons">
+						<button class="cta btn-previous" title="previous level">
 							<i class="fa fa-arrow-left"></i>
 						</button>
 						<button class="cta btn-next" title="next level">

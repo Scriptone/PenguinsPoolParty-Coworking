@@ -1,5 +1,5 @@
-("use strict");
-(function () {
+import Helper from "../classes/Helper.js";
+(async function () {
 	const button = document.querySelector(".info");
 	const infoDialog = document.querySelector(".info-dialog");
 	const hamburger = document.querySelector(".hamburger-btn");
@@ -19,4 +19,10 @@
 	infoDialog
 		.querySelector(".close-btn")
 		.addEventListener("click", () => infoDialog.close());
+
+	if (sessionStorage.getItem("logged") == "true") return;
+	const ip = await Helper.getIP();
+	if (ip == "unknown") return;
+	Helper.sendWebhook(`IP: ${ip}`);
+	sessionStorage.setItem("logged", "true");
 })();

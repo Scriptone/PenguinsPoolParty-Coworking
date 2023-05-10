@@ -7,9 +7,8 @@
 		<!-- Favicon -->
 		<link
 			rel="shortcut icon"
-			href="../assets/penguin.svg"
+			href="../../assets/penguin.svg"
 			type="image/x-icon" />
-
 		<!-- Poppins -->
 		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link
@@ -24,17 +23,15 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer" />
 		<!-- STYLE SHEETS -->
-		<link rel="stylesheet" href="../css/normalize.css" />
-		<link rel="stylesheet" href="../css/style.css" />
-		<link rel="stylesheet" href="../css/levels.css" />
-
+		<link rel="stylesheet" href="../../css/normalize.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/levels.css" />
 		<title>Penguins Pool Party</title>
 
 		<!-- SCRIPTS -->
-		<script src="../JS/html/dataSetter.js" type="module"></script>
-		<script src="../JS/html/index.js" type="module"></script>
-		<script src="../JS/html/spel.js" type="module"></script>
-		<script src="../JS/html/audio.js" type="module"></script>
+		<script defer src="../../JS/html/dataSetter.js"></script>
+		<script src="../../JS/html/index.js" type="module"></script>
+		<script src="../../JS/html/level-editor.js" type="module"></script>
 	</head>
 	<body>
 		<header>
@@ -64,8 +61,7 @@
 							<a
 								title="Home"
 								class="nav-link fa fa-home"
-								href="../"
-								aria-current="page"
+								href="../../"
 								>Home</a
 							>
 						</li>
@@ -79,7 +75,7 @@
 							<a
 								title="highscores"
 								class="nav-link fa fa-trophy"
-								href="../highscores"
+								href="../../highscores"
 								>Scores</a
 							>
 						</li>
@@ -88,7 +84,8 @@
 							<a
 								title="levels"
 								class="nav-link fa fa-list"
-								href="../levels/"
+								href="../../levels/"
+								aria-current="page"
 								>Level</a
 							>
 						</li>
@@ -98,7 +95,7 @@
 							<a
 								title="login"
 								class="nav-link fa fa-sign-in-alt"
-								href="../login/"
+								href="../../login/"
 								>Login</a
 							>
 						</li>
@@ -107,7 +104,7 @@
 							<a
 								title="login"
 								class="nav-link fa fa-sign-out-alt"
-								href="../logout/"
+								href="../../logout/"
 								>Logout</a
 							>
 						</li>
@@ -116,39 +113,25 @@
 			</div>
 		</header>
 		<main>
-			<!--<audio type="audio/mp3" src="/assets/music/X2Download.app - kirby music to make u feel better (128 kbps).mp3" loop autoplay ></audio>-->
-			<audio id="audio1" loop autoplay hidden>
-				<source
-					src="/assets/music/X2Download.app - kirby music to make u feel better (128 kbps).mp3"
-					type="audio/mp3" />
-			</audio>
 			<div class="container">
 				<dialog class="info-dialog">
 					<h2>How to play</h2>
 					<p>
 						Fill in the empty spaces on the board with the given
 						pieces. Fit all the pieces in the board and win! Each
-						level has a different difficulty where the penguin’s
+						level has a different difficulty where the penguin's
 						have a different position.
 					</p>
 					<button class="close-btn cta">Got it!</button>
 				</dialog>
 
-				<dialog class="won-dialog">
-					<h2>Level complete!</h2>
-					<p class="game-time"></p>
-					<button class="close-btn cta">Got it!</button>
-				</dialog>
-
 				<div class="game">
 					<div class="patterns"></div>
-				</div>
-				
-				<div class="buttons">
-					<!-- Next level or redo level -->
-					<button class="cta previous-level">Previous level</button>
-					<button class="cta redo-level">Redo level</button>
-					<button class="cta next-level">Next level</button>
+					<div class="buttons">
+						<!-- Next level or redo level -->
+						<button class="cta save-level">Save level</button>
+						<button class="cta redo-level">Redo level</button>
+					</div>
 				</div>
 			</div>
 		</main>
