@@ -274,7 +274,7 @@ dialog .cta:not(.locked):is(:hover, :focus-visible) {
 	justify-content: center;
 	gap: clamp(1rem, 2vw, 2rem);
 	flex-wrap: wrap;
-	width: clamp(20rem, 70vw, 70rem);
+	width: clamp(18rem, 70vw, 70rem);
 	margin-inline: auto;
 	margin-block: var(--margins);
 }

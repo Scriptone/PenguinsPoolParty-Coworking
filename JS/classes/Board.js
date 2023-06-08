@@ -2,6 +2,10 @@ import Tile from "./Tile.js";
 import Pattern from "./Pattern.js";
 const main = document.querySelector("main");
 
+function calculateScale(innerWidth) {
+	return -1.68  + .36 * Math.log(innerWidth);
+}
+
 class Board {
 	static padding = 1;
 	constructor({ parent, penguins, tileWidth = 75, patternPoints }) {
@@ -14,24 +18,8 @@ class Board {
 		this.height = 4;
 		this.width = 5;
 
-		let scale;
-
-		switch (true) {
-			case innerWidth < 400:
-				console.log("test")
-				scale = 0.3;
-				break;
-			case innerWidth < 600:
-				scale = 0.5;
-				break;
-			case innerWidth < 900:
-				scale = 0.75;
-				break;
-			default:
-				scale = 1;
-				break;
-		}
-		console.log(scale)
+		let scale = calculateScale(innerWidth);
+		console.log(scale);
 
 		this.tileWidth = tileWidth * scale;
 		this.tileHeight = tileWidth * (66 / 75) * scale;
