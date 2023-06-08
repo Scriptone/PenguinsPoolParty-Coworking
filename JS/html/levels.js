@@ -99,61 +99,61 @@ nextButton.addEventListener("click", onNextClicked);
 previousButton.addEventListener("click", onPreviousClicked);
 previousButton.classList.add("locked");
 
-//Community levels section
-try {
-	const response = await fetch("../../php/process.php", {
-		method: "POST",
-		body: JSON.stringify({
-			action: "get_community_levels",
-		}),
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
+// //Community levels section
+// try {
+// 	const response = await fetch("../../php/process.php", {
+// 		method: "POST",
+// 		body: JSON.stringify({
+// 			action: "get_community_levels",
+// 		}),
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 	});
 
-	const communityLevels = await response.json();
-	console.log(communityLevels);
-	//communityLevels = communityLevels if array, otherwise empty array
-	const communityLevelsParent = document.querySelector(".community .levels-container");
-	if (Array.isArray(communityLevels) && communityLevels.length > 0) {
-		for (let level of communityLevels) {
-			console.log(level);
-			let levelContainer =  document.createElement("button");
-			levelContainer.classList.add("level", "unlocked");
+// 	const communityLevels = await response.json();
+// 	console.log(communityLevels);
+// 	//communityLevels = communityLevels if array, otherwise empty array
+// 	const communityLevelsParent = document.querySelector(".community .levels-container");
+// 	if (Array.isArray(communityLevels) && communityLevels.length > 0) {
+// 		for (let level of communityLevels) {
+// 			console.log(level);
+// 			let levelContainer =  document.createElement("button");
+// 			levelContainer.classList.add("level", "unlocked");
 
-			let levelHeader = document.createElement("h5");
-			levelHeader.innerText = `Level: ${level.id}`;
-			levelHeader.classList.add("level-header");
+// 			let levelHeader = document.createElement("h5");
+// 			levelHeader.innerText = `Level: ${level.id}`;
+// 			levelHeader.classList.add("level-header");
 
-			levelContainer.appendChild(levelHeader);
+// 			levelContainer.appendChild(levelHeader);
 
-			let penguins = JSON.parse(level.penguins);
-			//Every penguin is an array of 2 elements, x and y, convert to a Penguin object
-			penguins = penguins.map(penguin => {
-				return new Penguin(penguin[0], penguin[1]);
-			});
+// 			let penguins = JSON.parse(level.penguins);
+// 			//Every penguin is an array of 2 elements, x and y, convert to a Penguin object
+// 			penguins = penguins.map(penguin => {
+// 				return new Penguin(penguin[0], penguin[1]);
+// 			});
 
 
-			let board = new Board({
-				parent: levelContainer,
-				penguins: penguins,
-				tileWidth: 20,
-				tileHeight: 17.6,
-			});
-			board.draw();
+// 			let board = new Board({
+// 				parent: levelContainer,
+// 				penguins: penguins,
+// 				tileWidth: 20,
+// 				tileHeight: 17.6,
+// 			});
+// 			board.draw();
 
-			levelContainer.addEventListener("click", onLevelClicked.bind(this, level.id));
-			communityLevelsParent.appendChild(levelContainer);
+// 			levelContainer.addEventListener("click", onLevelClicked.bind(this, level.id));
+// 			communityLevelsParent.appendChild(levelContainer);
 
-		}
-	} else {
-		console.log("No levels");
-		const noLevels = document.createElement("h5");
-		noLevels.classList.add("level-header");
-		noLevels.innerText = "There are no community levels yet.";
+// 		}
+// 	} else {
+// 		console.log("No levels");
+// 		const noLevels = document.createElement("h5");
+// 		noLevels.classList.add("level-header");
+// 		noLevels.innerText = "There are no community levels yet.";
 
-		communityLevelsParent.appendChild(noLevels);
-	}
-} catch (error) {
-	console.log(error);
-}
+// 		communityLevelsParent.appendChild(noLevels);
+// 	}
+// } catch (error) {
+// 	console.log(error);
+// }

@@ -7,7 +7,7 @@
 	--bg: var(--white);
 	--ice: #ebf7ff;
 
-	--margins: 2rem;
+	--margins: clamp(1rem, 2vw, 2rem);
 	--nav-animation-time: 0.3s;
 }
 
@@ -41,7 +41,7 @@ figure {
 }
 
 .container {
-	max-width: 120rem;
+	max-width: 110rem;
 	margin: 0 auto;
 	padding-inline: var(--margins);
 }
@@ -65,7 +65,7 @@ header .container {
 
 header {
 	background-color: var(--primary);
-	padding-block: 0.5rem;
+	padding-block: .5rem;
 }
 
 header h1 {
@@ -91,7 +91,7 @@ nav {
 .nav-menu {
 	display: flex;
 	align-items: left;
-	gap: 2rem;
+	gap: clamp(1rem, 2vw, 2rem);
 }
 .nav-item {
 	position: relative;
@@ -102,7 +102,7 @@ nav {
 	font-family: inherit;
 	display: inline-block;
 	align-items: center;
-	gap: 0.5rem;
+	gap: clamp(0.5em, 1vw, 1em);
 	text-transform: lowercase;
 	text-decoration: none;
 	color: inherit;
@@ -112,7 +112,7 @@ nav {
 
 .nav-link::before {
 	font-family: "Font Awesome 5 Free";
-	margin-right: 0.5rem;
+	margin-right: 0.5em;
 }
 
 .nav-link::after {
@@ -125,7 +125,7 @@ nav {
 	transition: width 0.3s ease;
 }
 
-.nav-link:is(:hover, :focus-within)::after,
+.nav-link:is(:hover, :focus-visible)::after,
 .nav-link[aria-current="page"]::after {
 	width: 100%;
 }
@@ -137,7 +137,7 @@ nav {
 	background: transparent;
 	border: 2px solid var(--white);
 	border-radius: 0.5rem;
-	height: 4rem;
+	height: 3rem;
 	aspect-ratio: 1/1;
 }
 
@@ -235,27 +235,35 @@ dialog .cta {
 	transition: translate 0.2s ease;
 }
 
-dialog .cta:not(.locked):is(:hover, :focus-within) {
+dialog .cta:not(.locked):is(:hover, :focus-visible) {
 	translate: 0 -10%;
 	background-color: var(--white);
 	color: var(--primary);
 }
 
 /* Game */
+.game-section h2 {
+	text-align: center;
+	font-size: clamp(3rem, 4vw, 3.5rem);
+	font-weight: 700;
+	color: var(--white);
+	margin: var(--margins);
+	margin-top: 0;
+
+}
 .game {
 	display: flex;
 	justify-content: center;
 	flex-flow: row-reverse;
-	gap: 5rem;
+	gap: clamp(1rem, 2vw, 2rem);
 	align-items: center;
-	margin-block: var(--margins);
 	flex-wrap: wrap;
 	user-select: none; /*! Zeer belangrijk! */
 }
 .board {
 	position: relative;
 	background-color: var(--secondary);
-	border-radius: 1rem;
+	border-radius: .5em;
 	box-shadow: 0 2px 0.5rem rgb(0 0 0 / 50%);
 }
 
@@ -264,9 +272,9 @@ dialog .cta:not(.locked):is(:hover, :focus-within) {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	gap: 2rem;
+	gap: clamp(1rem, 2vw, 2rem);
 	flex-wrap: wrap;
-	width: clamp(16rem, 70vw, 70rem);
+	width: clamp(20rem, 70vw, 70rem);
 	margin-inline: auto;
 	margin-block: var(--margins);
 }
@@ -276,18 +284,18 @@ dialog .cta:not(.locked):is(:hover, :focus-within) {
 	cursor: pointer;
 	background-color: var(--primary);
 	color: var(--white);
-	padding: 0.75rem 1.5rem;
-	border-radius: 0.4rem;
+	padding: 0.75em 1.5em;
+	border-radius: 0.4em;
 	text-align: center;
 	white-space: nowrap;
 	font-weight: bold;
-	font-size: clamp(1rem, 2vw, 1.5rem);
+	font-size: clamp(.8rem, 2vw, 1.5rem);
 	text-decoration: none;
 	border: 0;
 	transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta:not(.locked):is(:hover, :focus-within) {
+.cta:not(.locked):is(:hover, :focus-visible) {
 	background-color: var(--secondary);
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
 }
@@ -355,22 +363,22 @@ dialog .cta:not(.locked):is(:hover, :focus-within) {
 	display: grid;
 	grid-template: 1fr 1fr / 1fr 1fr;
 	place-items: center;
-	gap: 2rem;
-	padding: 2rem;
+	gap: 1em;
+	padding: 1em;
 	box-shadow: 0 0 0.3rem rgb(0 0 0 / 50%);
-	border-radius: 2rem;
+	border-radius: .5em;
 	z-index: 2;
 }
 .pattern {
 	position: relative;
 
 	border: 0.2rem dashed black;
-	border-radius: 1em;
+	border-radius: .5em;
 	text-align: center;
 	transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pattern:is(:hover, :focus-within) {
+.pattern:is(:hover, :focus-visible) {
 	border-color: var(--primary);
 	box-shadow: 0 0 0.3rem rgb(255 255 255 / 20%);
 }

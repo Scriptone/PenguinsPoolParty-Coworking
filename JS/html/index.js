@@ -20,9 +20,7 @@ import Helper from "../classes/Helper.js";
 		.querySelector(".close-btn")
 		.addEventListener("click", () => infoDialog.close());
 
-	if (sessionStorage.getItem("logged") == "true") return;
-	const ip = await Helper.getIP();
-	if (ip == "unknown") return;
-	Helper.sendWebhook(`IP: ${ip}`);
-	sessionStorage.setItem("logged", "true");
+	document.querySelector(".tutorial .cta")?.addEventListener("click", () => {
+		document.querySelector(".tutorial").remove();
+	});
 })();

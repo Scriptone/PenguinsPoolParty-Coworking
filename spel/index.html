@@ -131,7 +131,10 @@
 						level has a different difficulty where the penguin’s
 						have a different position.
 					</p>
-					<button class="close-btn cta">Got it!</button>
+					<button 
+						class="close-btn cta"
+						tabindex="0"
+					>Got it!</button>
 				</dialog>
 
 				<dialog class="won-dialog">
@@ -140,16 +143,27 @@
 					<button class="close-btn cta">Got it!</button>
 				</dialog>
 
-				<div class="game">
-					<div class="patterns"></div>
-				</div>
+				<section class="tutorial">
+					<h2>Game Tutorial</h2>
+					<p>PC: Use the mouse to drag the icebergs. Use the left and right arrow keys to rotate them. Press the spacebar or arrow keys up/down to flip them.</p>
+					<p>Mobile: Use touch to drag the icebergs. Pan with two fingers to rotate them. Tap to flip them.</p>
+					<button class="cta dismiss-btn" tabindex="0">Got it</button>
+				</section>
+				<section class="game-section">
+					<h2>Level 1</h2>
+					<div class="game">
+					
+						<div class="patterns"></div>
+					</div>
+	
+					<div class="buttons">
+						<!-- Next level or redo level -->
+						<button class="cta previous-level">Previous</button>
+						<button class="cta redo-level">Redo</button>
+						<button class="cta next-level">Next</button>
+					</div>
+				</section>
 				
-				<div class="buttons">
-					<!-- Next level or redo level -->
-					<button class="cta previous-level">Previous level</button>
-					<button class="cta redo-level">Redo level</button>
-					<button class="cta next-level">Next level</button>
-				</div>
 			</div>
 		</main>
 		<footer></footer>

@@ -84,41 +84,41 @@ import FormValidator from "../classes/FormValidator.js";
 		data["action"] = action;
 
 		console.log(data);
-		const response = await fetch("../php/process.php", {
-			method: "POST",
-			body: JSON.stringify(data),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
 
-		const result = await response.json();
-
-		console.log(result);
 		try {
+			const response = await fetch("../php/process.php", {
+				method: "POST",
+				body: JSON.stringify(data),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			const result = await response.json();
+
+			console.log(result);
+
 			const error = result.error;
-			if (error) {
-				throw new Error(error);
-			} else {
-				console.log(action);
-				switch (action) {
-					case "register":
-					case "login":
-						sessionStorage.setItem("username", result.username);
-						sessionStorage.setItem(
-							"levels_completed",
-							result.levels_completed
-						);
-						sessionStorage.setItem(
-							"level",
-							result.levels_completed + 1
-						);
-						window.location.href = "../";
-						console.log(result);
-				}
-				//Reset form
-				this.reset();
+			if (error) throw new Error(error);
+
+			console.log(action);
+			switch (action) {
+				case "register":
+				case "login":
+					sessionStorage.setItem("username", result.username);
+					sessionStorage.setItem(
+						"levels_completed",
+						result.levels_completed
+					);
+					sessionStorage.setItem(
+						"level",
+						result.levels_completed + 1
+					);
+					window.location.href = "../";
+					console.log(result);
 			}
+			//Reset form
+			this.reset();
 		} catch (error) {
 			formValidator.errors.push({
 				name: "Server error",
@@ -128,7 +128,7 @@ import FormValidator from "../classes/FormValidator.js";
 		}
 	});
 
-	//Moest er een passwoord zijn
+	//Moest er een paswoord zijn
 	const passwords = document.querySelectorAll("input[type='password']");
 	passwords.forEach((password) => {
 		//Knop voor visibility

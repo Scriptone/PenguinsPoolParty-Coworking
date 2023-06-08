@@ -4,13 +4,8 @@ const main = document.querySelector("main");
 
 class Board {
 	static padding = 1;
-	constructor({
-		parent,
-		penguins,
-		tileWidth = 75,
-		tileHeight = 66,
-		patternPoints,
-	}) {
+	constructor({ parent, penguins, tileWidth = 75, patternPoints }) {
+		const innerWidth = window.innerWidth;
 		this.penguins = penguins;
 		this.element = document.createElement("div");
 		this.element.classList.add("board");
@@ -18,8 +13,28 @@ class Board {
 		this.tiles = [];
 		this.height = 4;
 		this.width = 5;
-		this.tileWidth = tileWidth;
-		this.tileHeight = tileHeight;
+
+		let scale;
+
+		switch (true) {
+			case innerWidth < 400:
+				console.log("test")
+				scale = 0.3;
+				break;
+			case innerWidth < 600:
+				scale = 0.5;
+				break;
+			case innerWidth < 900:
+				scale = 0.75;
+				break;
+			default:
+				scale = 1;
+				break;
+		}
+		console.log(scale)
+
+		this.tileWidth = tileWidth * scale;
+		this.tileHeight = tileWidth * (66 / 75) * scale;
 
 		this.patterns = [];
 		if (!patternPoints) {

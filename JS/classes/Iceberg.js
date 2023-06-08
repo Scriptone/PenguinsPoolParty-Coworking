@@ -1,5 +1,3 @@
-import Pattern from "./Pattern.js";
-import Tile from "./Tile.js";
 class Iceberg {
 	constructor(pattern, point, width, height) {
 		this.element = document.createElement("div");

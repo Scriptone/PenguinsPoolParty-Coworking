@@ -12,6 +12,18 @@
 	margin-bottom: 0.5rem;
 	padding-inline: var(--margins);
 }
+
+.title {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: clamp(1.5rem, 2vw, 3rem);
+	margin-top: 0;
+	margin-bottom: 1rem;
+	color: var(--white);
+	text-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.2);
+}
+
 .difficulty {
 	padding: 2rem;
 	display: none;
@@ -67,7 +79,6 @@
 	text-transform: uppercase;
 }
 
-
 .levels .starters {
 	background-color: var(--starter);
 }
@@ -90,4 +101,38 @@
 .difficulty-span {
 	text-transform: uppercase;
 	text-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.tutorial {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: clamp(18rem, 70vw, 40rem);
+	padding: 2rem;
+	background-color: var(--white);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	border-radius: 2rem;
+	text-align: center;
+	z-index: 1000;
+}
+
+.tutorial h2 {
+	margin-top: 1rem;
+}
+
+.tutorial p {
+	margin-inline: 2rem;
+	text-align: left;
+	max-width: 40rem;
+}
+
+.tutorial button {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
 }
