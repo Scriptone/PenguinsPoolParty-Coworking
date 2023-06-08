@@ -2,9 +2,12 @@ import Board from "./Board.js";
 
 import patterns from "../data/patterns.js";
 
+const gameSection = document.querySelector(".game-section");
+const h2 = gameSection.querySelector("h2");
 const game = document.querySelector(".game");
 class Game {
 	constructor(difficulty, levelId, level) {
+		h2.innerHTML = `Level ${levelId}`;
 		const levelContainer = document.createElement("div");
 		levelContainer.classList.add("level");
 		game.appendChild(levelContainer)
